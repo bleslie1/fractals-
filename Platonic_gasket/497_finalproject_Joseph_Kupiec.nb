@@ -1,0 +1,230 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 9.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       157,          7]
+NotebookDataLength[      8305,        221]
+NotebookOptionsPosition[      7501,        187]
+NotebookOutlinePosition[      7855,        203]
+CellTagsIndexPosition[      7812,        200]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell["", "Text"],
+
+Cell[CellGroupData[{
+
+Cell["Math 497 - Final Project", "Title",
+ CellFrame->6,
+ CellChangeTimes->{{3.5763382440199127`*^9, 3.576338250362275*^9}},
+ TextAlignment->Center],
+
+Cell[CellGroupData[{
+
+Cell["\<\
+Joseph Kupiec - Fractal Methods (Expanding Barrett\[CloseCurlyQuote]s \
+research)\
+\>", "Section",
+ CellChangeTimes->{{3.5763382896895247`*^9, 3.5763382991770678`*^9}, {
+  3.576932522601407*^9, 3.576932538321306*^9}}],
+
+Cell[CellGroupData[{
+
+Cell["Project Workflow", "Subsection",
+ CellChangeTimes->{{3.5763383121288085`*^9, 3.576338316896081*^9}}],
+
+Cell[TextData[{
+ "1. First, I began by trying to parallelize the code, but it was extremely \
+difficult. CPU/GPU parallel optimized code requires a lot of research, and is \
+beyond the scope of this class.\n\n2. Thus, I changed routes, and began \
+packaging Barrett\[CloseCurlyQuote]s Fractal Reduction code.\n\n3. The first \
+problem I ran into was creating the packages with a private context (hide the \
+code from the end user). The code I originally used for the private context \
+\[OpenCurlyDoubleQuote]hid\[CloseCurlyDoubleQuote] the variables from the \
+functions.\n\t- I remedied this issue by including the \
+\[OpenCurlyDoubleQuote]`Private`\[CloseCurlyDoubleQuote] command within the \
+BeginPackage[] statement.\n\n4. The second problem I encountered was with the \
+naming of the variables. A number of variables used the same name within \
+different packages. Thus, when I tried to run any combination of packages \
+within the kernel, variable shadowing occurred.\n\t- I fixed this issue by \
+renaming all of the duplicate variables to reflect the package that they were \
+in. For instance \[OpenCurlyQuote]n\[CloseCurlyQuote] \twas renamed to \
+\[OpenCurlyQuote]nocta\[CloseCurlyQuote], \[OpenCurlyQuote]nicosa\
+\[CloseCurlyQuote] etc.\n\t\n5. The following five packages were successfully \
+created: TetrahedronFractalReduce, HexahedronFractalReduce, \
+OctahedronFractalReduce, IcosahedronFractalReduce, and \
+DodecahedronFractalReduce.\n\t- The following steps must be taken to run the \
+packages within ",
+ StyleBox["Mathematica",
+  FontSlant->"Italic"],
+ ":\n\t\t1. File->Install->Package->Select the source file\n\t\t2. Drop the \
+package into the ",
+ StyleBox["Mathematica",
+  FontSlant->"Italic"],
+ " AppData folder (Windows 7)\n\t\t3. Run the command to import the package: \
+\[OpenCurlyDoubleQuote]<<Package Name.m\n\t\t\n6. I combined all the \
+individual packages into one top level \[OpenCurlyDoubleQuote]main\
+\[CloseCurlyDoubleQuote] package titled MasterFractalReduce.\n\n7. Finally, I \
+created a GUI which allows the end user to:\n\t- Select which package he/she \
+wants to run\n\t- Input the number of iterations\n\t- Output the values for \
+\[OpenCurlyDoubleQuote]removing\[CloseCurlyDoubleQuote] slices from the \
+selected shape\n"
+}], "Text",
+ CellChangeTimes->{{3.5763383203852806`*^9, 3.5763383222563877`*^9}, {
+  3.576338360534577*^9, 3.576338362238674*^9}, {3.576338425228277*^9, 
+  3.576338441172189*^9}, {3.57633855938395*^9, 3.5763389664332323`*^9}, {
+  3.576339032463009*^9, 3.5763393403076167`*^9}, {3.5763393770987215`*^9, 
+  3.5763393853701944`*^9}, {3.576339644889038*^9, 3.5763397548053246`*^9}, {
+  3.576932415573285*^9, 3.576932415974308*^9}, {3.57693254538571*^9, 
+  3.5769326503807154`*^9}, {3.576932717531556*^9, 3.5769327607380276`*^9}, {
+  3.5769328005833063`*^9, 3.5769328356143103`*^9}, {3.576932898524908*^9, 
+  3.576933020543887*^9}, {3.5769331048047066`*^9, 3.5769331112520757`*^9}, {
+  3.5769331967779675`*^9, 3.57693320521745*^9}}]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Package Importing & GUI Code", "Section",
+ CellChangeTimes->{{3.576933245656763*^9, 3.576933277038558*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", 
+   RowBox[{"*", "Import", " ", "the", " ", "package", " ", "into", " ", 
+    RowBox[{"Mathematica", "'"}], "s", " ", "kernel"}], "**)"}], 
+  "\[IndentingNewLine]", 
+  RowBox[{"<<", "MasterFractalReduce.m"}]}]], "Input",
+ CellChangeTimes->{{3.576933289887293*^9, 3.57693331203856*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"Get", "::", "noopen"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], "\<\"Cannot open \
+\[NoBreak]\\!\\(\\\"MasterFractalReduce.m\\\"\\)\[NoBreak]. \
+\\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", ButtonStyle->\\\"Link\\\", \
+ButtonFrame->None, ButtonData:>\\\"paclet:ref/message/General/noopen\\\", \
+ButtonNote -> \\\"Get::noopen\\\"]\\)\"\>"}]], "Message", "MSG",
+ CellChangeTimes->{3.614946149049459*^9, 3.614946304138472*^9}],
+
+Cell[BoxData["$Failed"], "Output",
+ CellChangeTimes->{3.614946149080524*^9, 3.61494630417955*^9}]
+}, Open  ]],
+
+Cell[BoxData[
+ RowBox[{"(*", 
+  RowBox[{"*", "Create", " ", "the", " ", "GUI"}], "**)"}]], "Input",
+ CellChangeTimes->{{3.576933319100964*^9, 3.5769333257013416`*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"CreateDialog", "[", 
+   RowBox[{"Grid", "[", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"ActionMenu", "[", 
+         RowBox[{"\"\<Please select your shape\>\"", ",", 
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{"\"\<Tetrahedron\>\"", "\[RuleDelayed]", 
+             RowBox[{"(", 
+              RowBox[{
+               RowBox[{"shape", " ", "=", "  ", "TetrahedronFractalReduce"}], 
+               ";"}], ")"}]}], ",", 
+            RowBox[{"\"\<Hexahedron\>\"", "\[RuleDelayed]", 
+             RowBox[{"(", 
+              RowBox[{
+               RowBox[{"shape", " ", "=", "  ", "HexahedronFractalReduce"}], 
+               ";"}], ")"}]}], ",", 
+            RowBox[{"\"\<Octahedron\>\"", "\[RuleDelayed]", 
+             RowBox[{"(", 
+              RowBox[{
+               RowBox[{"shape", " ", "=", "  ", "OctahedronFractalReduce"}], 
+               ";"}], ")"}]}], ",", 
+            RowBox[{"\"\<Dodecahedron\>\"", "\[RuleDelayed]", 
+             RowBox[{"(", 
+              RowBox[{
+               RowBox[{"shape", " ", "=", "  ", "DodecahedronFractalReduce"}],
+                ";"}], ")"}]}], ",", 
+            RowBox[{"\"\<Icosahedron\>\"", "\[RuleDelayed]", 
+             RowBox[{"(", 
+              RowBox[{
+               RowBox[{"shape", " ", "=", "  ", "IcosahedronFractalReduce"}], 
+               ";"}], ")"}]}]}], "}"}]}], "]"}], ",", 
+        RowBox[{"Dynamic", "[", "shape", "]"}]}], "}"}], ",", 
+      "\[IndentingNewLine]", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{
+        "TextCell", "[", "\"\<Please enter the number of iterations:\>\"", 
+         "]"}], ",", 
+        RowBox[{"InputField", "[", 
+         RowBox[{
+          RowBox[{"Dynamic", "[", "ninput", "]"}], ",", "Number"}], "]"}]}], 
+       "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"Button", "[", 
+        RowBox[{"\"\<Run\>\"", ",", 
+         RowBox[{"Print", "[", 
+          RowBox[{"shape", "[", "ninput", "]"}], "]"}]}], "]"}], "}"}]}], 
+     "}"}], "]"}], "]"}], ";"}]], "Input"]
+}, Open  ]]
+}, Open  ]]
+},
+WindowSize->{907, 867},
+WindowMargins->{{Automatic, 54}, {Automatic, 18}},
+FrontEndVersion->"10.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (June 27, \
+2014)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[557, 20, 16, 0, 30, "Text"],
+Cell[CellGroupData[{
+Cell[598, 24, 148, 3, 120, "Title"],
+Cell[CellGroupData[{
+Cell[771, 31, 227, 5, 64, "Section"],
+Cell[CellGroupData[{
+Cell[1023, 40, 106, 1, 44, "Subsection"],
+Cell[1132, 43, 2991, 46, 562, "Text"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[4172, 95, 113, 1, 64, "Section"],
+Cell[CellGroupData[{
+Cell[4310, 100, 325, 7, 46, "Input"],
+Cell[4638, 109, 473, 10, 24, "Message"],
+Cell[5114, 121, 97, 1, 28, "Output"]
+}, Open  ]],
+Cell[5226, 125, 167, 3, 28, "Input"],
+Cell[5396, 130, 2077, 53, 182, "Input"]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)
