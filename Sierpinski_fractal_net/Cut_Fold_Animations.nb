@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       157,          7]
-NotebookDataLength[   1368134,      24516]
-NotebookOptionsPosition[   1360098,      24292]
-NotebookOutlinePosition[   1363951,      24398]
-CellTagsIndexPosition[   1362924,      24372]
+NotebookDataLength[   1368213,      24521]
+NotebookOptionsPosition[   1360177,      24297]
+NotebookOutlinePosition[   1364030,      24403]
+CellTagsIndexPosition[   1363003,      24377]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -20023,7 +20023,7 @@ Cell[TextData[{
   DynamicBox[ToBoxes[
     Style[
      DateString[], FontFamily -> "Calibri"], StandardForm],
-   ImageSizeCache->{143., {1., 9.}},
+   ImageSizeCache->{143., {0., 9.}},
    UpdateInterval:>1]],
   FontColor->GrayLevel[0]],
  StyleBox["  (GMT ",
@@ -21587,21 +21587,21 @@ Cell[BoxData[
 Cell[BoxData[
  TagBox[
   StyleBox[
-   DynamicModuleBox[{$CellContext`n$$ = 0, $CellContext`net$$ = False, 
+   DynamicModuleBox[{$CellContext`n$$ = 2, $CellContext`net$$ = False, 
     Typeset`show$$ = True, Typeset`bookmarkList$$ = {}, 
     Typeset`bookmarkMode$$ = "Menu", Typeset`animator$$, Typeset`animvar$$ = 
     1, Typeset`name$$ = "\"untitled\"", Typeset`specs$$ = {{
       Hold[$CellContext`n$$], {0, 1, 2, 3, 4}}, {
       Hold[$CellContext`net$$], {False, True}}}, Typeset`size$$ = {
     360., {133., 137.}}, Typeset`update$$ = 0, Typeset`initDone$$, 
-    Typeset`skipInitDone$$ = True, $CellContext`n$10700$$ = 
-    0, $CellContext`net$10701$$ = False}, 
+    Typeset`skipInitDone$$ = True, $CellContext`n$625$$ = 
+    0, $CellContext`net$630$$ = False}, 
     DynamicBox[Manipulate`ManipulateBoxes[
      1, StandardForm, 
       "Variables" :> {$CellContext`n$$ = 0, $CellContext`net$$ = False}, 
       "ControllerVariables" :> {
-        Hold[$CellContext`n$$, $CellContext`n$10700$$, 0], 
-        Hold[$CellContext`net$$, $CellContext`net$10701$$, False]}, 
+        Hold[$CellContext`n$$, $CellContext`n$625$$, 0], 
+        Hold[$CellContext`net$$, $CellContext`net$630$$, False]}, 
       "OtherVariables" :> {
        Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
         Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
@@ -21622,7 +21622,8 @@ $CellContext`net$$],
    Deployed->True,
    StripOnInput->False],
   Manipulate`InterpretManipulate[1]]], "Output",
- CellChangeTimes->{3.613230335567876*^9, 3.6149343109484873`*^9}]
+ CellChangeTimes->{3.613230335567876*^9, 3.6149343109484873`*^9, 
+  3.6149479778924017`*^9}]
 }, Open  ]],
 
 Cell[TextData[StyleBox["3D folding Code: ",
@@ -22006,9 +22007,10 @@ roatations. Each side of the tetrahedron has it's color.\>\""}], ";"}],
                     "**"}], "**"}], "**"}], "**"}], "**"}], "**"}], "**"}], 
                     "**"}], "**"}], "**"}], "**"}], "**"}], "**"}], "**"}], 
              "**"}], "**"}], "**"}], "**"}], "**"}], "**"}], "**"}], "**"}], 
-     "**"}], "********)"}], "\[IndentingNewLine]", 
+     "**"}], "********)"}], "\n", 
    RowBox[{"(*", 
-    RowBox[{"Documentation", ":", " ", "showFolded3D"}], "*)"}], "\n", 
+    RowBox[{"Documentation", ":", " ", "showFolded3D"}], "*)"}], 
+   "\[IndentingNewLine]", 
    RowBox[{
     RowBox[{
      RowBox[{"showFolded3D", "::", "usage"}], "=", 
@@ -22068,16 +22070,15 @@ extra rotation information.\>\""}], ";"}], "\[IndentingNewLine]",
     RowBox[{
      RowBox[{"midpoint", "::", "usage"}], "=", 
      "\"\<midpoint: Computes midpoints a midpoint between two points to be \
-used in the IFS method for generating the fractal.\>\""}], ";"}], 
-   "\[IndentingNewLine]", 
+used in the IFS method for generating the fractal.\>\""}], ";"}], "\n", 
    RowBox[{"(*", 
-    RowBox[{"Function", ":", " ", "midpoint"}], "*)"}], "\n", 
+    RowBox[{"Function", ":", " ", "midpoint"}], "*)"}], "\[IndentingNewLine]", 
    RowBox[{
     RowBox[{"midpoint", "[", 
      RowBox[{"x_", ",", "y_"}], "]"}], ":=", 
     RowBox[{
      RowBox[{"(", 
-      RowBox[{"x", "+", "y"}], ")"}], "/", "2"}]}], "\n", 
+      RowBox[{"x", "+", "y"}], ")"}], "/", "2"}]}], "\[IndentingNewLine]", 
    RowBox[{"(*", 
     RowBox[{
     "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**",
@@ -22085,9 +22086,9 @@ used in the IFS method for generating the fractal.\>\""}], ";"}],
      "**", "**", "**", "**"}], "********)"}], "\[IndentingNewLine]", 
    RowBox[{"(*", 
     RowBox[{
-    "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**",
-      "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", 
-     "**", "**", "**", "**"}], "********)"}], "\[IndentingNewLine]", 
+    "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", \
+"**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", 
+     "**", "**", "**"}], "********)"}], "\[IndentingNewLine]", 
    RowBox[{"(*", 
     RowBox[{
      RowBox[{
@@ -22100,7 +22101,7 @@ used in the IFS method for generating the fractal.\>\""}], ";"}],
       RowBox[{"Tetrahedron", "."}]}]}], "*)"}], "\[IndentingNewLine]", 
    RowBox[{"(*", 
     RowBox[{"Points", " ", "on", " ", "Tetrahedron", " ", "S0"}], "*)"}], 
-   "\[IndentingNewLine]", 
+   "\n", 
    RowBox[{
     RowBox[{"b", "=", 
      RowBox[{"N", "[", 
@@ -22177,13 +22178,13 @@ used in the IFS method for generating the fractal.\>\""}], ";"}],
     RowBox[{
     "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**",
       "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", 
-     "**", "**", "**", "**"}], "********)"}], "\[IndentingNewLine]", 
+     "**", "**", "**", "**"}], "********)"}], "\n", 
    RowBox[{"(*", 
     RowBox[{
      RowBox[{"Midpoints", " ", "on", " ", "Tetrehderon"}], ",", 
      RowBox[{"for", " ", 
       RowBox[{"Subscript", "[", 
-       RowBox[{"S", ",", "1"}], "]"}]}]}], "*)"}], "\n", 
+       RowBox[{"S", ",", "1"}], "]"}]}]}], "*)"}], "\[IndentingNewLine]", 
    RowBox[{
     RowBox[{"ab", "=", 
      RowBox[{"midpoint", "[", 
@@ -22212,12 +22213,12 @@ used in the IFS method for generating the fractal.\>\""}], ";"}],
     RowBox[{
     "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**",
       "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", 
-     "**", "**", "**", "**"}], "********)"}], "\[IndentingNewLine]", 
+     "**", "**", "**", "**"}], "********)"}], "\n", 
    RowBox[{"(*", 
     RowBox[{
     "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**",
       "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", 
-     "**", "**", "**", "**"}], "********)"}], "\n", 
+     "**", "**", "**", "**"}], "********)"}], "\[IndentingNewLine]", 
    RowBox[{"(*", 
     RowBox[{"Documentation", ":", " ", "foldedAngle"}], "*)"}], 
    "\[IndentingNewLine]", 
@@ -22239,14 +22240,15 @@ the folds.\>\""}], ";"}], "\[IndentingNewLine]",
     RowBox[{
     "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**",
       "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", 
-     "**", "**", "**", "**"}], "********)"}], "\[IndentingNewLine]", 
+     "**", "**", "**", "**"}], "********)"}], "\n", 
    RowBox[{"(*", 
     RowBox[{
     "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**",
       "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", 
      "**", "**", "**", "**"}], "********)"}], "\n", 
    RowBox[{"(*", 
-    RowBox[{"Documentation", ":", " ", "foldedAngle"}], "*)"}], "\n", 
+    RowBox[{"Documentation", ":", " ", "foldedAngle"}], "*)"}], 
+   "\[IndentingNewLine]", 
    RowBox[{
     RowBox[{
      RowBox[{"tetrahedronF0original", "::", "usage"}], "=", 
@@ -22292,14 +22294,15 @@ net, takes a list of thetas to unfold at various iterations.\>\""}], ";"}],
     RowBox[{
     "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**",
       "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", 
-     "**", "**", "**", "**"}], "********)"}], "\[IndentingNewLine]", 
+     "**", "**", "**", "**"}], "********)"}], "\n", 
    RowBox[{"(*", 
     RowBox[{
     "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**",
       "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", 
      "**", "**", "**", "**"}], "********)"}], "\n", 
    RowBox[{"(*", 
-    RowBox[{"Documentation", ":", " ", "tetrahedronF0new"}], "*)"}], "\n", 
+    RowBox[{"Documentation", ":", " ", "tetrahedronF0new"}], "*)"}], 
+   "\[IndentingNewLine]", 
    RowBox[{
     RowBox[{
      RowBox[{"tetrahedronF0new", "::", "usage"}], "=", 
@@ -22343,12 +22346,12 @@ net.\>\""}], ";"}], "\[IndentingNewLine]",
              RowBox[{"{", 
               RowBox[{"angleToChange", ",", 
                RowBox[{"a", "-", "c"}], ",", "c"}], "}"}]}], "}"}]}], "}"}]}],
-         "}"}]}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+         "}"}]}], "]"}]}], ";"}], "\n", 
    RowBox[{"(*", 
     RowBox[{
     "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**",
       "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", 
-     "**", "**", "**", "**"}], "********)"}], "\n", 
+     "**", "**", "**", "**"}], "********)"}], "\[IndentingNewLine]", 
    RowBox[{"(*", 
     RowBox[{
     "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**",
@@ -22489,10 +22492,10 @@ current tetreahedron.\>\""}], ";"}], "\[IndentingNewLine]",
     RowBox[{
     "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**",
       "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", 
-     "**", "**", "**", "**"}], "********)"}], "\[IndentingNewLine]", 
+     "**", "**", "**", "**"}], "********)"}], "\n", 
    RowBox[{"(*", 
     RowBox[{"Documentation", ":", " ", "recursivelyCreateChildren3D"}], 
-    "*)"}], "\n", 
+    "*)"}], "\[IndentingNewLine]", 
    RowBox[{
     RowBox[{
      RowBox[{"recursivelyCreateChildren3D", "::", "usage"}], "=", 
@@ -22531,14 +22534,15 @@ for subrotations dependent upon the iteration\>\""}], ";"}],
     RowBox[{
     "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**",
       "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", 
-     "**", "**", "**", "**"}], "********)"}], "\[IndentingNewLine]", 
+     "**", "**", "**", "**"}], "********)"}], "\n", 
    RowBox[{"(*", 
     RowBox[{
     "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**",
       "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", 
      "**", "**", "**", "**"}], "********)"}], "\n", 
    RowBox[{"(*", 
-    RowBox[{"Documentation", ":", " ", "foldedSierpinski"}], "*)"}], "\n", 
+    RowBox[{"Documentation", ":", " ", "foldedSierpinski"}], "*)"}], 
+   "\[IndentingNewLine]", 
    RowBox[{
     RowBox[{
      RowBox[{"foldedSierpinski", "::", "usage"}], "=", 
@@ -22579,14 +22583,15 @@ recursivelyCreateChildren3D.\>\""}], ";"}], "\[IndentingNewLine]",
     RowBox[{
     "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**",
       "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", 
-     "**", "**", "**", "**"}], "********)"}], "\[IndentingNewLine]", 
+     "**", "**", "**", "**"}], "********)"}], "\n", 
    RowBox[{"(*", 
     RowBox[{
     "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**",
       "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", 
      "**", "**", "**", "**"}], "********)"}], "\n", 
    RowBox[{"(*", 
-    RowBox[{"Documentation", ":", " ", "FoldingModule1"}], "*)"}], "\n", 
+    RowBox[{"Documentation", ":", " ", "FoldingModule1"}], "*)"}], 
+   "\[IndentingNewLine]", 
    RowBox[{
     RowBox[{
      RowBox[{"FoldingModule1", "::", "usage"}], "=", 
@@ -22700,7 +22705,7 @@ recursivelyCreateChildren3D.\>\""}], ";"}], "\[IndentingNewLine]",
               RowBox[{"Thickness", "[", ".001", "]"}]}], ",", 
              RowBox[{"Background", "\[Rule]", "White"}], ",", 
              RowBox[{"Lighting", "\[Rule]", "\"\<Neutral\>\""}]}], "]"}], 
-           "]"}]}], "}"}], "]"}]}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+           "]"}]}], "}"}], "]"}]}], "]"}]}], ";"}], "\n", 
    RowBox[{"(*", 
     RowBox[{
     "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**",
@@ -22710,7 +22715,7 @@ recursivelyCreateChildren3D.\>\""}], ";"}], "\[IndentingNewLine]",
     RowBox[{
     "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**",
       "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", 
-     "**", "**", "**", "**"}], "********)"}], "\n", 
+     "**", "**", "**", "**"}], "********)"}], "\[IndentingNewLine]", 
    RowBox[{"(*", 
     RowBox[{"Documentation", ":", " ", "FoldingModule2"}], "*)"}], 
    "\[IndentingNewLine]", 
@@ -23834,7 +23839,7 @@ $CellContext`labeledNet1PtsS1]],
    3.6142284997446127`*^9, 3.614228846810665*^9, 3.614228952171946*^9, 
    3.6142983820867558`*^9, 3.614370123780467*^9, 3.614406086155175*^9, 
    3.6144672097571087`*^9, 3.614843741989389*^9, 3.614934327512396*^9, 
-   3.6149459727630568`*^9}]
+   3.6149459727630568`*^9, {3.614947967408515*^9, 3.6149479925832644`*^9}}]
 }, Open  ]]
 }, Open  ]],
 
@@ -24291,7 +24296,7 @@ Cell[BoxData["41"], "Output",
 }, Open  ]]
 },
 WindowSize->{1220, 969},
-WindowMargins->{{Automatic, 300}, {Automatic, 0}},
+WindowMargins->{{255, Automatic}, {Automatic, 0}},
 FrontEndVersion->"10.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (June 27, \
 2014)",
 StyleDefinitions->"Default.nb"
@@ -24335,64 +24340,64 @@ CellTagsIndex->{
   Cell[1191108, 20155, 253, 5, 43, "Print",
    CellTags->"Info3595351171-5918227"]},
  "Info3595344806-9105891"->{
-  Cell[1249475, 21663, 341, 6, 43, "Print",
+  Cell[1249494, 21664, 341, 6, 43, "Print",
    CellTags->"Info3595344806-9105891"]},
  "Info3595344818-9105891"->{
-  Cell[1249819, 21671, 238, 4, 40, "Print",
+  Cell[1249838, 21672, 238, 4, 40, "Print",
    CellTags->"Info3595344818-9105891"]},
  "Info3595344968-9105891"->{
-  Cell[1250060, 21677, 237, 4, 43, "Print",
+  Cell[1250079, 21678, 237, 4, 43, "Print",
    CellTags->"Info3595344968-9105891"]},
  "Info3595345234-9105891"->{
-  Cell[1250300, 21683, 222, 4, 43, "Print",
+  Cell[1250319, 21684, 222, 4, 43, "Print",
    CellTags->"Info3595345234-9105891"]},
  "Info3595345351-9105891"->{
-  Cell[1250525, 21689, 276, 5, 43, "Print",
+  Cell[1250544, 21690, 276, 5, 43, "Print",
    CellTags->"Info3595345351-9105891"]},
  "Info3595345478-9105891"->{
-  Cell[1250804, 21696, 219, 4, 43, "Print",
+  Cell[1250823, 21697, 219, 4, 43, "Print",
    CellTags->"Info3595345478-9105891"]},
  "Info3595345730-9105891"->{
-  Cell[1251026, 21702, 840, 14, 110, "Print",
+  Cell[1251045, 21703, 840, 14, 110, "Print",
    CellTags->"Info3595345730-9105891"]},
  "Info3595348855-9105891"->{
-  Cell[1251869, 21718, 443, 8, 61, "Print",
+  Cell[1251888, 21719, 443, 8, 61, "Print",
    CellTags->"Info3595348855-9105891"]},
  "Info3595348880-9105891"->{
-  Cell[1252315, 21728, 221, 4, 40, "Print",
+  Cell[1252334, 21729, 221, 4, 40, "Print",
    CellTags->"Info3595348880-9105891"]},
  "Info3595349145-9105891"->{
-  Cell[1252539, 21734, 207, 4, 43, "Print",
+  Cell[1252558, 21735, 207, 4, 43, "Print",
    CellTags->"Info3595349145-9105891"]},
  "Info3595349173-9105891"->{
-  Cell[1252749, 21740, 208, 4, 43, "Print",
+  Cell[1252768, 21741, 208, 4, 43, "Print",
    CellTags->"Info3595349173-9105891"]}
  }
 *)
 (*CellTagsIndex
 CellTagsIndex->{
- {"SlideShowHeader", 1360410, 24303},
- {"Info3595350057-9105891", 1360533, 24306},
- {"Info3595350174-9105891", 1360647, 24309},
- {"Info3595350182-9105891", 1360761, 24312},
- {"Info3595350483-5918227", 1360875, 24315},
- {"Info3595350716-5918227", 1360989, 24318},
- {"Info3595350722-5918227", 1361103, 24321},
- {"Info3595350836-5918227", 1361217, 24324},
- {"Info3595350949-5918227", 1361331, 24327},
- {"Info3595351043-5918227", 1361446, 24330},
- {"Info3595351171-5918227", 1361560, 24333},
- {"Info3595344806-9105891", 1361674, 24336},
- {"Info3595344818-9105891", 1361788, 24339},
- {"Info3595344968-9105891", 1361902, 24342},
- {"Info3595345234-9105891", 1362016, 24345},
- {"Info3595345351-9105891", 1362130, 24348},
- {"Info3595345478-9105891", 1362244, 24351},
- {"Info3595345730-9105891", 1362358, 24354},
- {"Info3595348855-9105891", 1362474, 24357},
- {"Info3595348880-9105891", 1362588, 24360},
- {"Info3595349145-9105891", 1362702, 24363},
- {"Info3595349173-9105891", 1362816, 24366}
+ {"SlideShowHeader", 1360489, 24308},
+ {"Info3595350057-9105891", 1360612, 24311},
+ {"Info3595350174-9105891", 1360726, 24314},
+ {"Info3595350182-9105891", 1360840, 24317},
+ {"Info3595350483-5918227", 1360954, 24320},
+ {"Info3595350716-5918227", 1361068, 24323},
+ {"Info3595350722-5918227", 1361182, 24326},
+ {"Info3595350836-5918227", 1361296, 24329},
+ {"Info3595350949-5918227", 1361410, 24332},
+ {"Info3595351043-5918227", 1361525, 24335},
+ {"Info3595351171-5918227", 1361639, 24338},
+ {"Info3595344806-9105891", 1361753, 24341},
+ {"Info3595344818-9105891", 1361867, 24344},
+ {"Info3595344968-9105891", 1361981, 24347},
+ {"Info3595345234-9105891", 1362095, 24350},
+ {"Info3595345351-9105891", 1362209, 24353},
+ {"Info3595345478-9105891", 1362323, 24356},
+ {"Info3595345730-9105891", 1362437, 24359},
+ {"Info3595348855-9105891", 1362553, 24362},
+ {"Info3595348880-9105891", 1362667, 24365},
+ {"Info3595349145-9105891", 1362781, 24368},
+ {"Info3595349173-9105891", 1362895, 24371}
  }
 *)
 (*NotebookFileOutline
@@ -24446,75 +24451,75 @@ Cell[1243731, 21535, 522, 9, 46, "Text"],
 Cell[1244256, 21546, 821, 14, 30, "Text"],
 Cell[CellGroupData[{
 Cell[1245102, 21564, 835, 20, 39, "Input"],
-Cell[1245940, 21586, 1853, 38, 396, "Output"]
+Cell[1245940, 21586, 1872, 39, 396, "Output"]
 }, Open  ]],
-Cell[1247808, 21627, 222, 5, 46, "Text"],
-Cell[1248033, 21634, 925, 15, 49, "Text"],
-Cell[1248961, 21651, 489, 8, 30, "Text"],
+Cell[1247827, 21628, 222, 5, 46, "Text"],
+Cell[1248052, 21635, 925, 15, 49, "Text"],
+Cell[1248980, 21652, 489, 8, 30, "Text"],
 Cell[CellGroupData[{
-Cell[1249475, 21663, 341, 6, 43, "Print",
+Cell[1249494, 21664, 341, 6, 43, "Print",
  CellTags->"Info3595344806-9105891"],
-Cell[1249819, 21671, 238, 4, 40, "Print",
+Cell[1249838, 21672, 238, 4, 40, "Print",
  CellTags->"Info3595344818-9105891"],
-Cell[1250060, 21677, 237, 4, 43, "Print",
+Cell[1250079, 21678, 237, 4, 43, "Print",
  CellTags->"Info3595344968-9105891"],
-Cell[1250300, 21683, 222, 4, 43, "Print",
+Cell[1250319, 21684, 222, 4, 43, "Print",
  CellTags->"Info3595345234-9105891"],
-Cell[1250525, 21689, 276, 5, 43, "Print",
+Cell[1250544, 21690, 276, 5, 43, "Print",
  CellTags->"Info3595345351-9105891"],
-Cell[1250804, 21696, 219, 4, 43, "Print",
+Cell[1250823, 21697, 219, 4, 43, "Print",
  CellTags->"Info3595345478-9105891"],
-Cell[1251026, 21702, 840, 14, 110, "Print",
+Cell[1251045, 21703, 840, 14, 110, "Print",
  CellTags->"Info3595345730-9105891"],
-Cell[1251869, 21718, 443, 8, 61, "Print",
+Cell[1251888, 21719, 443, 8, 61, "Print",
  CellTags->"Info3595348855-9105891"],
-Cell[1252315, 21728, 221, 4, 40, "Print",
+Cell[1252334, 21729, 221, 4, 40, "Print",
  CellTags->"Info3595348880-9105891"],
-Cell[1252539, 21734, 207, 4, 43, "Print",
+Cell[1252558, 21735, 207, 4, 43, "Print",
  CellTags->"Info3595349145-9105891"],
-Cell[1252749, 21740, 208, 4, 43, "Print",
+Cell[1252768, 21741, 208, 4, 43, "Print",
  CellTags->"Info3595349173-9105891"]
 }, Open  ]],
-Cell[1252972, 21747, 967, 15, 46, "Text"],
-Cell[1253942, 21764, 54468, 1234, 1745, "Code"],
+Cell[1252991, 21748, 967, 15, 46, "Text"],
+Cell[1253961, 21765, 54480, 1238, 1745, "Code"],
 Cell[CellGroupData[{
-Cell[1308435, 23002, 405, 7, 42, "Subsection"],
-Cell[1308843, 23011, 23463, 638, 1551, "Code"]
+Cell[1308466, 23007, 405, 7, 42, "Subsection"],
+Cell[1308874, 23016, 23463, 638, 1551, "Code"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[1332343, 23654, 204, 3, 44, "Subsection"],
+Cell[1332374, 23659, 204, 3, 44, "Subsection"],
 Cell[CellGroupData[{
-Cell[1332572, 23661, 4648, 103, 169, "Code"],
-Cell[1337223, 23766, 3225, 70, 699, "Output"]
+Cell[1332603, 23666, 4648, 103, 169, "Code"],
+Cell[1337254, 23771, 3273, 70, 699, "Output"]
 }, Open  ]]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[1340497, 23842, 168, 2, 44, "Subsection"],
+Cell[1340576, 23847, 168, 2, 44, "Subsection"],
 Cell[CellGroupData[{
-Cell[1340690, 23848, 4656, 119, 244, "Code"],
-Cell[1345349, 23969, 912, 16, 24, "Message"],
-Cell[1346264, 23987, 77, 1, 28, "Output"],
-Cell[1346344, 23990, 873, 16, 24, "Message"]
+Cell[1340769, 23853, 4656, 119, 244, "Code"],
+Cell[1345428, 23974, 912, 16, 24, "Message"],
+Cell[1346343, 23992, 77, 1, 28, "Output"],
+Cell[1346423, 23995, 873, 16, 24, "Message"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[1347254, 24011, 116, 2, 28, "Input"],
-Cell[1347373, 24015, 96, 1, 28, "Output"]
+Cell[1347333, 24016, 116, 2, 28, "Input"],
+Cell[1347452, 24020, 96, 1, 28, "Output"]
 }, Open  ]]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[1347518, 24022, 157, 2, 44, "Subsection"],
-Cell[1347678, 24026, 9195, 189, 346, "Code"],
+Cell[1347597, 24027, 157, 2, 44, "Subsection"],
+Cell[1347757, 24031, 9195, 189, 346, "Code"],
 Cell[CellGroupData[{
-Cell[1356898, 24219, 725, 12, 28, "Input"],
-Cell[1357626, 24233, 2022, 35, 52, "Output"]
+Cell[1356977, 24224, 725, 12, 28, "Input"],
+Cell[1357705, 24238, 2022, 35, 52, "Output"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[1359685, 24273, 68, 1, 28, "Input"],
-Cell[1359756, 24276, 70, 1, 28, "Output"]
+Cell[1359764, 24278, 68, 1, 28, "Input"],
+Cell[1359835, 24281, 70, 1, 28, "Output"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[1359863, 24282, 121, 2, 28, "Input"],
-Cell[1359987, 24286, 71, 1, 28, "Output"]
+Cell[1359942, 24287, 121, 2, 28, "Input"],
+Cell[1360066, 24291, 71, 1, 28, "Output"]
 }, Open  ]]
 }, Open  ]]
 }, Open  ]]

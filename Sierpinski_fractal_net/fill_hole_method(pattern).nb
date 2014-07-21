@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       157,          7]
-NotebookDataLength[    406776,       7851]
-NotebookOptionsPosition[    405038,       7788]
-NotebookOutlinePosition[    405393,       7804]
-CellTagsIndexPosition[    405350,       7801]
+NotebookDataLength[    406827,       7851]
+NotebookOptionsPosition[    405089,       7788]
+NotebookOutlinePosition[    405444,       7804]
+CellTagsIndexPosition[    405401,       7801]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -1175,9 +1175,9 @@ Cell[BoxData[
        RowBox[{"-", 
         FractionBox["1", 
          RowBox[{"2", 
-          SqrtBox["6"]}]]}]}], "}"}]}], ";"}], "\n", 
+          SqrtBox["6"]}]]}]}], "}"}]}], ";"}], "\[IndentingNewLine]", 
    RowBox[{"(*", 
-    RowBox[{"1", "st", " ", "Iteration"}], "*)"}], "\[IndentingNewLine]", 
+    RowBox[{"1", "st", " ", "Iteration"}], "*)"}], "\n", 
    RowBox[{
     RowBox[{"d", "=", 
      RowBox[{"{", 
@@ -1221,12 +1221,12 @@ Cell[BoxData[
          RowBox[{"2", 
           SqrtBox["6"]}]]}]}], "}"}]}], ";"}], "\[IndentingNewLine]", 
    RowBox[{"(*", 
-    RowBox[{"2", "nd", " ", "Iteration"}], "*)"}], "\[IndentingNewLine]", 
+    RowBox[{"2", "nd", " ", "Iteration"}], "*)"}], "\n", 
    RowBox[{"(*", 
     RowBox[{
      RowBox[{"Edge", ":", 
       RowBox[{"u_", "0"}]}], "\[Rule]", 
-     RowBox[{"u_", "1"}]}], "*)"}], "\n", 
+     RowBox[{"u_", "1"}]}], "*)"}], "\[IndentingNewLine]", 
    RowBox[{
     RowBox[{"g", "=", 
      RowBox[{"{", 
@@ -1257,12 +1257,12 @@ Cell[BoxData[
        RowBox[{"-", 
         FractionBox["1", 
          RowBox[{"2", 
-          SqrtBox["6"]}]]}]}], "}"}]}], ";"}], "\n", 
+          SqrtBox["6"]}]]}]}], "}"}]}], ";"}], "\[IndentingNewLine]", 
    RowBox[{"(*", 
     RowBox[{
      RowBox[{"Edge", ":", 
       RowBox[{"u_", "1"}]}], "\[Rule]", 
-     RowBox[{"u_", "2"}]}], "*)"}], "\[IndentingNewLine]", 
+     RowBox[{"u_", "2"}]}], "*)"}], "\n", 
    RowBox[{
     RowBox[{"i", "=", 
      RowBox[{"{", 
@@ -1287,12 +1287,12 @@ Cell[BoxData[
        RowBox[{"-", 
         FractionBox["1", 
          RowBox[{"2", 
-          SqrtBox["6"]}]]}]}], "}"}]}], ";"}], "\n", 
+          SqrtBox["6"]}]]}]}], "}"}]}], ";"}], "\[IndentingNewLine]", 
    RowBox[{"(*", 
     RowBox[{
      RowBox[{"Edge", ":", 
       RowBox[{"u_", "2"}]}], "\[Rule]", 
-     RowBox[{"u_", "0"}]}], "*)"}], "\[IndentingNewLine]", 
+     RowBox[{"u_", "0"}]}], "*)"}], "\n", 
    RowBox[{
     RowBox[{"k", "=", 
      RowBox[{"{", 
@@ -1321,13 +1321,13 @@ Cell[BoxData[
        RowBox[{"-", 
         FractionBox["1", 
          RowBox[{"2", 
-          SqrtBox["6"]}]]}]}], "}"}]}], ";"}], "\[IndentingNewLine]", 
+          SqrtBox["6"]}]]}]}], "}"}]}], ";"}], "\n", 
    RowBox[{"(*", 
     RowBox[{
      RowBox[{"Edge", ":", 
       RowBox[{
        RowBox[{"3", " ", "center"}], "-", "x"}]}], ",", 
-     RowBox[{"-", "y"}], ",", "y"}], "*)"}], "\n", 
+     RowBox[{"-", "y"}], ",", "y"}], "*)"}], "\[IndentingNewLine]", 
    RowBox[{
     RowBox[{"m", "=", 
      RowBox[{"{", 
@@ -1754,11 +1754,11 @@ Cell[BoxData[
 ButtonFrame->None, ButtonData:>\\\"paclet:ref/message/General/write\\\", \
 ButtonNote -> \\\"SetDelayed::write\\\"]\\)\"\>"}]], "Message", "MSG",
  CellChangeTimes->{{3.614843773272656*^9, 3.614843780439516*^9}, {
-  3.6149353180529947`*^9, 3.614935321702283*^9}}],
+   3.6149353180529947`*^9, 3.614935321702283*^9}, 3.614947882745138*^9}],
 
 Cell[BoxData["$Failed"], "Output",
  CellChangeTimes->{{3.614843773320694*^9, 3.6148437804774923`*^9}, {
-  3.614935318216123*^9, 3.6149353217994213`*^9}}]
+   3.614935318216123*^9, 3.6149353217994213`*^9}, 3.614947882793612*^9}]
 }, Open  ]],
 
 Cell[BoxData[""], "Input",
@@ -6971,7 +6971,7 @@ Cell[BoxData[
       Hold[$CellContext`contraction$$], 1, 
       Rational[1, 2]}, {
       Hold[$CellContext`n$$], {0, 1, 2, 3}}}, Typeset`size$$ = {
-    600., {298., 302.}}, Typeset`update$$ = 0, Typeset`initDone$$, 
+    157., {2.44384765625, 9.}}, Typeset`update$$ = 0, Typeset`initDone$$, 
     Typeset`skipInitDone$$ = True, $CellContext`theta$29935$$ = 
     0, $CellContext`t$29936$$ = 0, $CellContext`contraction$29937$$ = 
     0, $CellContext`n$29938$$ = 0}, 
@@ -6995,7 +6995,7 @@ $CellContext`t$$, $CellContext`contraction$$, $CellContext`n$$],
          0, 1}, {$CellContext`contraction$$, 1, 
          Rational[1, 2]}, {$CellContext`n$$, {0, 1, 2, 3}}}, "Options" :> {}, 
       "DefaultOptions" :> {}],
-     ImageSizeCache->{645., {382., 387.}},
+     ImageSizeCache->{291., {89., 94.}},
      SingleEvaluation->True],
     Deinitialization:>None,
     DynamicModuleValues:>{},
@@ -7813,44 +7813,44 @@ Cell[CellGroupData[{
 Cell[39107, 1134, 104, 1, 64, "Section"],
 Cell[CellGroupData[{
 Cell[39236, 1139, 21691, 604, 1521, "Code"],
-Cell[60930, 1745, 588, 11, 24, "Message"],
-Cell[61521, 1758, 153, 2, 28, "Output"]
+Cell[60930, 1745, 611, 11, 24, "Message"],
+Cell[61544, 1758, 176, 2, 28, "Output"]
 }, Open  ]],
-Cell[61689, 1763, 68, 1, 28, "Input"],
+Cell[61735, 1763, 68, 1, 28, "Input"],
 Cell[CellGroupData[{
-Cell[61782, 1768, 223, 7, 28, "Input"],
-Cell[62008, 1777, 313076, 5141, 325, 244073, 4008, "CachedBoxData", \
+Cell[61828, 1768, 223, 7, 28, "Input"],
+Cell[62054, 1777, 313076, 5141, 325, 244073, 4008, "CachedBoxData", \
 "BoxData", "Output"]
 }, Open  ]]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[375133, 6924, 97, 1, 64, "Section"],
+Cell[375179, 6924, 97, 1, 64, "Section"],
 Cell[CellGroupData[{
-Cell[375255, 6929, 1465, 29, 50, "Code"],
-Cell[376723, 6960, 2796, 54, 786, "Output"]
+Cell[375301, 6929, 1465, 29, 50, "Code"],
+Cell[376769, 6960, 2801, 54, 200, "Output"]
 }, Open  ]]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[379568, 7020, 96, 1, 64, "Section"],
+Cell[379619, 7020, 96, 1, 64, "Section"],
 Cell[CellGroupData[{
-Cell[379689, 7025, 3615, 86, 177, "Code"],
-Cell[383307, 7113, 672, 12, 24, "Message"]
+Cell[379740, 7025, 3615, 86, 177, "Code"],
+Cell[383358, 7113, 672, 12, 24, "Message"]
 }, Open  ]],
-Cell[383994, 7128, 98, 1, 30, "Text"],
+Cell[384045, 7128, 98, 1, 30, "Text"],
 Cell[CellGroupData[{
-Cell[384117, 7133, 542, 14, 28, "Input"],
-Cell[384662, 7149, 3763, 149, 138, "Output"]
+Cell[384168, 7133, 542, 14, 28, "Input"],
+Cell[384713, 7149, 3763, 149, 138, "Output"]
 }, Open  ]],
-Cell[388440, 7301, 284, 8, 28, "Input"],
-Cell[388727, 7311, 880, 18, 284, "Input"],
+Cell[388491, 7301, 284, 8, 28, "Input"],
+Cell[388778, 7311, 880, 18, 284, "Input"],
 Cell[CellGroupData[{
-Cell[389632, 7333, 13294, 403, 1907, "Code"],
-Cell[402929, 7738, 484, 14, 52, "Output"]
+Cell[389683, 7333, 13294, 403, 1907, "Code"],
+Cell[402980, 7738, 484, 14, 52, "Output"]
 }, Open  ]],
-Cell[403428, 7755, 126, 2, 28, "Input"],
+Cell[403479, 7755, 126, 2, 28, "Input"],
 Cell[CellGroupData[{
-Cell[403579, 7761, 182, 4, 28, "Input"],
-Cell[403764, 7767, 1246, 17, 28, "Output"]
+Cell[403630, 7761, 182, 4, 28, "Input"],
+Cell[403815, 7767, 1246, 17, 28, "Output"]
 }, Open  ]]
 }, Open  ]]
 }
