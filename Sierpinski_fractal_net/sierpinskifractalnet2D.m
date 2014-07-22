@@ -8,8 +8,12 @@ F1NetOne::usage="F1: is the first iteration of the fractal. Needed for the recur
 F1NetTwo::usage="F1: is the first iteration of the fractal. Needed for the recursivelyCreateChildren function."
 showFolded2D::usage="showFolded2D: Places a unit triangle wrapper around the around the points and line, beacuse the above method  draws everything as dotted lines.";
 generateSierpinskiNet::usage="generateSierpinskiNet: Sets intial conditions for recursivelyCreateChildren2D to be used in manipulate."
+n::usage="iternation number"
+net::usage="Switches between net cases"
 
 Begin["`Private`"]
+n=0;
+net=False;
 (*******************************************************************)
 (*Begin: 3D Unfolding Code*)(*******************************************************************)(*******************************************************************)
 (*Documentation: colorFunction*)colorFunction::usage="colorFunction: Uses a switch statement to switch between colors for a given iterantion.";
@@ -35,7 +39,8 @@ F0TriangleNetTwo={{{-2/Sqrt[3],0,-1/(2Sqrt[6])},{1/Sqrt[3],-1,-1/(2Sqrt[6])},{1/
 (*Documentation: cutColor*)
 (*Function: showFolded2D*)
 showFolded2D[folded_,net_]:=Show[Flatten[Map[drawFolded2D,folded]],
-If[net,Graphics3D@{Thickness[Medium],Black,Line@Append[F0TriangleNetTwo[[1]],F0TriangleNetTwo[[1]][[1]]]},Graphics3D@{Thickness[Medium],Black,Line@Append[F0TriangleNetOne[[1]],F0TriangleNetOne[[1]][[1]]]}], Boxed->False]
+If[net,Graphics3D@{Thickness[Medium],Black,Line@Append[F0TriangleNetTwo[[1]],F0TriangleNetTwo[[1]][[1]]]},Graphics3D@{Thickness[Medium],Black,Line@Append[F0TriangleNetOne[[1]],F0TriangleNetOne[[1]][[1]]]}],Boxed->False,ImageSize->{600,600},ViewPoint->{0.18,-1,0.542},ViewAngle->0.69115,PlotRange->1.5,Background->White,Lighting->"Neutral",
+Axes->True,AxesOrigin->{0,0,0},AxesStyle->Directive[Dotted,Italic,Black,Thin]]
 
 (*******************************************************************)(*******************************************************************)
 (*Documentation: F1*)
@@ -65,7 +70,7 @@ maxIterations==1,start,
 iteration >=  maxIterations,start,
 True,recursivelyCreateChildren2D[iteration+1,maxIterations,Flatten[Map[computeChildren2D[#,iteration]&,start],1]]]
 (*******************************************************************)(*******************************************************************)
-(*Documentation: generateSierpinskiNet*)generateSierpinskiNet::usage="generateSierpinskiNet: Sets intial conditions for recursivelyCreateChildren2D to be used in manipulate.";
+(*Documentation: generateSierpinskiNet*)
 (*Function: generateSierpinskiNet*)
 generateSierpinskiNet[iteration_,net_]:=If[iteration==0,If[net,showFolded2D[{F0TriangleNetTwo},net],showFolded2D[{F0TriangleNetOne},net]],
                                                        If[net,showFolded2D[recursivelyCreateChildren2D[1,iteration,F1NetTwo],net],
@@ -73,6 +78,10 @@ generateSierpinskiNet[iteration_,net_]:=If[iteration==0,If[net,showFolded2D[{F0T
 (*******************************************************************)(*******************************************************************)
 (*Documentation: fractalNetModule2D*)
 (*Function: generateSierpinskiNet*)
-fractalNetModule2D=Manipulate[generateSierpinskiNet[n,net],{{n,0,"n"},{0,1,2,3,4}},{{net,False,"net"},{False, True}}];
+fractalNetModule2D=Dynamic[Column[{Panel[Grid[{{"n",SetterBar[Dynamic[n],{0,1,2,3}]},{"net",Checkbox[Dynamic[net]]},{" "},{" "}},Frame->All,Spacings->{0,1},Alignment->Left],ImageSize-> {600,125},Background->White],
+Dynamic[generateSierpinskiNet[n,net]]}]];
+(*;*)
+
+(*Manipulate[generateSierpinskiNet[n,net],{{n,0,"n"},{0,1,2,3,4}},{{net,False,"net"},{False, True}}];*)
 End[ ]
 EndPackage[ ]

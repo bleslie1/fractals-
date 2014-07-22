@@ -24,7 +24,7 @@ k={1/(4*Sqrt[(3)]),3/4,-(1/(2Sqrt[6]))};
 l={-5/(4*Sqrt[(3)]),1/4,-(1/(2Sqrt[6]))};
 (*Edge:3 center-x,-y,y*)
 m={-1/(2*Sqrt[(3)]),0,-(1/(2Sqrt[6]))};
-n={1/(4*Sqrt[(3)]),-1/4,-(1/(2Sqrt[6]))};
+(*n={1/(4*Sqrt[(3)]),-1/4,-(1/(2Sqrt[6]))};*)
 o={1/(4*Sqrt[(3)]),1/4,-(1/(2Sqrt[6]))};
 pattern[{Polygon[pts_]}]:={Texture[ExampleData[{"Texture","HexagonalHoles"}]],Polygon[pts,VertexTextureCoordinates->pts]}
 
@@ -64,7 +64,9 @@ Flatten[Map[Apply[simplex, {theta, t, contraction, F0[[1]],#}]&,F[n]]],
 			Boxed->False,ImageSize->{600,600},ViewPoint->{0.18,-1,0.542},ViewAngle->0.69115,PlotRange->1.5,Background->White,Lighting->"Neutral",
 Axes->True,AxesOrigin->{0,0,0},AxesStyle->Directive[Dotted,Italic,Black,Thin]]
 (*****************************************************)
-fillHolesMethod=Manipulate[makeFrame[theta,t,contraction,n],{{theta,0,"\[Theta]"},0,Pi},{{t,0,"translate"},0,1},{{contraction,1,"contract"},1,1/2},{{n,0,"iteration"},{0,1,2,3}}];
+fillHolesMethod=DynamicModule[{theta=0,t=0,contraction=1},Column[{Panel[Grid[{{"n",SetterBar[Dynamic[n],{0,1,2,3}]},{"angle",Slider[Dynamic[theta],{0,Pi}]},{"translate",Slider[Dynamic[t],{0,1}]},{"contract",Slider[Dynamic[contraction],{1,1/2}]}},Alignment->Left],ImageSize-> {600,125},Background->White],
+Dynamic[makeFrame[theta,t,contraction,n]]}]];
+(*Manipulate[makeFrame[theta,t,contraction,n],{{theta,0,"\[Theta]"},0,Pi},{{t,0,"translate"},0,1},{{contraction,1,"contract"},1,1/2},{{n,0,"iteration"},{0,1,2,3}}];*)
 
 End[ ]
 EndPackage[ ]

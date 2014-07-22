@@ -10,157 +10,37 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       158,          7]
-NotebookDataLength[      6787,        186]
-NotebookOptionsPosition[      6217,        161]
-NotebookOutlinePosition[      6601,        178]
-CellTagsIndexPosition[      6558,        175]
+NotebookDataLength[      1482,         56]
+NotebookOptionsPosition[      1202,         41]
+NotebookOutlinePosition[      1586,         58]
+CellTagsIndexPosition[      1543,         55]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
 Notebook[{
-Cell[BoxData[
- RowBox[{"<<", 
-  RowBox[{"(", 
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"<<", 
+   RowBox[{"(", 
+    RowBox[{
+     RowBox[{"NotebookDirectory", "[", "]"}], "<>", "\"\<fillHoles.m\>\""}], 
+    ")"}]}], " "}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"<<", 
+   RowBox[{"(", 
+    RowBox[{
+     RowBox[{"NotebookDirectory", "[", "]"}], "<>", 
+     "\"\<sierpinskifractalnet3D.m\>\""}], ")"}]}], 
+  " "}], "\[IndentingNewLine]", 
+ RowBox[{"TabView", "[", 
+  RowBox[{"{", 
    RowBox[{
-    RowBox[{"NotebookDirectory", "[", "]"}], "<>", "\"\<fillHoles.m\>\""}], 
-   ")"}], " "}]], "Input"],
-
-Cell[BoxData[
- RowBox[{"<<", 
-  RowBox[{"(", 
-   RowBox[{
-    RowBox[{"NotebookDirectory", "[", "]"}], "<>", 
-    "\"\<sierpinskifractalnet3D.m\>\""}], ")"}], " "}]], "Input"],
-
-Cell[CellGroupData[{
-
-Cell[BoxData["fractalNetModule2D"], "Input"],
-
-Cell[BoxData[
- TagBox[
-  StyleBox[
-   DynamicModuleBox[{sierpinskifractalnet2D`Private`n$$ = 0, 
-    sierpinskifractalnet2D`Private`net$$ = False, Typeset`show$$ = True, 
-    Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
-    Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
-    "\"untitled\"", Typeset`specs$$ = {{{
-       Hold[sierpinskifractalnet2D`Private`n$$], 0, "n"}, {0, 1, 2, 3, 4}}, {{
-      
-       Hold[sierpinskifractalnet2D`Private`net$$], False, "net"}, {
-      False, True}}}, Typeset`size$$ = {360., {133., 137.}}, 
-    Typeset`update$$ = 0, Typeset`initDone$$, Typeset`skipInitDone$$ = True, 
-    sierpinskifractalnet2D`Private`n$15702$$ = 0, 
-    sierpinskifractalnet2D`Private`net$15703$$ = False}, 
-    DynamicBox[Manipulate`ManipulateBoxes[
-     1, StandardForm, 
-      "Variables" :> {
-       sierpinskifractalnet2D`Private`n$$ = 0, 
-        sierpinskifractalnet2D`Private`net$$ = False}, "ControllerVariables" :> {
-        Hold[
-        sierpinskifractalnet2D`Private`n$$, 
-         sierpinskifractalnet2D`Private`n$15702$$, 0], 
-        Hold[
-        sierpinskifractalnet2D`Private`net$$, 
-         sierpinskifractalnet2D`Private`net$15703$$, False]}, 
-      "OtherVariables" :> {
-       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
-        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
-        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
-         Typeset`skipInitDone$$}, "Body" :> 
-      sierpinskifractalnet2D`generateSierpinskiNet[
-       sierpinskifractalnet2D`Private`n$$, 
-        sierpinskifractalnet2D`Private`net$$], 
-      "Specifications" :> {{{sierpinskifractalnet2D`Private`n$$, 0, "n"}, {0, 
-         1, 2, 3, 4}}, {{
-         sierpinskifractalnet2D`Private`net$$, False, "net"}, {False, True}}},
-       "Options" :> {}, "DefaultOptions" :> {}],
-     ImageSizeCache->{405., {187., 192.}},
-     SingleEvaluation->True],
-    Deinitialization:>None,
-    DynamicModuleValues:>{},
-    SynchronousInitialization->True,
-    UnsavedVariables:>{Typeset`initDone$$},
-    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
-   Deployed->True,
-   StripOnInput->False],
-  Manipulate`InterpretManipulate[1]]], "Output"]
-}, Open  ]],
-
-Cell[CellGroupData[{
-
-Cell[BoxData["fractalNetModule3D"], "Input"],
-
-Cell[BoxData[
- DynamicModuleBox[{sierpinskifractalnet3D`Private`n$$ = 0, 
-  sierpinskifractalnet3D`Private`alphatheta$$ = 0, 
-  sierpinskifractalnet3D`Private`net$$ = False}, 
-  TagBox[GridBox[{
-     {
-      CheckboxBox[Dynamic[sierpinskifractalnet3D`Private`net$$]]},
-     {
-      InterpretationBox[
-       StyleBox[GridBox[{
-          {
-           SetterBox[Dynamic[sierpinskifractalnet3D`Private`n$$], {0}, "0"], 
-           SetterBox[Dynamic[sierpinskifractalnet3D`Private`n$$], {1}, "1"], 
-           SetterBox[Dynamic[sierpinskifractalnet3D`Private`n$$], {2}, "2"], 
-           SetterBox[Dynamic[sierpinskifractalnet3D`Private`n$$], {3}, "3"]}
-         },
-         BaselinePosition->{1, 1},
-         GridBoxSpacings->{"Columns" -> {
-             Offset[0.27999999999999997`], {
-              Offset[0.]}, 
-             Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
-             Offset[0.2], {
-              Offset[0.4]}, 
-             Offset[0.2]}, "RowsIndexed" -> {}}],
-        Deployed->True],
-       SetterBar[
-        Dynamic[sierpinskifractalnet3D`Private`n$$], {0, 1, 2, 3}]]},
-     {
-      SliderBox[Dynamic[sierpinskifractalnet3D`Private`alphatheta$$], {
-       0, 1.9106332362490184`}]},
-     {
-      DynamicBox[ToBoxes[
-        Show[
-         If[
-         sierpinskifractalnet3D`Private`alphatheta$$ > 
-          sierpinskifractalnet3D`Private`foldedAngle - 10^(-6), 
-          sierpinskifractalnet3D`Private`labeled3DPts, 
-          If[
-          sierpinskifractalnet3D`Private`net$$, 
-           sierpinskifractalnet3D`Private`labeledNet2pts, 
-           sierpinskifractalnet3D`Private`labeledNet1PtsS1]], 
-         sierpinskifractalnet3D`Private`showFolded3D[
-          sierpinskifractalnet3D`Private`foldedSierpinski[
-          sierpinskifractalnet3D`Private`n$$, 
-           Table[
-           sierpinskifractalnet3D`Private`foldedAngle - 
-            sierpinskifractalnet3D`Private`alphatheta$$, {
-            sierpinskifractalnet3D`Private`i, 5}], 
-           sierpinskifractalnet3D`Private`net$$]], 
-         sierpinskifractalnet2D`generateSierpinskiNet[
-         sierpinskifractalnet3D`Private`n$$ + 1, 
-          sierpinskifractalnet3D`Private`net$$], PlotRange -> {-1.3, 1.5}, 
-         Axes -> True, AxesStyle -> Directive[Dotted, Gray], 
-         AxesOrigin -> {0, 0, (-1)/(2 Sqrt[6])}, AxesOrigin -> {0, 0, 0}, 
-         AxesLabel -> {"x", "y", "z"}, Boxed -> False, Axes -> False, 
-         Background -> Darker[White, 0], ImageSize -> {600, 600}, Lighting -> 
-         "Neutral", ViewPoint -> {0.18, -1, 0.542}, ViewAngle -> 0.69115], 
-        StandardForm],
-       ImageSizeCache->{600., {298., 302.}}]}
-    },
-    DefaultBaseStyle->"Column",
-    GridBoxAlignment->{"Columns" -> {{Left}}},
-    GridBoxItemSize->{"Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}],
-   "Column"],
-  DynamicModuleValues:>{}]], "Output"]
-}, Open  ]],
-
-Cell[BoxData["fillHolesMethod"], "Input"]
+    RowBox[{"x", "\[Rule]", "fillHolesMethod"}], " ", ",", 
+    RowBox[{"y", "\[Rule]", "fractalNetModule2D"}], ",", 
+    RowBox[{"z", "\[Rule]", "fractalNetModule3D"}]}], "}"}], "]"}]}], "Input"]
 },
-WindowSize->{1249, 967},
-WindowMargins->{{256, Automatic}, {Automatic, 0}},
+WindowSize->{922, 1069},
+WindowMargins->{{Automatic, 443}, {Automatic, 0}},
 TrackCellChangeTimes->False,
 FrontEndVersion->"10.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (June 27, \
 2014)",
@@ -177,17 +57,7 @@ CellTagsIndex->{}
 *)
 (*NotebookFileOutline
 Notebook[{
-Cell[558, 20, 161, 5, 28, "Input"],
-Cell[722, 27, 175, 5, 28, "Input"],
-Cell[CellGroupData[{
-Cell[922, 36, 44, 0, 28, "Input"],
-Cell[969, 38, 2231, 47, 396, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[3237, 90, 44, 0, 28, "Input"],
-Cell[3284, 92, 2873, 64, 699, "Output"]
-}, Open  ]],
-Cell[6172, 159, 41, 0, 28, "Input"]
+Cell[558, 20, 640, 19, 63, "Input"]
 }
 ]
 *)

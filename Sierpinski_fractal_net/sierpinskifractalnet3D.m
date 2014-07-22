@@ -2,7 +2,6 @@
 
 BeginPackage["sierpinskifractalnet3D`",{"sierpinskifractalnet2D`"}]
 fractalNetModule3D::usage="fractalNetModule3D: Displays folding between 2D and 3D fractal net."
-
 Begin["`Private`"]
 (*******************************************************************)
 (*Begin: 3D Unfolding Code*)(*******************************************************************)(*******************************************************************)
@@ -166,11 +165,11 @@ MapIndexed[Style[Text[First[labelsNetTwoS0[[#2]]],#1,First[offsets2DNetTwo[[#2]]
 labeled3DPts=Graphics3D[{PointSize[Large],Point@pts3D,
 MapIndexed[Style[Text[First[labels3D[[#2]]],#1,First[offsets3D[[#2]]]],Black,20]&,pts3D]},Boxed->False,Axes->False];
 
-fractalNetModule3D=DynamicModule[{n=0,alphatheta=0,net=False},Column[{Checkbox[Dynamic[net]],SetterBar[Dynamic[n],{0,1,2,3}],Slider[Dynamic[alphatheta],{0,foldedAngle}],
+fractalNetModule3D=DynamicModule[{alphatheta=0},Column[{Panel[Grid[{{"n",SetterBar[Dynamic[n],{0,1,2,3}]},{"net",Checkbox[Dynamic[net]]},{"Fold",Slider[Dynamic[alphatheta],{0,foldedAngle}]},{" "}},Frame->All,Spacings->{0,1},Alignment->Left],ImageSize-> {600,125},Background->White],
 Dynamic[Show[If[alphatheta>foldedAngle-10^-6,labeled3DPts,If[net,labeledNet2pts,labeledNet1PtsS1]],
 showFolded3D[foldedSierpinski[n,Table[foldedAngle-alphatheta,{i,5}],net]],generateSierpinskiNet[n+1,net],
-PlotRange->{-1.3,1.5},Axes->True,AxesStyle->Directive[Dotted,Gray],AxesOrigin->{0,0,-1/(2Sqrt[6])},AxesOrigin->{0,0,0},AxesLabel->{"x","y","z"},
-Boxed->False,Axes->False,Background->Darker[White,0],ImageSize->{600,600},Lighting->"Neutral",ViewPoint->{0.18,-1,0.542},ViewAngle->0.69115]]}]];
+Boxed->False,ImageSize->{600,600},ViewPoint->{0.18,-1,0.542},ViewAngle->0.69115,PlotRange->1.5,Background->White,Lighting->"Neutral",
+Axes->True,AxesOrigin->{0,0,0},AxesStyle->Directive[Dotted,Italic,Black,Thin]]]}]];
 
 End[ ]
 EndPackage[ ]
