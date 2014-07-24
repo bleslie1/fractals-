@@ -10,14 +10,50 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       158,          7]
-NotebookDataLength[      1482,         56]
-NotebookOptionsPosition[      1202,         41]
-NotebookOutlinePosition[      1586,         58]
-CellTagsIndexPosition[      1543,         55]
+NotebookDataLength[      6195,        211]
+NotebookOptionsPosition[      5030,        168]
+NotebookOutlinePosition[      5414,        185]
+CellTagsIndexPosition[      5371,        182]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
 Notebook[{
+
+Cell[CellGroupData[{
+Cell["Intialization cell", "Section"],
+
+Cell[CellGroupData[{
+
+Cell["\<\
+For the code to work the following files need to be the same directory: \
+\>", "Item"],
+
+Cell[CellGroupData[{
+
+Cell["sierpinskifractalnet2D.m package", "SubitemNumbered"],
+
+Cell["fillHoles.m package", "SubitemNumbered"],
+
+Cell["sierpinskifractalnet2D.m", "SubitemNumbered"],
+
+Cell["test.nb", "SubitemNumbered"]
+}, Open  ]],
+
+Cell["The cell below does the following:", "Item"],
+
+Cell[CellGroupData[{
+
+Cell["runs the sierpinskifractalnet2D.m package", "SubitemNumbered"],
+
+Cell["runs the sierpinskifractalnet3D.m package", "SubitemNumbered"],
+
+Cell["\<\
+Combines all three packages and places each packages module in one combine \
+module for viewing the various rule of the Sirepinski fractal net method. \
+\>", "SubitemNumbered"]
+}, Open  ]]
+}, Open  ]],
+
 Cell[BoxData[{
  RowBox[{
   RowBox[{"<<", 
@@ -32,15 +68,106 @@ Cell[BoxData[{
      RowBox[{"NotebookDirectory", "[", "]"}], "<>", 
      "\"\<sierpinskifractalnet3D.m\>\""}], ")"}]}], 
   " "}], "\[IndentingNewLine]", 
- RowBox[{"TabView", "[", 
-  RowBox[{"{", 
-   RowBox[{
-    RowBox[{"x", "\[Rule]", "fillHolesMethod"}], " ", ",", 
-    RowBox[{"y", "\[Rule]", "fractalNetModule2D"}], ",", 
-    RowBox[{"z", "\[Rule]", "fractalNetModule3D"}]}], "}"}], "]"}]}], "Input"]
+ RowBox[{"Panel", "[", 
+  RowBox[{
+   RowBox[{"TabView", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"\"\<'Fill Holes' Rule\>\"", "\[Rule]", "fillHolesMethod"}], 
+       " ", ",", 
+       RowBox[{"\"\<Cut-fold Rule\>\"", "\[Rule]", "fractalNetModule2D"}], 
+       ",", 
+       RowBox[{"\"\<Folding Rule\>\"", "\[Rule]", "fractalNetModule3D"}]}], 
+      "}"}], ",", 
+     RowBox[{"ControlPlacement", "\[Rule]", 
+      RowBox[{"{", 
+       RowBox[{"Top", ",", "Left"}], "}"}]}], ",", 
+     RowBox[{"Background", "\[Rule]", "Black"}]}], "]"}], ",", 
+   RowBox[{"Background", "\[Rule]", "White"}]}], "]"}]}], "Code"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Debugging Code", "Section"],
+
+Cell["Basic tools to help debug.", "Item"],
+
+Cell["The cell below creates a palette for all open .nb files. ", "Text"],
+
+Cell[BoxData[
+ RowBox[{"With", "[", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{"title", "=", "\"\<Notebook selector\>\""}], "}"}], ",", 
+   RowBox[{"CreatePalette", "[", 
+    RowBox[{
+     RowBox[{"Dynamic", "@", 
+      RowBox[{"Column", "[", 
+       RowBox[{"DeleteCases", "[", 
+        RowBox[{
+         RowBox[{
+          RowBox[{
+           RowBox[{"Button", "[", 
+            RowBox[{
+             RowBox[{"\"\<WindowTitle\>\"", "/.", 
+              RowBox[{"NotebookInformation", "@", "#"}]}], ",", 
+             RowBox[{"SetSelectedNotebook", "@", "#"}]}], "]"}], "&"}], "/@", 
+          
+          RowBox[{"Notebooks", "[", "]"}]}], ",", 
+         RowBox[{"Button", "[", 
+          RowBox[{"title", ",", "_"}], "]"}]}], "]"}], "]"}]}], ",", 
+     RowBox[{"WindowTitle", "\[Rule]", "title"}]}], "]"}]}], "]"}]], "Code"],
+
+Cell[TextData[{
+ "The cell below creates a short cut for quitting the ",
+ StyleBox["Mathematica",
+  FontSlant->"Italic"],
+ " kernel."
+}], "Text"],
+
+Cell[BoxData[
+ RowBox[{"FrontEndExecute", "[", 
+  RowBox[{"FrontEnd`AddMenuCommands", "[", 
+   RowBox[{"\"\<MenuListQuitEvaluators\>\"", ",", 
+    RowBox[{"{", 
+     RowBox[{"MenuItem", "[", 
+      RowBox[{"\"\<AddMenu &Quit\>\"", ",", 
+       RowBox[{"FrontEnd`KernelExecute", "[", 
+        RowBox[{"ToExpression", "[", "\"\<Quit[]\>\"", "]"}], "]"}], ",", 
+       RowBox[{"MenuKey", "[", 
+        RowBox[{"\"\<q\>\"", ",", 
+         RowBox[{"Modifiers", "\[Rule]", 
+          RowBox[{"{", "\"\<Control\>\"", "}"}]}]}], "]"}], ",", 
+       RowBox[{"System`MenuEvaluator", "\[Rule]", "Automatic"}]}], "]"}], 
+     "}"}]}], "]"}], "]"}]], "Code"],
+
+Cell[TextData[{
+ "The cell below can be added to the ",
+ StyleBox["Mathematica",
+  FontSlant->"Italic"],
+ " root directory files to Creates a permanent short cut for quitting the \
+mathematica kernel."
+}], "Text"],
+
+Cell[BoxData[
+ RowBox[{"Menu", "[", 
+  RowBox[{"\"\<Quit Local\>\"", ",", 
+   RowBox[{"{", 
+    RowBox[{"MenuItem", "[", 
+     RowBox[{"\"\<Quit Kernel\>\"", ",", 
+      RowBox[{"FrontEnd`KernelExecute", "[", 
+       RowBox[{"ToExpression", "[", "\"\<Quit[]\>\"", "]"}], "]"}], ",", 
+      RowBox[{"MenuKey", "[", 
+       RowBox[{"\"\<q\>\"", ",", 
+        RowBox[{"Modifiers", "\[Rule]", 
+         RowBox[{"{", "\"\<Control\>\"", "}"}]}]}], "]"}], ",", 
+      RowBox[{"MenuEvaluator", "\[Rule]", "Automatic"}]}], "]"}], "}"}]}], 
+  "]"}]], "Code"]
+}, Open  ]]
 },
 WindowSize->{922, 1069},
-WindowMargins->{{Automatic, 443}, {Automatic, 0}},
+WindowMargins->{{464, Automatic}, {Automatic, 0}},
 TrackCellChangeTimes->False,
 FrontEndVersion->"10.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (June 27, \
 2014)",
@@ -57,7 +184,35 @@ CellTagsIndex->{}
 *)
 (*NotebookFileOutline
 Notebook[{
-Cell[558, 20, 640, 19, 63, "Input"]
+Cell[CellGroupData[{
+Cell[580, 22, 37, 0, 64, "Section"],
+Cell[CellGroupData[{
+Cell[642, 26, 96, 2, 28, "Item"],
+Cell[CellGroupData[{
+Cell[763, 32, 59, 0, 24, "SubitemNumbered"],
+Cell[825, 34, 46, 0, 24, "SubitemNumbered"],
+Cell[874, 36, 51, 0, 24, "SubitemNumbered"],
+Cell[928, 38, 34, 0, 24, "SubitemNumbered"]
+}, Open  ]],
+Cell[977, 41, 50, 0, 28, "Item"],
+Cell[CellGroupData[{
+Cell[1052, 45, 68, 0, 24, "SubitemNumbered"],
+Cell[1123, 47, 68, 0, 24, "SubitemNumbered"],
+Cell[1194, 49, 186, 3, 41, "SubitemNumbered"]
+}, Open  ]]
+}, Open  ]],
+Cell[1407, 56, 1026, 30, 82, "Code"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[2470, 91, 33, 0, 64, "Section"],
+Cell[2506, 93, 42, 0, 28, "Item"],
+Cell[2551, 95, 73, 0, 30, "Text"],
+Cell[2627, 97, 824, 22, 50, "Code"],
+Cell[3454, 121, 145, 5, 30, "Text"],
+Cell[3602, 128, 645, 14, 50, "Code"],
+Cell[4250, 144, 213, 6, 49, "Text"],
+Cell[4466, 152, 548, 13, 50, "Code"]
+}, Open  ]]
 }
 ]
 *)

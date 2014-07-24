@@ -1,0 +1,3852 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 9.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       157,          7]
+NotebookDataLength[    148215,       3843]
+NotebookOptionsPosition[    145924,       3771]
+NotebookOutlinePosition[    146875,       3803]
+CellTagsIndexPosition[    146795,       3798]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell["A uniform planar slicing method for the platonic fractal set", "Text",
+ CellChangeTimes->{{3.571290101454563*^9, 3.571290109452821*^9}, 
+   3.571290928081813*^9, {3.571291319072459*^9, 3.5712913203709087`*^9}, {
+   3.571291432788732*^9, 3.571291433379949*^9}},
+ TextAlignment->Center,
+ FontFamily->"Helvetica Neue Medium",
+ FontSize->24,
+ FontColor->GrayLevel[0]],
+
+Cell["Using the \[OpenCurlyDoubleQuote]Two Steps Back, \
+\[OpenCurlyDoubleQuote] n \[OpenCurlyDoubleQuote] Steps Forward\
+\[CloseCurlyDoubleQuote] Method", "Text",
+ CellChangeTimes->{{3.571290101454563*^9, 3.571290109452821*^9}, 
+   3.571290928081813*^9, {3.571291319072459*^9, 3.5712913203709087`*^9}, {
+   3.5712914402110977`*^9, 3.5712914450508013`*^9}},
+ TextAlignment->Center,
+ FontFamily->"Helvetica Neue",
+ FontSize->18,
+ FontSlant->"Italic",
+ FontColor->GrayLevel[0]],
+
+Cell[TextData[{
+ StyleBox["Author: ",
+  FontSize->20],
+ StyleBox["Barrett A. Leslie\nbleslie@iit.edu",
+  FontSize->20,
+  FontSlant->"Italic"]
+}], "Subsubtitle",
+ CellChangeTimes->{{3.51987558864886*^9, 3.5198756054238157`*^9}},
+ FontFamily->"Georgia",
+ FontSize->18],
+
+Cell[CellGroupData[{
+
+Cell["", "SlideShowNavigationBar",
+ CellTags->"SlideShowHeader"],
+
+Cell[TextData[{
+ StyleBox["Section I",
+  FontColor->GrayLevel[0]],
+ StyleBox[":",
+  FontColor->RGBColor[0., 0., 0.]],
+ StyleBox[" Intialiazing The Code",
+  FontColor->RGBColor[0.811765, 0.117647, 0.145098]]
+}], "Title",
+ CellChangeTimes->{{3.51974103434864*^9, 3.519741058023837*^9}, {
+   3.519741398614336*^9, 3.519741408106407*^9}, {3.519741529699089*^9, 
+   3.5197415516226807`*^9}, {3.519742772904827*^9, 3.519742797213902*^9}, {
+   3.523991347171103*^9, 3.523991352337471*^9}, {3.523991397715253*^9, 
+   3.5239914429707747`*^9}, {3.567434994287612*^9, 3.5674349969745817`*^9}, {
+   3.567445264296218*^9, 3.567445266240169*^9}, 3.5678766758319693`*^9, {
+   3.569104194337366*^9, 3.5691041980382137`*^9}, {3.571268865882723*^9, 
+   3.571268871400805*^9}}],
+
+Cell[TextData[{
+ "\tBelow is the code for constructing the Platonic Fractal Set. Under each \
+Regular Convex Polyhedra Gasket is a closed cell which contains \
+\[OpenCurlyDoubleQuote]The ",
+ StyleBox["\[OpenCurlyDoubleQuote]Two Steps Back, \[OpenCurlyDoubleQuote]n\
+\[CloseCurlyDoubleQuote] Steps Forward\[CloseCurlyDoubleQuote] Method\
+\[CloseCurlyDoubleQuote]. To run a ",
+  FontWeight->"Plain"],
+ "Polyhedra Gasket",
+ StyleBox[" the cell for that particular",
+  FontWeight->"Plain"],
+ " Gasket",
+ StyleBox[" must first be intialized. Note: to make the ",
+  FontWeight->"Plain"],
+ "Gasket",
+ StyleBox[" code run more effciently, quite the Kernel between running code \
+for each ",
+  FontWeight->"Plain"],
+ "Gasket",
+ StyleBox[". ",
+  FontWeight->"Plain"]
+}], "Text",
+ CellChangeTimes->{{3.519742194640764*^9, 3.519742259011936*^9}, {
+   3.5674329282011023`*^9, 3.567433047860474*^9}, {3.567433092498707*^9, 
+   3.5674334657741823`*^9}, 3.567437131533231*^9, 3.567445045038762*^9, {
+   3.56786947889454*^9, 3.567869501860033*^9}, {3.57126865909656*^9, 
+   3.571268659847918*^9}, {3.571270338620132*^9, 3.571270383408329*^9}, {
+   3.571275143129479*^9, 3.571275356860214*^9}, {3.5712758721240788`*^9, 
+   3.57127594122232*^9}, 3.571276041438354*^9, {3.5713492550386763`*^9, 
+   3.571349446659371*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "SlideShowNavigationBar",
+ CellTags->"SlideShowHeader"],
+
+Cell[TextData[{
+ StyleBox["Tetrahedron",
+  FontColor->RGBColor[0.8118867780575265, 0., 0.]],
+ " Gasket Code"
+}], "Item",
+ CellDingbat->"\[RightGuillemet] ",
+ CellChangeTimes->{{3.51987719454279*^9, 3.519877302667454*^9}, {
+   3.5198777102433977`*^9, 3.5198777526706963`*^9}, {3.519878617304996*^9, 
+   3.519878623567318*^9}, 3.52399668355009*^9, {3.5239967592767467`*^9, 
+   3.523996759285749*^9}, {3.523997020161542*^9, 3.523997022805822*^9}, {
+   3.5239971687972918`*^9, 3.5239972024108*^9}, 3.523998116683179*^9, 
+   3.523999032312121*^9, 3.52399986284588*^9, 3.524000229982913*^9, {
+   3.567435115836684*^9, 3.56743512657791*^9}, 3.567750840860441*^9, {
+   3.5682580198160677`*^9, 3.568258030451024*^9}, {3.569109201407279*^9, 
+   3.569109209814609*^9}, 3.571268968376562*^9, {3.5712695638919487`*^9, 
+   3.571269572338168*^9}}],
+
+Cell[BoxData[
+ RowBox[{"\[IndentingNewLine]", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+  
+  RowBox[{"(*", 
+   RowBox[{
+    RowBox[{
+     RowBox[{
+      RowBox[{
+       RowBox[{
+        RowBox[{
+         RowBox[{
+          RowBox[{
+           RowBox[{
+            RowBox[{
+             RowBox[{
+              RowBox[{
+               RowBox[{
+                RowBox[{
+                 RowBox[{
+                  RowBox[{
+                   RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"**", "**"}], "**"}], "**"}], "**"}], "**"}], 
+                    "**"}], "**"}], "**"}], "**"}], "**"}], "**"}], "**"}], 
+                    "**"}], "**"}], "**"}], "**"}], "**"}], "**"}], "**"}], 
+                    "**"}], "**"}], "**"}], "**"}], "**"}], "**"}], "**"}], 
+                    "**"}], "**"}], "**"}], "**"}], "**"}], "**"}], "**"}], 
+               "**"}], "**"}], "**"}], "**"}], "**"}], "**"}], "**"}], "**"}],
+        "**"}], "**"}], "**"}], "**"}], "********)"}], "\[IndentingNewLine]", 
+  
+  RowBox[{"(*", " ", 
+   RowBox[{"General", " ", "Variables"}], " ", "*)"}], "\[IndentingNewLine]", 
+  
+  RowBox[{"(*", 
+   RowBox[{
+   "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**",
+     "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**",
+     "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**",
+     "**", "**", "**", "**", "**", "**", "**"}], "********)"}], 
+  "\[IndentingNewLine]", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+  RowBox[{"(*", 
+   RowBox[{
+   "Intializes", " ", "the", " ", "Vertices", " ", "of", " ", "the", " ", 
+    "Polyhedra", " ", "to", " ", "Used", " ", "for", " ", "the", " ", 
+    "Fractal"}], "*)"}], "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"t1", "=", 
+     RowBox[{"PolyhedronData", "[", 
+      RowBox[{"\"\<Tetrahedron\>\"", ",", "\"\<VertexCoordinates\>\""}], 
+      "]"}]}], ";"}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{
+    "Defines", " ", "a", " ", "function", " ", "which", " ", "takes", " ", 
+     "the", " ", "VertexCoordiantes", " ", "of", " ", "the", " ", "Polyhedra",
+      " ", "and", " ", "reduces", " ", "them", " ", 
+     RowBox[{"1", "/", "2"}]}], "*)"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"tetvec", "[", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"x_", ",", "y_", ",", "z_"}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"coordsx_", ",", "coordsy_", ",", "coordsz_"}], "}"}]}], 
+      "]"}], ":=", 
+     RowBox[{
+      RowBox[{"(", 
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{"x", ",", "y", ",", "z"}], "}"}], "-", 
+        RowBox[{"{", 
+         RowBox[{"coordsx", ",", "coordsy", ",", "coordsz"}], "}"}]}], ")"}], 
+      "/", "2"}]}], ";"}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{
+    "Threads", " ", "the", " ", "Vector", " ", "to", " ", "the", " ", "to", 
+     " ", "the", " ", 
+     RowBox[{"Polyhedra", "'"}], "s", " ", "VertexCoordiantes"}], "*)"}], 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"Thread", "[", 
+     RowBox[{
+      RowBox[{"tetvec", "[", 
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{"x", ",", "y", ",", "z"}], "}"}], ",", "t1"}], "]"}], ",", 
+      "List", ",", 
+      RowBox[{"-", "1"}]}], "]"}], ";"}], "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{
+     RowBox[{
+     "Uses", " ", "a", " ", "Regional", " ", "Plot", " ", "of", " ", "the", 
+      " ", "Poyhedra", " ", "to", " ", "define", " ", "the", " ", 
+      "Polyhedra"}], ",", " ", 
+     RowBox[{"then", " ", "takes", " ", "the", " ", 
+      RowBox[{"1", "/", "2"}], " ", "reduced", " ", "sized", " ", 
+      "polyhedra"}], ",", " ", 
+     RowBox[{
+     "places", " ", "them", " ", "at", " ", "the", " ", "vertext", " ", 
+      "coordiantes"}], ",", " ", 
+     RowBox[{
+     "and", " ", "removes", " ", "them", " ", "so", " ", "that", " ", "the", 
+      " ", "remaining", " ", "logic", " ", "statment", " ", "if", " ", "the", 
+      " ", "polyhedra", " ", 
+      RowBox[{"fractal", "'"}], "s", " ", "compliment"}]}], "*)"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"grosslogicalexpressiontet", "=", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"PolyhedronData", "[", 
+        RowBox[{"\"\<Tetrahedron\>\"", ",", "\"\<RegionFunction\>\""}], "]"}],
+        "[", 
+       RowBox[{"x", ",", "y", ",", "z"}], "]"}], " ", "&&", 
+      RowBox[{"Not", "[", 
+       RowBox[{"Apply", "[", 
+        RowBox[{"Or", ",", 
+         RowBox[{"Map", "[", 
+          RowBox[{
+           RowBox[{
+            RowBox[{"Apply", "[", 
+             RowBox[{
+              RowBox[{"PolyhedronData", "[", 
+               RowBox[{"\"\<Tetrahedron\>\"", ",", "\"\<RegionFunction\>\""}],
+                "]"}], ",", "#"}], "]"}], "&"}], ",", 
+           RowBox[{"Thread", "[", 
+            RowBox[{
+             RowBox[{"tetvec", "[", 
+              RowBox[{
+               RowBox[{"{", 
+                RowBox[{"x", ",", "y", ",", "z"}], "}"}], ",", "t1"}], "]"}], 
+             ",", "List", ",", 
+             RowBox[{"-", "1"}]}], "]"}]}], "]"}]}], "]"}], "]"}]}]}], ";"}], 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{"(*", " ", 
+    RowBox[{
+    "Reduces", " ", "the", " ", "number", " ", "of", " ", "logical", " ", 
+     "statments", " ", "required", " ", "to", " ", "define", " ", "the", " ", 
+     "previous", " ", "logic", " ", "statment", " ", "used", " ", "to", " ", 
+     "define", " ", "the", " ", "polyhedra", " ", 
+     RowBox[{"fractal", "'"}], "s", " ", 
+     RowBox[{"compliment", "."}]}], " ", "*)"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"lessgrosslogicalexpressiontet", "[", 
+      RowBox[{"x_", ",", "y_", ",", "z_"}], "]"}], "=", 
+     RowBox[{"FullSimplify", "[", 
+      RowBox[{"LogicalExpand", "[", 
+       RowBox[{"Resolve", "[", "grosslogicalexpressiontet", "]"}], "]"}], 
+      "]"}]}], ";"}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{
+     RowBox[{
+      RowBox[{
+       RowBox[{
+        RowBox[{
+         RowBox[{
+          RowBox[{
+           RowBox[{
+            RowBox[{
+             RowBox[{
+              RowBox[{
+               RowBox[{
+                RowBox[{
+                 RowBox[{
+                  RowBox[{
+                   RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"**", "**"}], "**"}], "**"}], "**"}], "**"}], 
+                    "**"}], "**"}], "**"}], "**"}], "**"}], "**"}], "**"}], 
+                    "**"}], "**"}], "**"}], "**"}], "**"}], "**"}], "**"}], 
+                    "**"}], "**"}], "**"}], "**"}], "**"}], "**"}], "**"}], 
+                    "**"}], "**"}], "**"}], "**"}], "**"}], "**"}], "**"}], 
+                "**"}], "**"}], "**"}], "**"}], "**"}], "**"}], "**"}], 
+         "**"}], "**"}], "**"}], "**"}], "**"}], "********)"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{"(*", " ", 
+    RowBox[{"Fractal", " ", "Variables"}], " ", "*)"}], "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{
+    "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**",
+      "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", 
+     "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**",
+      "**", "**", "**", "**", "**", "**", "**", "**"}], "********)"}], 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{"Clears", " ", "OctahedronFractalDrilling"}], "*)"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"Clear", "[", "TetrahedronFractalDrilling", "]"}], ";"}], 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{"(*", " ", 
+    RowBox[{"Defines", " ", "the", " ", 
+     SuperscriptBox["0", "th"], " ", "Fractal"}], "*)"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"TetrahedronFractalDrilling", "[", 
+      RowBox[{"0", ",", "distance_", ",", 
+       RowBox[{"{", 
+        RowBox[{"xcoords_", ",", "ycoords_", ",", "zcoords_"}], "}"}]}], 
+      "]"}], "=", "False"}], ";"}], "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", 
+   RowBox[{"(*", " ", 
+    RowBox[{"Defines", " ", "the", " ", 
+     SuperscriptBox["0", "th"], " ", "Fractal"}], "*)"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"TetrahedronFractalDrilling", "[", 
+      RowBox[{"1", ",", "distance_", ",", 
+       RowBox[{"{", 
+        RowBox[{"xcoords_", ",", "ycoords_", ",", "zcoords_"}], "}"}]}], 
+      "]"}], "=", 
+     RowBox[{"lessgrosslogicalexpressiontet", "[", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"(", 
+         RowBox[{"x", "-", "xcoords"}], ")"}], "/", "distance"}], ",", 
+       RowBox[{
+        RowBox[{"(", 
+         RowBox[{"y", "-", "ycoords"}], ")"}], "/", "distance"}], ",", 
+       RowBox[{
+        RowBox[{"(", 
+         RowBox[{"z", "-", "zcoords"}], ")"}], "/", "distance"}]}], "]"}]}], 
+    ";"}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{"(*", " ", 
+    RowBox[{"Defines", " ", "the", " ", 
+     SuperscriptBox["0", "th"], " ", "Fractal"}], "*)"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"TetrahedronFractalDrilling", "[", 
+      RowBox[{"n_", ",", "distance_", ",", 
+       RowBox[{"{", 
+        RowBox[{"xcoords_", ",", "ycoords_", ",", "zcoords_"}], "}"}]}], 
+      "]"}], ":=", 
+     RowBox[{
+      RowBox[{"TetrahedronFractalDrilling", "[", 
+       RowBox[{"n", ",", "distance", ",", 
+        RowBox[{"{", 
+         RowBox[{"xcoords", ",", "ycoords", ",", "zcoords"}], "}"}]}], "]"}], 
+      "=", 
+      RowBox[{
+       RowBox[{"TetrahedronFractalDrilling", "[", 
+        RowBox[{
+         RowBox[{"n", "-", "1"}], ",", "distance", ",", 
+         RowBox[{"{", 
+          RowBox[{"xcoords", ",", "ycoords", ",", "zcoords"}], "}"}]}], "]"}],
+        "||", 
+       RowBox[{"TetrahedronFractalDrilling", "[", 
+        RowBox[{
+         RowBox[{"n", "-", "1"}], ",", 
+         RowBox[{"distance", "/", "2"}], ",", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{"xcoords", ",", "ycoords", ",", "zcoords"}], "}"}], "+", 
+          RowBox[{
+           RowBox[{"t1", "[", 
+            RowBox[{"[", "1", "]"}], "]"}], "*", 
+           RowBox[{"distance", "/", "2"}]}]}]}], "]"}], "||", 
+       RowBox[{"TetrahedronFractalDrilling", "[", 
+        RowBox[{
+         RowBox[{"n", "-", "1"}], ",", 
+         RowBox[{"distance", "/", "2"}], ",", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{"xcoords", ",", "ycoords", ",", "zcoords"}], "}"}], "+", 
+          RowBox[{
+           RowBox[{"t1", "[", 
+            RowBox[{"[", "2", "]"}], "]"}], "*", 
+           RowBox[{"distance", "/", "2"}]}]}]}], "]"}], "||", 
+       RowBox[{"TetrahedronFractalDrilling", "[", 
+        RowBox[{
+         RowBox[{"n", "-", "1"}], ",", 
+         RowBox[{"distance", "/", "2"}], ",", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{"xcoords", ",", "ycoords", ",", "zcoords"}], "}"}], "+", 
+          RowBox[{
+           RowBox[{"t1", "[", 
+            RowBox[{"[", "3", "]"}], "]"}], "*", 
+           RowBox[{"distance", "/", "2"}]}]}]}], "]"}], "||", 
+       RowBox[{"TetrahedronFractalDrilling", "[", 
+        RowBox[{
+         RowBox[{"n", "-", "1"}], ",", 
+         RowBox[{"distance", "/", "2"}], ",", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{"xcoords", ",", "ycoords", ",", "zcoords"}], "}"}], "+", 
+          RowBox[{
+           RowBox[{"t1", "[", 
+            RowBox[{"[", "4", "]"}], "]"}], "*", 
+           RowBox[{"distance", "/", "2"}]}]}]}], "]"}]}]}]}], ";"}], 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{"Clear", "[", "TetrahedronFractalReduce", "]"}], 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"TetrahedronFractalReduce", "[", "0", "]"}], "=", 
+     RowBox[{
+      RowBox[{"PolyhedronData", "[", 
+       RowBox[{"\"\<Tetrahedron\>\"", ",", "\"\<RegionFunction\>\""}], "]"}], 
+      "[", 
+      RowBox[{"x", ",", "y", ",", "z"}], "]"}]}], " ", ";"}], 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"TetrahedronFractalReduce", "[", "n_", "]"}], ":=", 
+     RowBox[{
+      RowBox[{"TetrahedronFractalReduce", "[", "n", "]"}], "=", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"PolyhedronData", "[", 
+         RowBox[{"\"\<Tetrahedron\>\"", ",", "\"\<RegionFunction\>\""}], 
+         "]"}], "[", 
+        RowBox[{"x", ",", "y", ",", "z"}], "]"}], " ", "&&", 
+       RowBox[{"Not", "[", 
+        RowBox[{"TetrahedronFractalDrilling", "[", 
+         RowBox[{"n", ",", "1", ",", 
+          RowBox[{"{", 
+           RowBox[{"0", ",", "0", ",", "0"}], "}"}]}], "]"}], "]"}]}]}]}], 
+    ";"}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{
+     RowBox[{
+      RowBox[{
+       RowBox[{
+        RowBox[{
+         RowBox[{
+          RowBox[{
+           RowBox[{
+            RowBox[{
+             RowBox[{
+              RowBox[{
+               RowBox[{
+                RowBox[{
+                 RowBox[{
+                  RowBox[{
+                   RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"**", "**"}], "**"}], "**"}], "**"}], "**"}], 
+                    "**"}], "**"}], "**"}], "**"}], "**"}], "**"}], "**"}], 
+                    "**"}], "**"}], "**"}], "**"}], "**"}], "**"}], "**"}], 
+                    "**"}], "**"}], "**"}], "**"}], "**"}], "**"}], "**"}], 
+                    "**"}], "**"}], "**"}], "**"}], "**"}], "**"}], "**"}], 
+                "**"}], "**"}], "**"}], "**"}], "**"}], "**"}], "**"}], 
+         "**"}], "**"}], "**"}], "**"}], "**"}], "********)"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{"(*", " ", 
+    RowBox[{"Compliment", " ", "Variables"}], " ", "*)"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{
+    "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**",
+      "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", 
+     "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**",
+      "**", "**", "**", "**", "**", "**", "**", "**"}], "********)"}], 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{"Clears", " ", "OctahedronComplimentDrilling"}], "*)"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"Clear", "[", "TetrahedronComplimentDrilling", "]"}], ";"}], 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{"(*", " ", 
+    RowBox[{"Defines", " ", "the", " ", 
+     SuperscriptBox["0", "th"], " ", "Fractal"}], "*)"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"TetrahedronComplimentDrilling", "[", 
+      RowBox[{"0", ",", "depth_", ",", "mindepth_", ",", "distance_", ",", 
+       RowBox[{"{", 
+        RowBox[{"xcoords_", ",", "ycoords_", ",", "zcoords_"}], "}"}]}], 
+      "]"}], "=", "False"}], ";"}], "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", 
+   RowBox[{"(*", " ", 
+    RowBox[{"Defines", " ", "the", " ", 
+     SuperscriptBox["0", "th"], " ", "Fractal"}], "*)"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"TetrahedronComplimentDrilling", "[", 
+      RowBox[{"1", ",", "depth_", ",", "mindepth_", ",", "distance_", ",", 
+       RowBox[{"{", 
+        RowBox[{"xcoords_", ",", "ycoords_", ",", "zcoords_"}], "}"}]}], 
+      "]"}], "=", 
+     RowBox[{"If", "[", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"depth", "+", "1"}], " ", "\[GreaterEqual]", " ", 
+        "mindepth"}], ",", 
+       RowBox[{"lessgrosslogicalexpressiontet", "[", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"(", 
+           RowBox[{"x", "-", "xcoords"}], ")"}], "/", "distance"}], ",", 
+         RowBox[{
+          RowBox[{"(", 
+           RowBox[{"y", "-", "ycoords"}], ")"}], "/", "distance"}], ",", 
+         RowBox[{
+          RowBox[{"(", 
+           RowBox[{"z", "-", "zcoords"}], ")"}], "/", "distance"}]}], "]"}], 
+       ",", "False"}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", 
+   RowBox[{"(*", " ", 
+    RowBox[{"Defines", " ", "the", " ", 
+     SuperscriptBox["0", "th"], " ", "Fractal"}], "*)"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"TetrahedronComplimentDrilling", "[", 
+      RowBox[{"n_", ",", "depth_", ",", "mindepth_", ",", "distance_", ",", 
+       RowBox[{"{", 
+        RowBox[{"xcoords_", ",", "ycoords_", ",", "zcoords_"}], "}"}]}], 
+      "]"}], ":=", 
+     RowBox[{
+      RowBox[{"TetrahedronComplimentDrilling", "[", 
+       RowBox[{"n", ",", "depth", ",", "mindepth", ",", "distance", ",", 
+        RowBox[{"{", 
+         RowBox[{"xcoords", ",", "ycoords", ",", "zcoords"}], "}"}]}], "]"}], 
+      "=", 
+      RowBox[{
+       RowBox[{"TetrahedronComplimentDrilling", "[", 
+        RowBox[{
+         RowBox[{"n", "-", "1"}], ",", "depth", ",", "mindepth", ",", 
+         "distance", ",", 
+         RowBox[{"{", 
+          RowBox[{"xcoords", ",", "ycoords", ",", "zcoords"}], "}"}]}], "]"}],
+        "||", 
+       RowBox[{"TetrahedronComplimentDrilling", "[", 
+        RowBox[{
+         RowBox[{"n", "-", "1"}], ",", 
+         RowBox[{"depth", "+", "1"}], ",", "mindepth", ",", 
+         RowBox[{"distance", "/", "2"}], ",", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{"xcoords", ",", "ycoords", ",", "zcoords"}], "}"}], "+", 
+          RowBox[{
+           RowBox[{"t1", "[", 
+            RowBox[{"[", "1", "]"}], "]"}], "*", 
+           RowBox[{"distance", "/", "2"}]}]}]}], "]"}], "||", 
+       RowBox[{"TetrahedronComplimentDrilling", "[", 
+        RowBox[{
+         RowBox[{"n", "-", "1"}], ",", 
+         RowBox[{"depth", "+", "1"}], ",", "mindepth", ",", 
+         RowBox[{"distance", "/", "2"}], ",", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{"xcoords", ",", "ycoords", ",", "zcoords"}], "}"}], "+", 
+          RowBox[{
+           RowBox[{"t1", "[", 
+            RowBox[{"[", "2", "]"}], "]"}], "*", 
+           RowBox[{"distance", "/", "2"}]}]}]}], "]"}], "||", 
+       RowBox[{"TetrahedronComplimentDrilling", "[", 
+        RowBox[{
+         RowBox[{"n", "-", "1"}], ",", 
+         RowBox[{"depth", "+", "1"}], ",", "mindepth", ",", 
+         RowBox[{"distance", "/", "2"}], ",", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{"xcoords", ",", "ycoords", ",", "zcoords"}], "}"}], "+", 
+          RowBox[{
+           RowBox[{"t1", "[", 
+            RowBox[{"[", "3", "]"}], "]"}], "*", 
+           RowBox[{"distance", "/", "2"}]}]}]}], "]"}], "||", 
+       RowBox[{"TetrahedronComplimentDrilling", "[", 
+        RowBox[{
+         RowBox[{"n", "-", "1"}], ",", 
+         RowBox[{"depth", "+", "1"}], ",", "mindepth", ",", 
+         RowBox[{"distance", "/", "2"}], ",", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{"xcoords", ",", "ycoords", ",", "zcoords"}], "}"}], "+", 
+          RowBox[{
+           RowBox[{"t1", "[", 
+            RowBox[{"[", "4", "]"}], "]"}], "*", 
+           RowBox[{"distance", "/", "2"}]}]}]}], "]"}]}]}]}], 
+    ";"}]}]}]], "Code",
+ CellChangeTimes->{{3.5524292243107*^9, 3.552429580155436*^9}, 
+   3.552429622097569*^9, {3.5524296567114487`*^9, 3.552429681592835*^9}, {
+   3.5524469166628323`*^9, 3.5524471737470284`*^9}, {3.552447770997064*^9, 
+   3.552447772293908*^9}, {3.552447802728531*^9, 3.552447822840316*^9}, 
+   3.5524479277635527`*^9, {3.5524844396519213`*^9, 3.552484454560721*^9}}],
+
+Cell[BoxData[
+ RowBox[{"TetrahedronFractalReduce", "[", "1", "]"}]], "Input",
+ CellChangeTimes->{3.615061110777465*^9}],
+
+Cell[BoxData[
+ RowBox[{"\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"mindepth", "=", "1"}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"TetrahedronComplimentDrilling", "[", 
+     RowBox[{"1", ",", "0", ",", "mindepth", ",", "1", ",", 
+      RowBox[{"{", 
+       RowBox[{"0", ",", "0", ",", "0"}], "}"}]}], "]"}], ";"}]}]}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{"RegionPlot3D", "[", 
+  RowBox[{
+   RowBox[{"TetrahedronComplimentDrilling", "[", 
+    RowBox[{"1", ",", "0", ",", "mindepth", ",", "1", ",", 
+     RowBox[{"{", 
+      RowBox[{"0", ",", "0", ",", "0"}], "}"}]}], "]"}], "  ", ",", 
+   RowBox[{"{", 
+    RowBox[{"x", ",", 
+     RowBox[{"-", "0.3"}], ",", "0.6"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"y", ",", 
+     RowBox[{
+      RowBox[{"-", "1"}], "/", "2"}], ",", 
+     RowBox[{"1", "/", "2"}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"z", ",", 
+     RowBox[{"-", "0.3"}], ",", "0.7"}], "}"}], ",", 
+   RowBox[{"PlotStyle", "\[Rule]", "Black"}], ",", 
+   RowBox[{"PlotPoints", "\[Rule]", " ", "100"}], ",", 
+   RowBox[{"Boxed", "\[Rule]", "False"}], ",", 
+   RowBox[{"MeshStyle", "\[Rule]", "White"}], ",", 
+   RowBox[{"Axes", "->", "False"}], ",", 
+   RowBox[{"Lighting", "\[Rule]", "\"\<Neutral\>\""}], ",", 
+   RowBox[{"ViewPoint", "\[Rule]", 
+    RowBox[{"{", 
+     RowBox[{"Pi", ",", 
+      RowBox[{"Pi", "/", "12"}], ",", 
+      RowBox[{"1", "/", "4"}]}], "}"}]}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.615061143144724*^9, 3.6150611622663803`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"\[IndentingNewLine]", 
+  RowBox[{"RegionPlot3D", "[", 
+   RowBox[{
+    RowBox[{"TetrahedronFractalReduce", "[", "1", "]"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"x", ",", 
+      RowBox[{"-", "0.3"}], ",", "0.6"}], "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"y", ",", 
+      RowBox[{
+       RowBox[{"-", "1"}], "/", "2"}], ",", 
+      RowBox[{"1", "/", "2"}]}], "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"z", ",", 
+      RowBox[{"-", "0.3"}], ",", "0.7"}], "}"}], ",", 
+    RowBox[{"PlotStyle", "\[Rule]", 
+     RowBox[{"{", 
+      RowBox[{"Red", ",", 
+       RowBox[{"Specularity", "[", 
+        RowBox[{
+         RowBox[{"GrayLevel", "[", "1.5", "]"}], ",", "5"}], "]"}]}], "}"}]}],
+     ",", 
+    RowBox[{"PlotPoints", "\[Rule]", "100"}], ",", 
+    RowBox[{"Boxed", "\[Rule]", "False"}], ",", 
+    RowBox[{"Mesh", "\[Rule]", "None"}], ",", 
+    RowBox[{"Axes", "->", "False"}], ",", 
+    RowBox[{"Lighting", "\[Rule]", "\"\<Neutral\>\""}], ",", 
+    RowBox[{"ViewPoint", "\[Rule]", 
+     RowBox[{"{", 
+      RowBox[{"Pi", ",", 
+       RowBox[{"Pi", "/", "12"}], ",", 
+       RowBox[{"1", "/", "4"}]}], "}"}]}]}], "]"}]}]], "Input"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "SlideShowNavigationBar",
+ CellTags->"SlideShowHeader"],
+
+Cell[TextData[{
+ StyleBox["Octahedron",
+  FontColor->RGBColor[0.8118867780575265, 0., 0.]],
+ " Gasket Code"
+}], "Item",
+ CellDingbat->"\[RightGuillemet] ",
+ CellChangeTimes->{{3.51987719454279*^9, 3.519877302667454*^9}, {
+   3.5198777102433977`*^9, 3.5198777526706963`*^9}, {3.519878617304996*^9, 
+   3.519878623567318*^9}, 3.52399668355009*^9, {3.5239967592767467`*^9, 
+   3.523996759285749*^9}, {3.523997020161542*^9, 3.523997022805822*^9}, {
+   3.5239971687972918`*^9, 3.5239972024108*^9}, 3.523998116683179*^9, 
+   3.523999032312121*^9, 3.52399986284588*^9, 3.524000229982913*^9, {
+   3.567435115836684*^9, 3.56743512657791*^9}, 3.567750840860441*^9, {
+   3.5682580198160677`*^9, 3.568258030451024*^9}, {3.569109201407279*^9, 
+   3.569109209814609*^9}, {3.571268968376562*^9, 3.5712689837742*^9}, {
+   3.571269578660678*^9, 3.57126958270586*^9}}],
+
+Cell[BoxData[
+ RowBox[{"\[IndentingNewLine]", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+  
+  RowBox[{"(*", 
+   RowBox[{
+    RowBox[{
+     RowBox[{
+      RowBox[{
+       RowBox[{
+        RowBox[{
+         RowBox[{
+          RowBox[{
+           RowBox[{
+            RowBox[{
+             RowBox[{
+              RowBox[{
+               RowBox[{
+                RowBox[{
+                 RowBox[{
+                  RowBox[{
+                   RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"**", "**"}], "**"}], "**"}], "**"}], "**"}], 
+                    "**"}], "**"}], "**"}], "**"}], "**"}], "**"}], "**"}], 
+                    "**"}], "**"}], "**"}], "**"}], "**"}], "**"}], "**"}], 
+                    "**"}], "**"}], "**"}], "**"}], "**"}], "**"}], "**"}], 
+                    "**"}], "**"}], "**"}], "**"}], "**"}], "**"}], "**"}], 
+               "**"}], "**"}], "**"}], "**"}], "**"}], "**"}], "**"}], "**"}],
+        "**"}], "**"}], "**"}], "**"}], "********)"}], "\[IndentingNewLine]", 
+  
+  RowBox[{"(*", " ", 
+   RowBox[{"General", " ", "Variables"}], " ", "*)"}], "\[IndentingNewLine]", 
+  
+  RowBox[{"(*", 
+   RowBox[{
+   "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**",
+     "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**",
+     "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**",
+     "**", "**", "**", "**", "**", "**", "**"}], "********)"}], 
+  "\[IndentingNewLine]", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+  RowBox[{"(*", 
+   RowBox[{
+   "Intializes", " ", "the", " ", "Vertices", " ", "of", " ", "the", " ", 
+    "Polyhedra", " ", "to", " ", "Used", " ", "for", " ", "the", " ", 
+    "Fractal"}], "*)"}], "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"o1", "=", 
+     RowBox[{"PolyhedronData", "[", 
+      RowBox[{"\"\<Octahedron\>\"", ",", "\"\<VertexCoordinates\>\""}], 
+      "]"}]}], ";"}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{
+    "Defines", " ", "a", " ", "function", " ", "which", " ", "takes", " ", 
+     "the", " ", "VertexCoordiantes", " ", "of", " ", "the", " ", "Polyhedra",
+      " ", "and", " ", "reduces", " ", "them", " ", 
+     RowBox[{"1", "/", "2"}]}], "*)"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"octvec", "[", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"x_", ",", "y_", ",", "z_"}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"coordsx_", ",", "coordsy_", ",", "coordsz_"}], "}"}]}], 
+      "]"}], ":=", 
+     RowBox[{
+      RowBox[{"2", "*", 
+       RowBox[{"{", 
+        RowBox[{"x", ",", "y", ",", "z"}], "}"}]}], "-", 
+      RowBox[{"{", 
+       RowBox[{"coordsx", ",", "coordsy", ",", "coordsz"}], "}"}]}]}], ";"}], 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{
+    "Threads", " ", "the", " ", "Vector", " ", "to", " ", "the", " ", "to", 
+     " ", "the", " ", 
+     RowBox[{"Polyhedra", "'"}], "s", " ", "VertexCoordiantes"}], "*)"}], 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"Thread", "[", 
+     RowBox[{
+      RowBox[{"octvec", "[", 
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{"x", ",", "y", ",", "z"}], "}"}], ",", "o1"}], "]"}], ",", 
+      "List", ",", 
+      RowBox[{"-", "1"}]}], "]"}], ";"}], "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{
+     RowBox[{
+     "Uses", " ", "a", " ", "Regional", " ", "Plot", " ", "of", " ", "the", 
+      " ", "Poyhedra", " ", "to", " ", "define", " ", "the", " ", 
+      "Polyhedra"}], ",", " ", 
+     RowBox[{"then", " ", "takes", " ", "the", " ", 
+      RowBox[{"1", "/", "2"}], " ", "reduced", " ", "sized", " ", 
+      "polyhedra"}], ",", " ", 
+     RowBox[{
+     "places", " ", "them", " ", "at", " ", "the", " ", "vertext", " ", 
+      "coordiantes"}], ",", " ", 
+     RowBox[{
+     "and", " ", "removes", " ", "them", " ", "so", " ", "that", " ", "the", 
+      " ", "remaining", " ", "logic", " ", "statment", " ", "if", " ", "the", 
+      " ", "polyhedra", " ", 
+      RowBox[{"fractal", "'"}], "s", " ", "compliment"}]}], "*)"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"grosslogicalexpressionoct", "=", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"PolyhedronData", "[", 
+        RowBox[{"\"\<Octahedron\>\"", ",", "\"\<RegionFunction\>\""}], "]"}], 
+       "[", 
+       RowBox[{"x", ",", "y", ",", "z"}], "]"}], " ", "&&", 
+      RowBox[{"Not", "[", 
+       RowBox[{"Apply", "[", 
+        RowBox[{"Or", ",", 
+         RowBox[{"Map", "[", 
+          RowBox[{
+           RowBox[{
+            RowBox[{"Apply", "[", 
+             RowBox[{
+              RowBox[{"PolyhedronData", "[", 
+               RowBox[{"\"\<Octahedron\>\"", ",", "\"\<RegionFunction\>\""}], 
+               "]"}], ",", "#"}], "]"}], "&"}], ",", 
+           RowBox[{"Thread", "[", 
+            RowBox[{
+             RowBox[{"octvec", "[", 
+              RowBox[{
+               RowBox[{"{", 
+                RowBox[{"x", ",", "y", ",", "z"}], "}"}], ",", "o1"}], "]"}], 
+             ",", "List", ",", 
+             RowBox[{"-", "1"}]}], "]"}]}], "]"}]}], "]"}], "]"}]}]}], ";"}], 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{"(*", " ", 
+    RowBox[{
+    "Reduces", " ", "the", " ", "number", " ", "of", " ", "logical", " ", 
+     "statments", " ", "required", " ", "to", " ", "define", " ", "the", " ", 
+     "previous", " ", "logic", " ", "statment", " ", "used", " ", "to", " ", 
+     "define", " ", "the", " ", "polyhedra", " ", 
+     RowBox[{"fractal", "'"}], "s", " ", 
+     RowBox[{"compliment", "."}]}], " ", "*)"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"lessgrosslogicalexpressionoct", "[", 
+      RowBox[{"x_", ",", "y_", ",", "z_"}], "]"}], "=", 
+     RowBox[{"FullSimplify", "[", 
+      RowBox[{"Resolve", "[", "grosslogicalexpressionoct", "]"}], "]"}]}], 
+    ";"}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{
+     RowBox[{
+      RowBox[{
+       RowBox[{
+        RowBox[{
+         RowBox[{
+          RowBox[{
+           RowBox[{
+            RowBox[{
+             RowBox[{
+              RowBox[{
+               RowBox[{
+                RowBox[{
+                 RowBox[{
+                  RowBox[{
+                   RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"**", "**"}], "**"}], "**"}], "**"}], "**"}], 
+                    "**"}], "**"}], "**"}], "**"}], "**"}], "**"}], "**"}], 
+                    "**"}], "**"}], "**"}], "**"}], "**"}], "**"}], "**"}], 
+                    "**"}], "**"}], "**"}], "**"}], "**"}], "**"}], "**"}], 
+                    "**"}], "**"}], "**"}], "**"}], "**"}], "**"}], "**"}], 
+                "**"}], "**"}], "**"}], "**"}], "**"}], "**"}], "**"}], 
+         "**"}], "**"}], "**"}], "**"}], "**"}], "********)"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{"(*", " ", 
+    RowBox[{"Fractal", " ", "Variables"}], " ", "*)"}], "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{
+    "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**",
+      "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", 
+     "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**",
+      "**", "**", "**", "**", "**", "**", "**", "**"}], "********)"}], 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{"Clears", " ", "OctahedronFractalDrilling"}], "*)"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"Clear", "[", "OctahedronFractalDrilling", "]"}], ";"}], 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{"(*", " ", 
+    RowBox[{"Defines", " ", "the", " ", 
+     SuperscriptBox["0", "th"], " ", "Fractal"}], "*)"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"OctahedronFractalDrilling", "[", 
+      RowBox[{"0", ",", "distance_", ",", 
+       RowBox[{"{", 
+        RowBox[{"xcoords_", ",", "ycoords_", ",", "zcoords_"}], "}"}]}], 
+      "]"}], "=", "False"}], ";"}], "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", 
+   RowBox[{"(*", " ", 
+    RowBox[{"Defines", " ", "the", " ", 
+     SuperscriptBox["0", "th"], " ", "Fractal"}], "*)"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"OctahedronFractalDrilling", "[", 
+      RowBox[{"1", ",", "distance_", ",", 
+       RowBox[{"{", 
+        RowBox[{"xcoords_", ",", "ycoords_", ",", "zcoords_"}], "}"}]}], 
+      "]"}], "=", 
+     RowBox[{"lessgrosslogicalexpressionoct", "[", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"(", 
+         RowBox[{"x", "-", "xcoords"}], ")"}], "/", "distance"}], ",", 
+       RowBox[{
+        RowBox[{"(", 
+         RowBox[{"y", "-", "ycoords"}], ")"}], "/", "distance"}], ",", 
+       RowBox[{
+        RowBox[{"(", 
+         RowBox[{"z", "-", "zcoords"}], ")"}], "/", "distance"}]}], "]"}]}], 
+    ";"}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{"(*", " ", 
+    RowBox[{"Defines", " ", "the", " ", 
+     SuperscriptBox["0", "th"], " ", "Fractal"}], "*)"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"OctahedronFractalDrilling", "[", 
+      RowBox[{"n_", ",", "distance_", ",", 
+       RowBox[{"{", 
+        RowBox[{"xcoords_", ",", "ycoords_", ",", "zcoords_"}], "}"}]}], 
+      "]"}], ":=", 
+     RowBox[{
+      RowBox[{"OctahedronFractalDrilling", "[", 
+       RowBox[{"n", ",", "distance", ",", 
+        RowBox[{"{", 
+         RowBox[{"xcoords", ",", "ycoords", ",", "zcoords"}], "}"}]}], "]"}], 
+      "=", 
+      RowBox[{
+       RowBox[{"OctahedronFractalDrilling", "[", 
+        RowBox[{
+         RowBox[{"n", "-", "1"}], ",", "distance", ",", 
+         RowBox[{"{", 
+          RowBox[{"xcoords", ",", "ycoords", ",", "zcoords"}], "}"}]}], "]"}],
+        "||", 
+       RowBox[{"OctahedronFractalDrilling", "[", 
+        RowBox[{
+         RowBox[{"n", "-", "1"}], ",", 
+         RowBox[{"distance", "/", "2"}], ",", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{"xcoords", ",", "ycoords", ",", "zcoords"}], "}"}], "+", 
+          RowBox[{
+           RowBox[{"o1", "[", 
+            RowBox[{"[", "1", "]"}], "]"}], "*", 
+           RowBox[{"distance", "/", "2"}]}]}]}], "]"}], "||", 
+       RowBox[{"OctahedronFractalDrilling", "[", 
+        RowBox[{
+         RowBox[{"n", "-", "1"}], ",", 
+         RowBox[{"distance", "/", "2"}], ",", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{"xcoords", ",", "ycoords", ",", "zcoords"}], "}"}], "+", 
+          RowBox[{
+           RowBox[{"o1", "[", 
+            RowBox[{"[", "2", "]"}], "]"}], "*", 
+           RowBox[{"distance", "/", "2"}]}]}]}], "]"}], "||", 
+       RowBox[{"OctahedronFractalDrilling", "[", 
+        RowBox[{
+         RowBox[{"n", "-", "1"}], ",", 
+         RowBox[{"distance", "/", "2"}], ",", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{"xcoords", ",", "ycoords", ",", "zcoords"}], "}"}], "+", 
+          RowBox[{
+           RowBox[{"o1", "[", 
+            RowBox[{"[", "3", "]"}], "]"}], "*", 
+           RowBox[{"distance", "/", "2"}]}]}]}], "]"}], "||", 
+       RowBox[{"OctahedronFractalDrilling", "[", 
+        RowBox[{
+         RowBox[{"n", "-", "1"}], ",", 
+         RowBox[{"distance", "/", "2"}], ",", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{"xcoords", ",", "ycoords", ",", "zcoords"}], "}"}], "+", 
+          RowBox[{
+           RowBox[{"o1", "[", 
+            RowBox[{"[", "4", "]"}], "]"}], "*", 
+           RowBox[{"distance", "/", "2"}]}]}]}], "]"}], "||", 
+       "\[IndentingNewLine]", 
+       RowBox[{"OctahedronFractalDrilling", "[", 
+        RowBox[{
+         RowBox[{"n", "-", "1"}], ",", 
+         RowBox[{"distance", "/", "2"}], ",", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{"xcoords", ",", "ycoords", ",", "zcoords"}], "}"}], "+", 
+          RowBox[{
+           RowBox[{"o1", "[", 
+            RowBox[{"[", "5", "]"}], "]"}], "*", 
+           RowBox[{"distance", "/", "2"}]}]}]}], "]"}], "||", 
+       RowBox[{"OctahedronFractalDrilling", "[", 
+        RowBox[{
+         RowBox[{"n", "-", "1"}], ",", 
+         RowBox[{"distance", "/", "2"}], ",", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{"xcoords", ",", "ycoords", ",", "zcoords"}], "}"}], "+", 
+          RowBox[{
+           RowBox[{"o1", "[", 
+            RowBox[{"[", "6", "]"}], "]"}], "*", 
+           RowBox[{"distance", "/", "2"}]}]}]}], "]"}]}]}]}], ";"}], 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{"Clear", "[", "OctahedronFractalReduce", "]"}], 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"OctahedronFractalReduce", "[", "0", "]"}], "=", 
+     RowBox[{
+      RowBox[{"PolyhedronData", "[", 
+       RowBox[{"\"\<Octahedron\>\"", ",", "\"\<RegionFunction\>\""}], "]"}], 
+      "[", 
+      RowBox[{"x", ",", "y", ",", "z"}], "]"}]}], " ", ";"}], 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"OctahedronFractalReduce", "[", "n_", "]"}], ":=", 
+     RowBox[{
+      RowBox[{"OctahedronFractalReduce", "[", "n", "]"}], "=", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"PolyhedronData", "[", 
+         RowBox[{"\"\<Octahedron\>\"", ",", "\"\<RegionFunction\>\""}], "]"}],
+         "[", 
+        RowBox[{"x", ",", "y", ",", "z"}], "]"}], " ", "&&", 
+       RowBox[{"Not", "[", 
+        RowBox[{"OctahedronFractalDrilling", "[", 
+         RowBox[{"n", ",", "1", ",", 
+          RowBox[{"{", 
+           RowBox[{"0", ",", "0", ",", "0"}], "}"}]}], "]"}], "]"}]}]}]}], 
+    ";"}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{
+     RowBox[{
+      RowBox[{
+       RowBox[{
+        RowBox[{
+         RowBox[{
+          RowBox[{
+           RowBox[{
+            RowBox[{
+             RowBox[{
+              RowBox[{
+               RowBox[{
+                RowBox[{
+                 RowBox[{
+                  RowBox[{
+                   RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"**", "**"}], "**"}], "**"}], "**"}], "**"}], 
+                    "**"}], "**"}], "**"}], "**"}], "**"}], "**"}], "**"}], 
+                    "**"}], "**"}], "**"}], "**"}], "**"}], "**"}], "**"}], 
+                    "**"}], "**"}], "**"}], "**"}], "**"}], "**"}], "**"}], 
+                    "**"}], "**"}], "**"}], "**"}], "**"}], "**"}], "**"}], 
+                "**"}], "**"}], "**"}], "**"}], "**"}], "**"}], "**"}], 
+         "**"}], "**"}], "**"}], "**"}], "**"}], "********)"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{"(*", " ", 
+    RowBox[{"Compliment", " ", "Variables"}], " ", "*)"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{
+    "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**",
+      "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", 
+     "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**",
+      "**", "**", "**", "**", "**", "**", "**", "**"}], "********)"}], 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{"Clears", " ", "OctahedronComplimentDrilling"}], "*)"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"Clear", "[", "OctahedronComplimentDrilling", "]"}], ";"}], 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{"(*", " ", 
+    RowBox[{"Defines", " ", "the", " ", 
+     SuperscriptBox["0", "th"], " ", "Fractal"}], "*)"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"OctahedronComplimentDrilling", "[", 
+      RowBox[{"0", ",", "depth_", ",", "mindepth_", ",", "distance_", ",", 
+       RowBox[{"{", 
+        RowBox[{"xcoords_", ",", "ycoords_", ",", "zcoords_"}], "}"}]}], 
+      "]"}], "=", "False"}], ";"}], "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", 
+   RowBox[{"(*", " ", 
+    RowBox[{"Defines", " ", "the", " ", 
+     SuperscriptBox["0", "th"], " ", "Fractal"}], "*)"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"OctahedronComplimentDrilling", "[", 
+      RowBox[{"1", ",", "depth_", ",", "mindepth_", ",", "distance_", ",", 
+       RowBox[{"{", 
+        RowBox[{"xcoords_", ",", "ycoords_", ",", "zcoords_"}], "}"}]}], 
+      "]"}], "=", 
+     RowBox[{"If", "[", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"depth", "+", "1"}], " ", "\[GreaterEqual]", " ", 
+        "mindepth"}], ",", 
+       RowBox[{"lessgrosslogicalexpressionoct", "[", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"(", 
+           RowBox[{"x", "-", "xcoords"}], ")"}], "/", "distance"}], ",", 
+         RowBox[{
+          RowBox[{"(", 
+           RowBox[{"y", "-", "ycoords"}], ")"}], "/", "distance"}], ",", 
+         RowBox[{
+          RowBox[{"(", 
+           RowBox[{"z", "-", "zcoords"}], ")"}], "/", "distance"}]}], "]"}], 
+       ",", "False"}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", 
+   RowBox[{"(*", " ", 
+    RowBox[{"Defines", " ", "the", " ", 
+     SuperscriptBox["0", "th"], " ", "Fractal"}], "*)"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"OctahedronComplimentDrilling", "[", 
+      RowBox[{"n_", ",", "depth_", ",", "mindepth_", ",", "distance_", ",", 
+       RowBox[{"{", 
+        RowBox[{"xcoords_", ",", "ycoords_", ",", "zcoords_"}], "}"}]}], 
+      "]"}], ":=", 
+     RowBox[{
+      RowBox[{"OctahedronComplimentDrilling", "[", 
+       RowBox[{"n", ",", "depth", ",", "mindepth", ",", "distance", ",", 
+        RowBox[{"{", 
+         RowBox[{"xcoords", ",", "ycoords", ",", "zcoords"}], "}"}]}], "]"}], 
+      "=", 
+      RowBox[{
+       RowBox[{"OctahedronComplimentDrilling", "[", 
+        RowBox[{
+         RowBox[{"n", "-", "1"}], ",", "depth", ",", "mindepth", ",", 
+         "distance", ",", 
+         RowBox[{"{", 
+          RowBox[{"xcoords", ",", "ycoords", ",", "zcoords"}], "}"}]}], "]"}],
+        "||", 
+       RowBox[{"OctahedronComplimentDrilling", "[", 
+        RowBox[{
+         RowBox[{"n", "-", "1"}], ",", 
+         RowBox[{"depth", "+", "1"}], ",", "mindepth", ",", 
+         RowBox[{"distance", "/", "2"}], ",", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{"xcoords", ",", "ycoords", ",", "zcoords"}], "}"}], "+", 
+          RowBox[{
+           RowBox[{"o1", "[", 
+            RowBox[{"[", "1", "]"}], "]"}], "*", 
+           RowBox[{"distance", "/", "2"}]}]}]}], "]"}], "||", 
+       RowBox[{"OctahedronComplimentDrilling", "[", 
+        RowBox[{
+         RowBox[{"n", "-", "1"}], ",", 
+         RowBox[{"depth", "+", "1"}], ",", "mindepth", ",", 
+         RowBox[{"distance", "/", "2"}], ",", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{"xcoords", ",", "ycoords", ",", "zcoords"}], "}"}], "+", 
+          RowBox[{
+           RowBox[{"o1", "[", 
+            RowBox[{"[", "2", "]"}], "]"}], "*", 
+           RowBox[{"distance", "/", "2"}]}]}]}], "]"}], "||", 
+       RowBox[{"OctahedronComplimentDrilling", "[", 
+        RowBox[{
+         RowBox[{"n", "-", "1"}], ",", 
+         RowBox[{"depth", "+", "1"}], ",", "mindepth", ",", 
+         RowBox[{"distance", "/", "2"}], ",", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{"xcoords", ",", "ycoords", ",", "zcoords"}], "}"}], "+", 
+          RowBox[{
+           RowBox[{"o1", "[", 
+            RowBox[{"[", "3", "]"}], "]"}], "*", 
+           RowBox[{"distance", "/", "2"}]}]}]}], "]"}], "||", 
+       RowBox[{"OctahedronComplimentDrilling", "[", 
+        RowBox[{
+         RowBox[{"n", "-", "1"}], ",", 
+         RowBox[{"depth", "+", "1"}], ",", "mindepth", ",", 
+         RowBox[{"distance", "/", "2"}], ",", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{"xcoords", ",", "ycoords", ",", "zcoords"}], "}"}], "+", 
+          RowBox[{
+           RowBox[{"o1", "[", 
+            RowBox[{"[", "4", "]"}], "]"}], "*", 
+           RowBox[{"distance", "/", "2"}]}]}]}], "]"}], "||", 
+       "\[IndentingNewLine]", 
+       RowBox[{"OctahedronComplimentDrilling", "[", 
+        RowBox[{
+         RowBox[{"n", "-", "1"}], ",", 
+         RowBox[{"depth", "+", "1"}], ",", "mindepth", ",", 
+         RowBox[{"distance", "/", "2"}], ",", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{"xcoords", ",", "ycoords", ",", "zcoords"}], "}"}], "+", 
+          RowBox[{
+           RowBox[{"o1", "[", 
+            RowBox[{"[", "5", "]"}], "]"}], "*", 
+           RowBox[{"distance", "/", "2"}]}]}]}], "]"}], "||", 
+       RowBox[{"OctahedronComplimentDrilling", "[", 
+        RowBox[{
+         RowBox[{"n", "-", "1"}], ",", 
+         RowBox[{"depth", "+", "1"}], ",", "mindepth", ",", 
+         RowBox[{"distance", "/", "2"}], ",", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{"xcoords", ",", "ycoords", ",", "zcoords"}], "}"}], "+", 
+          RowBox[{
+           RowBox[{"o1", "[", 
+            RowBox[{"[", "6", "]"}], "]"}], "*", 
+           RowBox[{"distance", "/", "2"}]}]}]}], "]"}]}]}]}], 
+    ";"}]}]}]], "Code",
+ CellChangeTimes->{{3.5524292243107*^9, 3.552429580155436*^9}, 
+   3.552429622097569*^9, {3.5524296567114487`*^9, 3.552429681592835*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "SlideShowNavigationBar",
+ CellTags->"SlideShowHeader"],
+
+Cell[TextData[{
+ StyleBox["Hexahedron",
+  FontColor->RGBColor[0.8118867780575265, 0., 0.]],
+ " Gasket Code"
+}], "Item",
+ CellDingbat->"\[RightGuillemet] ",
+ CellChangeTimes->{{3.51987719454279*^9, 3.519877302667454*^9}, {
+   3.5198777102433977`*^9, 3.5198777526706963`*^9}, {3.519878617304996*^9, 
+   3.519878623567318*^9}, 3.52399668355009*^9, {3.5239967592767467`*^9, 
+   3.523996759285749*^9}, {3.523997020161542*^9, 3.523997022805822*^9}, {
+   3.5239971687972918`*^9, 3.5239972024108*^9}, 3.523998116683179*^9, 
+   3.523999032312121*^9, 3.52399986284588*^9, 3.524000229982913*^9, {
+   3.567435115836684*^9, 3.56743512657791*^9}, 3.567750840860441*^9, {
+   3.5682580198160677`*^9, 3.568258030451024*^9}, {3.569109201407279*^9, 
+   3.569109209814609*^9}, {3.571268968376562*^9, 3.5712689983672667`*^9}, {
+   3.5712695862339497`*^9, 3.571269590604789*^9}}],
+
+Cell[BoxData[
+ RowBox[{"\[IndentingNewLine]", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+  
+  RowBox[{"(*", 
+   RowBox[{
+    RowBox[{
+     RowBox[{
+      RowBox[{
+       RowBox[{
+        RowBox[{
+         RowBox[{
+          RowBox[{
+           RowBox[{
+            RowBox[{
+             RowBox[{
+              RowBox[{
+               RowBox[{
+                RowBox[{
+                 RowBox[{
+                  RowBox[{
+                   RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"**", "**"}], "**"}], "**"}], "**"}], "**"}], 
+                    "**"}], "**"}], "**"}], "**"}], "**"}], "**"}], "**"}], 
+                    "**"}], "**"}], "**"}], "**"}], "**"}], "**"}], "**"}], 
+                    "**"}], "**"}], "**"}], "**"}], "**"}], "**"}], "**"}], 
+                    "**"}], "**"}], "**"}], "**"}], "**"}], "**"}], "**"}], 
+               "**"}], "**"}], "**"}], "**"}], "**"}], "**"}], "**"}], "**"}],
+        "**"}], "**"}], "**"}], "**"}], "********)"}], "\[IndentingNewLine]", 
+  
+  RowBox[{"(*", " ", 
+   RowBox[{"General", " ", "Variables"}], " ", "*)"}], "\[IndentingNewLine]", 
+  
+  RowBox[{"(*", 
+   RowBox[{
+   "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**",
+     "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**",
+     "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**",
+     "**", "**", "**", "**", "**", "**", "**"}], "********)"}], 
+  "\[IndentingNewLine]", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"h1", "=", 
+     RowBox[{"Select", "[", 
+      RowBox[{
+       RowBox[{"Join", "[", 
+        RowBox[{
+         RowBox[{"Join", "[", 
+          RowBox[{
+           RowBox[{"Join", "[", 
+            RowBox[{
+             RowBox[{"PolyhedronData", "[", 
+              RowBox[{"\"\<Cube\>\"", ",", "\"\<VertexCoordinates\>\""}], 
+              "]"}], ",", 
+             RowBox[{"Map", "[", 
+              RowBox[{
+               RowBox[{
+                RowBox[{"#", "+", 
+                 RowBox[{"{", 
+                  RowBox[{"0", ",", "0", ",", 
+                   RowBox[{"1", "/", "2"}]}], "}"}]}], "&"}], ",", 
+               RowBox[{"PolyhedronData", "[", 
+                RowBox[{"\"\<Cube\>\"", ",", "\"\<VertexCoordinates\>\""}], 
+                "]"}]}], "]"}]}], "]"}], ",", 
+           RowBox[{"Map", "[", 
+            RowBox[{
+             RowBox[{
+              RowBox[{"#", "+", 
+               RowBox[{"{", 
+                RowBox[{"0", ",", 
+                 RowBox[{"1", "/", "2"}], ",", "0"}], "}"}]}], "&"}], ",", 
+             RowBox[{"PolyhedronData", "[", 
+              RowBox[{"\"\<Cube\>\"", ",", "\"\<VertexCoordinates\>\""}], 
+              "]"}]}], "]"}]}], "]"}], ",", 
+         RowBox[{"Map", "[", 
+          RowBox[{
+           RowBox[{
+            RowBox[{"#", "+", 
+             RowBox[{"{", 
+              RowBox[{
+               RowBox[{"1", "/", "2"}], ",", "0", ",", "0"}], "}"}]}], "&"}], 
+           ",", 
+           RowBox[{"PolyhedronData", "[", 
+            RowBox[{"\"\<Cube\>\"", ",", "\"\<VertexCoordinates\>\""}], 
+            "]"}]}], "]"}]}], "]"}], ",", 
+       RowBox[{
+        RowBox[{"Apply", "[", 
+         RowBox[{
+          RowBox[{"PolyhedronData", "[", 
+           RowBox[{"\"\<Cube\>\"", ",", "\"\<RegionFunction\>\""}], "]"}], 
+          ",", "#"}], "]"}], "&"}]}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{
+    "Defines", " ", "a", " ", "function", " ", "which", " ", "takes", " ", 
+     "the", " ", "VertexCoordiantes", " ", "of", " ", "the", " ", "Polyhedra",
+      " ", "and", " ", "reduces", " ", "them", " ", 
+     RowBox[{"1", "/", "2"}]}], "*)"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"hexvec", "[", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"x_", ",", "y_", ",", "z_"}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"coordsx_", ",", "coordsy_", ",", "coordsz_"}], "}"}]}], 
+      "]"}], ":=", 
+     RowBox[{"3", "*", 
+      RowBox[{"(", 
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{"x", ",", "y", ",", "z"}], "}"}], "-", 
+        RowBox[{
+         RowBox[{"(", 
+          RowBox[{"1", "-", 
+           RowBox[{"1", "/", "3"}]}], ")"}], "*", 
+         RowBox[{"{", 
+          RowBox[{"coordsx", ",", "coordsy", ",", "coordsz"}], "}"}]}]}], 
+       ")"}]}]}], ";"}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{
+     RowBox[{
+     "Uses", " ", "a", " ", "Regional", " ", "Plot", " ", "of", " ", "the", 
+      " ", "Poyhedra", " ", "to", " ", "define", " ", "the", " ", 
+      "Polyhedra"}], ",", " ", 
+     RowBox[{"then", " ", "takes", " ", "the", " ", 
+      RowBox[{"1", "/", "2"}], " ", "reduced", " ", "sized", " ", 
+      "polyhedra"}], ",", " ", 
+     RowBox[{
+     "places", " ", "them", " ", "at", " ", "the", " ", "vertext", " ", 
+      "coordiantes"}], ",", " ", 
+     RowBox[{
+     "and", " ", "removes", " ", "them", " ", "so", " ", "that", " ", "the", 
+      " ", "remaining", " ", "logic", " ", "statment", " ", "if", " ", "the", 
+      " ", "polyhedra", " ", 
+      RowBox[{"fractal", "'"}], "s", " ", "compliment"}]}], "*)"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"grosslogicalexpressionhex", "=", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"PolyhedronData", "[", 
+        RowBox[{"\"\<Cube\>\"", ",", "\"\<RegionFunction\>\""}], "]"}], "[", 
+       RowBox[{"x", ",", "y", ",", "z"}], "]"}], " ", "&&", 
+      RowBox[{"Not", "[", 
+       RowBox[{"Apply", "[", 
+        RowBox[{"Or", ",", 
+         RowBox[{"Map", "[", 
+          RowBox[{
+           RowBox[{
+            RowBox[{"Apply", "[", 
+             RowBox[{
+              RowBox[{"PolyhedronData", "[", 
+               RowBox[{"\"\<Cube\>\"", ",", "\"\<RegionFunction\>\""}], "]"}],
+               ",", "#"}], "]"}], "&"}], ",", 
+           RowBox[{"Thread", "[", 
+            RowBox[{
+             RowBox[{"hexvec", "[", 
+              RowBox[{
+               RowBox[{"{", 
+                RowBox[{"x", ",", "y", ",", "z"}], "}"}], ",", "h1"}], "]"}], 
+             ",", "List", ",", 
+             RowBox[{"-", "1"}]}], "]"}]}], "]"}]}], "]"}], "]"}]}]}], ";"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"lessgrosslogicalexpressionhex", "[", 
+      RowBox[{"x_", ",", "y_", ",", "z_"}], "]"}], "=", 
+     RowBox[{"FullSimplify", "[", "grosslogicalexpressionhex", "]"}]}], ";"}],
+    "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{"Quick", " ", "Fix"}], "*)"}], "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"lessgrosslogicalexpressionhex", "[", 
+       RowBox[{"x_", ",", "y_", ",", "z_"}], "]"}], "=", 
+      "grosslogicalexpressionhex"}], ";"}], "*)"}], "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{
+     RowBox[{
+      RowBox[{
+       RowBox[{
+        RowBox[{
+         RowBox[{
+          RowBox[{
+           RowBox[{
+            RowBox[{
+             RowBox[{
+              RowBox[{
+               RowBox[{
+                RowBox[{
+                 RowBox[{
+                  RowBox[{
+                   RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"**", "**"}], "**"}], "**"}], "**"}], "**"}], 
+                    "**"}], "**"}], "**"}], "**"}], "**"}], "**"}], "**"}], 
+                    "**"}], "**"}], "**"}], "**"}], "**"}], "**"}], "**"}], 
+                    "**"}], "**"}], "**"}], "**"}], "**"}], "**"}], "**"}], 
+                    "**"}], "**"}], "**"}], "**"}], "**"}], "**"}], "**"}], 
+                "**"}], "**"}], "**"}], "**"}], "**"}], "**"}], "**"}], 
+         "**"}], "**"}], "**"}], "**"}], "**"}], "********)"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{"(*", " ", 
+    RowBox[{"Fractal", " ", "Variables"}], " ", "*)"}], "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{
+    "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**",
+      "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", 
+     "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**",
+      "**", "**", "**", "**", "**", "**", "**", "**"}], "********)"}], 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{"Clears", " ", "OctahedronFractalDrilling"}], "*)"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"Clear", "[", "HexahedronFractalDrilling", "]"}], ";"}], 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{"(*", " ", 
+    RowBox[{"Defines", " ", "the", " ", 
+     SuperscriptBox["0", "th"], " ", "Fractal"}], "*)"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"HexahedronFractalDrilling", "[", 
+      RowBox[{"0", ",", "distance_", ",", 
+       RowBox[{"{", 
+        RowBox[{"xcoords_", ",", "ycoords_", ",", "zcoords_"}], "}"}]}], 
+      "]"}], "=", "False"}], ";"}], "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", 
+   RowBox[{"(*", " ", 
+    RowBox[{"Defines", " ", "the", " ", 
+     SuperscriptBox["0", "th"], " ", "Fractal"}], "*)"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"HexahedronFractalDrilling", "[", 
+      RowBox[{"1", ",", "distance_", ",", 
+       RowBox[{"{", 
+        RowBox[{"xcoords_", ",", "ycoords_", ",", "zcoords_"}], "}"}]}], 
+      "]"}], "=", 
+     RowBox[{"lessgrosslogicalexpressionhex", "[", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"(", 
+         RowBox[{"x", "-", "xcoords"}], ")"}], "/", "distance"}], ",", 
+       RowBox[{
+        RowBox[{"(", 
+         RowBox[{"y", "-", "ycoords"}], ")"}], "/", "distance"}], ",", 
+       RowBox[{
+        RowBox[{"(", 
+         RowBox[{"z", "-", "zcoords"}], ")"}], "/", "distance"}]}], "]"}]}], 
+    ";"}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{"(*", " ", 
+    RowBox[{"Defines", " ", "the", " ", 
+     SuperscriptBox["0", "th"], " ", "Fractal"}], "*)"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"HexahedronFractalDrilling", "[", 
+      RowBox[{"n_", ",", "distance_", ",", 
+       RowBox[{"{", 
+        RowBox[{"xcoords_", ",", "ycoords_", ",", "zcoords_"}], "}"}]}], 
+      "]"}], ":=", 
+     RowBox[{
+      RowBox[{"HexahedronFractalDrilling", "[", 
+       RowBox[{"n", ",", "distance", ",", 
+        RowBox[{"{", 
+         RowBox[{"xcoords", ",", "ycoords", ",", "zcoords"}], "}"}]}], "]"}], 
+      "=", 
+      RowBox[{
+       RowBox[{"HexahedronFractalDrilling", "[", 
+        RowBox[{
+         RowBox[{"n", "-", "1"}], ",", "distance", ",", 
+         RowBox[{"{", 
+          RowBox[{"xcoords", ",", "ycoords", ",", "zcoords"}], "}"}]}], "]"}],
+        " ", "||", 
+       RowBox[{"Apply", "[", 
+        RowBox[{"Or", ",", 
+         RowBox[{"Map", "[", 
+          RowBox[{
+           RowBox[{
+            RowBox[{"HexahedronFractalDrilling", "[", 
+             RowBox[{
+              RowBox[{"n", "-", "1"}], ",", 
+              RowBox[{"distance", "*", 
+               RowBox[{"1", "/", "3"}]}], ",", "#"}], "]"}], "&"}], ",", 
+           RowBox[{"Map", "[", 
+            RowBox[{
+             RowBox[{
+              RowBox[{
+               RowBox[{"distance", "*", 
+                RowBox[{"(", 
+                 RowBox[{"1", "-", 
+                  RowBox[{"1", "/", "3"}]}], ")"}], "*", "#"}], "+", 
+               RowBox[{"{", 
+                RowBox[{"xcoords", ",", "ycoords", ",", "zcoords"}], "}"}]}], 
+              "&"}], ",", "h1"}], "]"}]}], "]"}]}], "]"}]}]}]}], ";"}], 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{"Clear", "[", "HexahedronFractalReduce", "]"}], 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"HexahedronFractalReduce", "[", "0", "]"}], "=", 
+     RowBox[{
+      RowBox[{"PolyhedronData", "[", 
+       RowBox[{"\"\<Cube\>\"", ",", "\"\<RegionFunction\>\""}], "]"}], "[", 
+      RowBox[{"x", ",", "y", ",", "z"}], "]"}]}], " ", ";"}], 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"HexahedronFractalReduce", "[", "n_", "]"}], ":=", 
+     RowBox[{
+      RowBox[{"HexahedronFractalReduce", "[", "n", "]"}], "=", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"PolyhedronData", "[", 
+         RowBox[{"\"\<Cube\>\"", ",", "\"\<RegionFunction\>\""}], "]"}], "[", 
+        
+        RowBox[{"x", ",", "y", ",", "z"}], "]"}], " ", "&&", 
+       RowBox[{"Not", "[", 
+        RowBox[{"HexahedronFractalDrilling", "[", 
+         RowBox[{"n", ",", "1", ",", 
+          RowBox[{"{", 
+           RowBox[{"0", ",", "0", ",", "0"}], "}"}]}], "]"}], "]"}]}]}]}], 
+    ";"}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{
+     RowBox[{
+      RowBox[{
+       RowBox[{
+        RowBox[{
+         RowBox[{
+          RowBox[{
+           RowBox[{
+            RowBox[{
+             RowBox[{
+              RowBox[{
+               RowBox[{
+                RowBox[{
+                 RowBox[{
+                  RowBox[{
+                   RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"**", "**"}], "**"}], "**"}], "**"}], "**"}], 
+                    "**"}], "**"}], "**"}], "**"}], "**"}], "**"}], "**"}], 
+                    "**"}], "**"}], "**"}], "**"}], "**"}], "**"}], "**"}], 
+                    "**"}], "**"}], "**"}], "**"}], "**"}], "**"}], "**"}], 
+                    "**"}], "**"}], "**"}], "**"}], "**"}], "**"}], "**"}], 
+                "**"}], "**"}], "**"}], "**"}], "**"}], "**"}], "**"}], 
+         "**"}], "**"}], "**"}], "**"}], "**"}], "********)"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{"(*", " ", 
+    RowBox[{"Compliment", " ", "Variables"}], " ", "*)"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{
+    "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**",
+      "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", 
+     "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**",
+      "**", "**", "**", "**", "**", "**", "**", "**"}], "********)"}], 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{"Clears", " ", "OctahedronComplimentDrilling"}], "*)"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"Clear", "[", "HexahedronComplimentDrilling", "]"}], ";"}], 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{"(*", " ", 
+    RowBox[{"Defines", " ", "the", " ", 
+     SuperscriptBox["0", "th"], " ", "Fractal"}], "*)"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"HexahedronComplimentDrilling", "[", 
+      RowBox[{"0", ",", "depth_", ",", "mindepth_", ",", "distance_", ",", 
+       RowBox[{"{", 
+        RowBox[{"xcoords_", ",", "ycoords_", ",", "zcoords_"}], "}"}]}], 
+      "]"}], "=", "False"}], ";"}], "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", 
+   RowBox[{"(*", " ", 
+    RowBox[{"Defines", " ", "the", " ", 
+     SuperscriptBox["0", "th"], " ", "Fractal"}], "*)"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"HexahedronComplimentDrilling", "[", 
+      RowBox[{"1", ",", "depth_", ",", "mindepth_", ",", "distance_", ",", 
+       RowBox[{"{", 
+        RowBox[{"xcoords_", ",", "ycoords_", ",", "zcoords_"}], "}"}]}], 
+      "]"}], "=", 
+     RowBox[{"If", "[", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"depth", "+", "1"}], " ", "\[GreaterEqual]", " ", 
+        "mindepth"}], ",", 
+       RowBox[{"lessgrosslogicalexpressionhex", "[", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"(", 
+           RowBox[{"x", "-", "xcoords"}], ")"}], "/", "distance"}], ",", 
+         RowBox[{
+          RowBox[{"(", 
+           RowBox[{"y", "-", "ycoords"}], ")"}], "/", "distance"}], ",", 
+         RowBox[{
+          RowBox[{"(", 
+           RowBox[{"z", "-", "zcoords"}], ")"}], "/", "distance"}]}], "]"}], 
+       ",", "False"}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"HexahedronComplimentDrilling", "[", 
+      RowBox[{"n_", ",", "depth_", ",", "mindepth_", ",", "distance_", ",", 
+       RowBox[{"{", 
+        RowBox[{"xcoords_", ",", "ycoords_", ",", "zcoords_"}], "}"}]}], 
+      "]"}], ":=", 
+     RowBox[{
+      RowBox[{"HexahedronComplimentDrilling", "[", 
+       RowBox[{"n", ",", "depth", ",", "mindepth", ",", "distance", ",", 
+        RowBox[{"{", 
+         RowBox[{"xcoords", ",", "ycoords", ",", "zcoords"}], "}"}]}], "]"}], 
+      "=", 
+      RowBox[{
+       RowBox[{"HexahedronComplimentDrilling", "[", 
+        RowBox[{
+         RowBox[{"n", "-", "1"}], ",", "depth", ",", "mindepth", ",", 
+         "distance", ",", 
+         RowBox[{"{", 
+          RowBox[{"xcoords", ",", "ycoords", ",", "zcoords"}], "}"}]}], "]"}],
+        " ", "||", 
+       RowBox[{"Apply", "[", 
+        RowBox[{"Or", ",", 
+         RowBox[{"Map", "[", 
+          RowBox[{
+           RowBox[{
+            RowBox[{"HexahedronComplimentDrilling", "[", 
+             RowBox[{
+              RowBox[{"n", "-", "1"}], ",", 
+              RowBox[{"depth", "+", "1"}], ",", "mindepth", ",", 
+              RowBox[{"distance", "*", 
+               RowBox[{"1", "/", "3"}]}], ",", "#"}], "]"}], "&"}], ",", 
+           RowBox[{"Map", "[", 
+            RowBox[{
+             RowBox[{
+              RowBox[{
+               RowBox[{"distance", "*", 
+                RowBox[{"(", 
+                 RowBox[{"1", "-", 
+                  RowBox[{"1", "/", "3"}]}], ")"}], "*", "#"}], "+", 
+               RowBox[{"{", 
+                RowBox[{"xcoords", ",", "ycoords", ",", "zcoords"}], "}"}]}], 
+              "&"}], ",", "h1"}], "]"}]}], "]"}]}], "]"}]}]}]}], 
+    ";"}]}]}]], "Code",
+ CellChangeTimes->{{3.552489914860326*^9, 3.552489985697248*^9}, {
+   3.552490499313016*^9, 3.552490567444007*^9}, {3.5524906458169403`*^9, 
+   3.552490709815733*^9}, {3.5524907433799257`*^9, 3.5524908949700336`*^9}, {
+   3.552491002022009*^9, 3.552491005795414*^9}, {3.5525385915640287`*^9, 
+   3.5525385932232323`*^9}, 3.552869233279911*^9, {3.5528721709768963`*^9, 
+   3.552872213544683*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "SlideShowNavigationBar",
+ CellTags->"SlideShowHeader"],
+
+Cell[TextData[{
+ StyleBox["Icosahedon",
+  FontColor->RGBColor[0.8118867780575265, 0., 0.]],
+ " Gasket Code"
+}], "Item",
+ CellDingbat->"\[RightGuillemet] ",
+ CellChangeTimes->{{3.51987719454279*^9, 3.519877302667454*^9}, {
+   3.5198777102433977`*^9, 3.5198777526706963`*^9}, {3.519878617304996*^9, 
+   3.519878623567318*^9}, 3.52399668355009*^9, {3.5239967592767467`*^9, 
+   3.523996759285749*^9}, {3.523997020161542*^9, 3.523997022805822*^9}, {
+   3.5239971687972918`*^9, 3.5239972024108*^9}, 3.523998116683179*^9, 
+   3.523999032312121*^9, 3.52399986284588*^9, 3.524000229982913*^9, {
+   3.567435115836684*^9, 3.56743512657791*^9}, 3.567750840860441*^9, {
+   3.5682580198160677`*^9, 3.568258030451024*^9}, {3.569109201407279*^9, 
+   3.569109209814609*^9}, {3.571268968376562*^9, 3.5712689983672667`*^9}, 
+   3.571269095726047*^9, {3.571269594242653*^9, 3.571269598753356*^9}}],
+
+Cell[BoxData[
+ RowBox[{"\[IndentingNewLine]", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+  
+  RowBox[{"(*", 
+   RowBox[{
+    RowBox[{
+     RowBox[{
+      RowBox[{
+       RowBox[{
+        RowBox[{
+         RowBox[{
+          RowBox[{
+           RowBox[{
+            RowBox[{
+             RowBox[{
+              RowBox[{
+               RowBox[{
+                RowBox[{
+                 RowBox[{
+                  RowBox[{
+                   RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"**", "**"}], "**"}], "**"}], "**"}], "**"}], 
+                    "**"}], "**"}], "**"}], "**"}], "**"}], "**"}], "**"}], 
+                    "**"}], "**"}], "**"}], "**"}], "**"}], "**"}], "**"}], 
+                    "**"}], "**"}], "**"}], "**"}], "**"}], "**"}], "**"}], 
+                    "**"}], "**"}], "**"}], "**"}], "**"}], "**"}], "**"}], 
+               "**"}], "**"}], "**"}], "**"}], "**"}], "**"}], "**"}], "**"}],
+        "**"}], "**"}], "**"}], "**"}], "********)"}], "\[IndentingNewLine]", 
+  
+  RowBox[{"(*", " ", 
+   RowBox[{"General", " ", "Variables"}], " ", "*)"}], "\[IndentingNewLine]", 
+  
+  RowBox[{"(*", 
+   RowBox[{
+   "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**",
+     "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**",
+     "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**",
+     "**", "**", "**", "**", "**", "**", "**"}], "********)"}], 
+  "\[IndentingNewLine]", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+  RowBox[{"(*", 
+   RowBox[{
+   "Intializes", " ", "the", " ", "Vertices", " ", "of", " ", "the", " ", 
+    "Polyhedra", " ", "to", " ", "Used", " ", "for", " ", "the", " ", 
+    "Fractal"}], "*)"}], "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"i1", "=", 
+     RowBox[{"PolyhedronData", "[", 
+      RowBox[{"\"\<Icosahedron\>\"", ",", "\"\<VertexCoordinates\>\""}], 
+      "]"}]}], ";"}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{
+    "Defines", " ", "a", " ", "function", " ", "which", " ", "takes", " ", 
+     "the", " ", "VertexCoordiantes", " ", "of", " ", "the", " ", "Polyhedra",
+      " ", "and", " ", "reduces", " ", "them", " ", 
+     RowBox[{"1", "/", "2"}]}], "*)"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"icosavec", "[", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"x_", ",", "y_", ",", "z_"}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"coordsx_", ",", "coordsy_", ",", "coordsz_"}], "}"}]}], 
+      "]"}], ":=", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"(", 
+        RowBox[{"1.", "+", "GoldenRatio"}], ")"}], "*", 
+       RowBox[{"{", 
+        RowBox[{"x", ",", "y", ",", "z"}], "}"}]}], "-", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"coordsx", ",", "coordsy", ",", "coordsz"}], "}"}], "*", 
+       FractionBox[
+        RowBox[{"(", 
+         RowBox[{"1.", "+", "GoldenRatio"}], ")"}], "GoldenRatio"]}]}]}], 
+    ";"}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{
+    "Threads", " ", "the", " ", "Vector", " ", "to", " ", "the", " ", "to", 
+     " ", "the", " ", 
+     RowBox[{"Polyhedra", "'"}], "s", " ", "VertexCoordiantes"}], "*)"}], 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"Thread", "[", 
+     RowBox[{
+      RowBox[{"icosavec", "[", 
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{"x", ",", "y", ",", "z"}], "}"}], ",", "i1"}], "]"}], ",", 
+      "List", ",", 
+      RowBox[{"-", "1"}]}], "]"}], ";"}], "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{
+     RowBox[{
+     "Uses", " ", "a", " ", "Regional", " ", "Plot", " ", "of", " ", "the", 
+      " ", "Poyhedra", " ", "to", " ", "define", " ", "the", " ", 
+      "Polyhedra"}], ",", " ", 
+     RowBox[{"then", " ", "takes", " ", "the", " ", 
+      RowBox[{"1", "/", "2"}], " ", "reduced", " ", "sized", " ", 
+      "polyhedra"}], ",", " ", 
+     RowBox[{
+     "places", " ", "them", " ", "at", " ", "the", " ", "vertext", " ", 
+      "coordiantes"}], ",", " ", 
+     RowBox[{
+     "and", " ", "removes", " ", "them", " ", "so", " ", "that", " ", "the", 
+      " ", "remaining", " ", "logic", " ", "statment", " ", "if", " ", "the", 
+      " ", "polyhedra", " ", 
+      RowBox[{"fractal", "'"}], "s", " ", "compliment"}]}], "*)"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"grosslogicalexpressionicosa", "=", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"PolyhedronData", "[", 
+        RowBox[{"\"\<Icosahedron\>\"", ",", "\"\<RegionFunction\>\""}], "]"}],
+        "[", 
+       RowBox[{"x", ",", "y", ",", "z"}], "]"}], " ", "&&", 
+      RowBox[{"Not", "[", 
+       RowBox[{"Apply", "[", 
+        RowBox[{"Or", ",", 
+         RowBox[{"Map", "[", 
+          RowBox[{
+           RowBox[{
+            RowBox[{"Apply", "[", 
+             RowBox[{
+              RowBox[{"PolyhedronData", "[", 
+               RowBox[{"\"\<Icosahedron\>\"", ",", "\"\<RegionFunction\>\""}],
+                "]"}], ",", "#"}], "]"}], "&"}], ",", 
+           RowBox[{"Thread", "[", 
+            RowBox[{
+             RowBox[{"icosavec", "[", 
+              RowBox[{
+               RowBox[{"{", 
+                RowBox[{"x", ",", "y", ",", "z"}], "}"}], ",", "i1"}], "]"}], 
+             ",", "List", ",", 
+             RowBox[{"-", "1"}]}], "]"}]}], "]"}]}], "]"}], "]"}]}]}], ";"}], 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{"(*", " ", 
+    RowBox[{
+    "Reduces", " ", "the", " ", "number", " ", "of", " ", "logical", " ", 
+     "statments", " ", "required", " ", "to", " ", "define", " ", "the", " ", 
+     "previous", " ", "logic", " ", "statment", " ", "used", " ", "to", " ", 
+     "define", " ", "the", " ", "polyhedra", " ", 
+     RowBox[{"fractal", "'"}], "s", " ", 
+     RowBox[{"compliment", "."}]}], " ", "*)"}], "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", 
+   RowBox[{"(*", " ", 
+    RowBox[{"Quick", " ", "Fix"}], "*)"}], "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"lessgrosslogicalexpressionicosa", "[", 
+       RowBox[{"x_", ",", "y_", ",", "z_"}], "]"}], "=", 
+      RowBox[{"FullSimplify", "[", "grosslogicalexpressionicosa", "]"}]}], 
+     ";"}], "*)"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"lessgrosslogicalexpressionicosa", "[", 
+      RowBox[{"x_", ",", "y_", ",", "z_"}], "]"}], "=", 
+     "grosslogicalexpressionicosa"}], ";"}], "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{
+     RowBox[{
+      RowBox[{
+       RowBox[{
+        RowBox[{
+         RowBox[{
+          RowBox[{
+           RowBox[{
+            RowBox[{
+             RowBox[{
+              RowBox[{
+               RowBox[{
+                RowBox[{
+                 RowBox[{
+                  RowBox[{
+                   RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"**", "**"}], "**"}], "**"}], "**"}], "**"}], 
+                    "**"}], "**"}], "**"}], "**"}], "**"}], "**"}], "**"}], 
+                    "**"}], "**"}], "**"}], "**"}], "**"}], "**"}], "**"}], 
+                    "**"}], "**"}], "**"}], "**"}], "**"}], "**"}], "**"}], 
+                    "**"}], "**"}], "**"}], "**"}], "**"}], "**"}], "**"}], 
+                "**"}], "**"}], "**"}], "**"}], "**"}], "**"}], "**"}], 
+         "**"}], "**"}], "**"}], "**"}], "**"}], "********)"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{"(*", " ", 
+    RowBox[{"Fractal", " ", "Variables"}], " ", "*)"}], "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{
+    "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**",
+      "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", 
+     "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**",
+      "**", "**", "**", "**", "**", "**", "**", "**"}], "********)"}], 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{"Clears", " ", "OctahedronFractalDrilling"}], "*)"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"Clear", "[", "IcosahedronFractalDrilling", "]"}], ";"}], 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{"(*", " ", 
+    RowBox[{"Defines", " ", "the", " ", 
+     SuperscriptBox["0", "th"], " ", "Fractal"}], "*)"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"IcosahedronFractalDrilling", "[", 
+      RowBox[{"0", ",", "distance_", ",", 
+       RowBox[{"{", 
+        RowBox[{"xcoords_", ",", "ycoords_", ",", "zcoords_"}], "}"}]}], 
+      "]"}], "=", "False"}], ";"}], "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", 
+   RowBox[{"(*", " ", 
+    RowBox[{"Defines", " ", "the", " ", 
+     SuperscriptBox["0", "th"], " ", "Fractal"}], "*)"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"IcosahedronFractalDrilling", "[", 
+      RowBox[{"1", ",", "distance_", ",", 
+       RowBox[{"{", 
+        RowBox[{"xcoords_", ",", "ycoords_", ",", "zcoords_"}], "}"}]}], 
+      "]"}], "=", 
+     RowBox[{"lessgrosslogicalexpressionicosa", "[", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"(", 
+         RowBox[{"x", "-", "xcoords"}], ")"}], "/", "distance"}], ",", 
+       RowBox[{
+        RowBox[{"(", 
+         RowBox[{"y", "-", "ycoords"}], ")"}], "/", "distance"}], ",", 
+       RowBox[{
+        RowBox[{"(", 
+         RowBox[{"z", "-", "zcoords"}], ")"}], "/", "distance"}]}], "]"}]}], 
+    ";"}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{"(*", " ", 
+    RowBox[{"Defines", " ", "the", " ", 
+     SuperscriptBox["0", "th"], " ", "Fractal"}], "*)"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"IcosahedronFractalDrilling", "[", 
+      RowBox[{"n_", ",", "distance_", ",", 
+       RowBox[{"{", 
+        RowBox[{"xcoords_", ",", "ycoords_", ",", "zcoords_"}], "}"}]}], 
+      "]"}], ":=", 
+     RowBox[{
+      RowBox[{"IcosahedronFractalDrilling", "[", 
+       RowBox[{"n", ",", "distance", ",", 
+        RowBox[{"{", 
+         RowBox[{"xcoords", ",", "ycoords", ",", "zcoords"}], "}"}]}], "]"}], 
+      "=", 
+      RowBox[{
+       RowBox[{"IcosahedronFractalDrilling", "[", 
+        RowBox[{
+         RowBox[{"n", "-", "1"}], ",", "distance", ",", 
+         RowBox[{"{", 
+          RowBox[{"xcoords", ",", "ycoords", ",", "zcoords"}], "}"}]}], "]"}],
+        "||", 
+       RowBox[{"IcosahedronFractalDrilling", "[", 
+        RowBox[{
+         RowBox[{"n", "-", "1"}], ",", 
+         RowBox[{"distance", "/", "2"}], ",", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{"xcoords", ",", "ycoords", ",", "zcoords"}], "}"}], "+", 
+          RowBox[{
+           RowBox[{"i1", "[", 
+            RowBox[{"[", "1", "]"}], "]"}], "*", 
+           RowBox[{"distance", "/", "2"}]}]}]}], "]"}], "||", 
+       RowBox[{"IcosahedronFractalDrilling", "[", 
+        RowBox[{
+         RowBox[{"n", "-", "1"}], ",", 
+         RowBox[{"distance", "/", "2"}], ",", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{"xcoords", ",", "ycoords", ",", "zcoords"}], "}"}], "+", 
+          RowBox[{
+           RowBox[{"i1", "[", 
+            RowBox[{"[", "2", "]"}], "]"}], "*", 
+           RowBox[{"distance", "/", "2"}]}]}]}], "]"}], "||", 
+       RowBox[{"IcosahedronFractalDrilling", "[", 
+        RowBox[{
+         RowBox[{"n", "-", "1"}], ",", 
+         RowBox[{"distance", "/", "2"}], ",", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{"xcoords", ",", "ycoords", ",", "zcoords"}], "}"}], "+", 
+          RowBox[{
+           RowBox[{"i1", "[", 
+            RowBox[{"[", "3", "]"}], "]"}], "*", 
+           RowBox[{"distance", "/", "2"}]}]}]}], "]"}], "||", 
+       RowBox[{"IcosahedronFractalDrilling", "[", 
+        RowBox[{
+         RowBox[{"n", "-", "1"}], ",", 
+         RowBox[{"distance", "/", "2"}], ",", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{"xcoords", ",", "ycoords", ",", "zcoords"}], "}"}], "+", 
+          RowBox[{
+           RowBox[{"i1", "[", 
+            RowBox[{"[", "4", "]"}], "]"}], "*", 
+           RowBox[{"distance", "/", "2"}]}]}]}], "]"}], "||", 
+       "\[IndentingNewLine]", 
+       RowBox[{"IcosahedronFractalDrilling", "[", 
+        RowBox[{
+         RowBox[{"n", "-", "1"}], ",", 
+         RowBox[{"distance", "/", "2"}], ",", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{"xcoords", ",", "ycoords", ",", "zcoords"}], "}"}], "+", 
+          RowBox[{
+           RowBox[{"i1", "[", 
+            RowBox[{"[", "5", "]"}], "]"}], "*", 
+           RowBox[{"distance", "/", "2"}]}]}]}], "]"}], "||", 
+       RowBox[{"IcosahedronFractalDrilling", "[", 
+        RowBox[{
+         RowBox[{"n", "-", "1"}], ",", 
+         RowBox[{"distance", "/", "2"}], ",", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{"xcoords", ",", "ycoords", ",", "zcoords"}], "}"}], "+", 
+          RowBox[{
+           RowBox[{"i1", "[", 
+            RowBox[{"[", "6", "]"}], "]"}], "*", 
+           RowBox[{"distance", "/", "2"}]}]}]}], "]"}], "||", 
+       RowBox[{"IcosahedronFractalDrilling", "[", 
+        RowBox[{
+         RowBox[{"n", "-", "1"}], ",", 
+         RowBox[{"distance", "/", "2"}], ",", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{"xcoords", ",", "ycoords", ",", "zcoords"}], "}"}], "+", 
+          RowBox[{
+           RowBox[{"i1", "[", 
+            RowBox[{"[", "7", "]"}], "]"}], "*", 
+           RowBox[{"distance", "/", "2"}]}]}]}], "]"}], "||", 
+       RowBox[{"IcosahedronFractalDrilling", "[", 
+        RowBox[{
+         RowBox[{"n", "-", "1"}], ",", 
+         RowBox[{"distance", "/", "2"}], ",", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{"xcoords", ",", "ycoords", ",", "zcoords"}], "}"}], "+", 
+          RowBox[{
+           RowBox[{"i1", "[", 
+            RowBox[{"[", "8", "]"}], "]"}], "*", 
+           RowBox[{"distance", "/", "2"}]}]}]}], "]"}], "||", 
+       RowBox[{"IcosahedronFractalDrilling", "[", 
+        RowBox[{
+         RowBox[{"n", "-", "1"}], ",", 
+         RowBox[{"distance", "/", "2"}], ",", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{"xcoords", ",", "ycoords", ",", "zcoords"}], "}"}], "+", 
+          RowBox[{
+           RowBox[{"i1", "[", 
+            RowBox[{"[", "9", "]"}], "]"}], "*", 
+           RowBox[{"distance", "/", "2"}]}]}]}], "]"}], "||", 
+       RowBox[{"IcosahedronFractalDrilling", "[", 
+        RowBox[{
+         RowBox[{"n", "-", "1"}], ",", 
+         RowBox[{"distance", "/", "2"}], ",", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{"xcoords", ",", "ycoords", ",", "zcoords"}], "}"}], "+", 
+          RowBox[{
+           RowBox[{"i1", "[", 
+            RowBox[{"[", "10", "]"}], "]"}], "*", 
+           RowBox[{"distance", "/", "2"}]}]}]}], "]"}], "||", 
+       RowBox[{"IcosahedronFractalDrilling", "[", 
+        RowBox[{
+         RowBox[{"n", "-", "1"}], ",", 
+         RowBox[{"distance", "/", "2"}], ",", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{"xcoords", ",", "ycoords", ",", "zcoords"}], "}"}], "+", 
+          RowBox[{
+           RowBox[{"i1", "[", 
+            RowBox[{"[", "11", "]"}], "]"}], "*", 
+           RowBox[{"distance", "/", "2"}]}]}]}], "]"}], "||", 
+       RowBox[{"IcosahedronFractalDrilling", "[", 
+        RowBox[{
+         RowBox[{"n", "-", "1"}], ",", 
+         RowBox[{"distance", "/", "2"}], ",", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{"xcoords", ",", "ycoords", ",", "zcoords"}], "}"}], "+", 
+          RowBox[{
+           RowBox[{"i1", "[", 
+            RowBox[{"[", "12", "]"}], "]"}], "*", 
+           RowBox[{"distance", "/", "2"}]}]}]}], "]"}]}]}]}], ";"}], 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{"Clear", "[", "IcosahedronFractalReduce", "]"}], 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"IcosahedronFractalReduce", "[", "0", "]"}], "=", 
+     RowBox[{
+      RowBox[{"PolyhedronData", "[", 
+       RowBox[{"\"\<Icosahedron\>\"", ",", "\"\<RegionFunction\>\""}], "]"}], 
+      "[", 
+      RowBox[{"x", ",", "y", ",", "z"}], "]"}]}], " ", ";"}], 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"IcosahedronFractalReduce", "[", "n_", "]"}], ":=", 
+     RowBox[{
+      RowBox[{"IcosahedronFractalReduce", "[", "n", "]"}], "=", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"PolyhedronData", "[", 
+         RowBox[{"\"\<Icosahedron\>\"", ",", "\"\<RegionFunction\>\""}], 
+         "]"}], "[", 
+        RowBox[{"x", ",", "y", ",", "z"}], "]"}], " ", "&&", 
+       RowBox[{"Not", "[", 
+        RowBox[{"IcosahedronFractalDrilling", "[", 
+         RowBox[{"n", ",", "1", ",", 
+          RowBox[{"{", 
+           RowBox[{"0", ",", "0", ",", "0"}], "}"}]}], "]"}], "]"}]}]}]}], 
+    ";"}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{
+     RowBox[{
+      RowBox[{
+       RowBox[{
+        RowBox[{
+         RowBox[{
+          RowBox[{
+           RowBox[{
+            RowBox[{
+             RowBox[{
+              RowBox[{
+               RowBox[{
+                RowBox[{
+                 RowBox[{
+                  RowBox[{
+                   RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"**", "**"}], "**"}], "**"}], "**"}], "**"}], 
+                    "**"}], "**"}], "**"}], "**"}], "**"}], "**"}], "**"}], 
+                    "**"}], "**"}], "**"}], "**"}], "**"}], "**"}], "**"}], 
+                    "**"}], "**"}], "**"}], "**"}], "**"}], "**"}], "**"}], 
+                    "**"}], "**"}], "**"}], "**"}], "**"}], "**"}], "**"}], 
+                "**"}], "**"}], "**"}], "**"}], "**"}], "**"}], "**"}], 
+         "**"}], "**"}], "**"}], "**"}], "**"}], "********)"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{"(*", " ", 
+    RowBox[{"Compliment", " ", "Variables"}], " ", "*)"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{
+    "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**",
+      "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", 
+     "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**",
+      "**", "**", "**", "**", "**", "**", "**", "**"}], "********)"}], 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{"Clears", " ", "OctahedronComplimentDrilling"}], "*)"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"Clear", "[", "IcosahedronComplimentDrilling", "]"}], ";"}], 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{"(*", " ", 
+    RowBox[{"Defines", " ", "the", " ", 
+     SuperscriptBox["0", "th"], " ", "Fractal"}], "*)"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"IcosahedronComplimentDrilling", "[", 
+      RowBox[{"0", ",", "depth_", ",", "mindepth_", ",", "distance_", ",", 
+       RowBox[{"{", 
+        RowBox[{"xcoords_", ",", "ycoords_", ",", "zcoords_"}], "}"}]}], 
+      "]"}], "=", "False"}], ";"}], "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", 
+   RowBox[{"(*", " ", 
+    RowBox[{"Defines", " ", "the", " ", 
+     SuperscriptBox["0", "th"], " ", "Fractal"}], "*)"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"IcosahedronComplimentDrilling", "[", 
+      RowBox[{"1", ",", "depth_", ",", "mindepth_", ",", "distance_", ",", 
+       RowBox[{"{", 
+        RowBox[{"xcoords_", ",", "ycoords_", ",", "zcoords_"}], "}"}]}], 
+      "]"}], "=", 
+     RowBox[{"If", "[", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"depth", "+", "1"}], " ", "\[GreaterEqual]", " ", 
+        "mindepth"}], ",", 
+       RowBox[{"lessgrosslogicalexpressionicosa", "[", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"(", 
+           RowBox[{"x", "-", "xcoords"}], ")"}], "/", "distance"}], ",", 
+         RowBox[{
+          RowBox[{"(", 
+           RowBox[{"y", "-", "ycoords"}], ")"}], "/", "distance"}], ",", 
+         RowBox[{
+          RowBox[{"(", 
+           RowBox[{"z", "-", "zcoords"}], ")"}], "/", "distance"}]}], "]"}], 
+       ",", "False"}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", 
+   RowBox[{"(*", " ", 
+    RowBox[{"Defines", " ", "the", " ", 
+     SuperscriptBox["0", "th"], " ", "Fractal"}], "*)"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"IcosahedronComplimentDrilling", "[", 
+      RowBox[{"n_", ",", "depth_", ",", "mindepth_", ",", "distance_", ",", 
+       RowBox[{"{", 
+        RowBox[{"xcoords_", ",", "ycoords_", ",", "zcoords_"}], "}"}]}], 
+      "]"}], ":=", 
+     RowBox[{
+      RowBox[{"IcosahedronComplimentDrilling", "[", 
+       RowBox[{"n", ",", "depth", ",", "mindepth", ",", "distance", ",", 
+        RowBox[{"{", 
+         RowBox[{"xcoords", ",", "ycoords", ",", "zcoords"}], "}"}]}], "]"}], 
+      "=", 
+      RowBox[{
+       RowBox[{"IcosahedronComplimentDrilling", "[", 
+        RowBox[{
+         RowBox[{"n", "-", "1"}], ",", "depth", ",", "mindepth", ",", 
+         "distance", ",", 
+         RowBox[{"{", 
+          RowBox[{"xcoords", ",", "ycoords", ",", "zcoords"}], "}"}]}], "]"}],
+        "||", 
+       RowBox[{"IcosahedronComplimentDrilling", "[", 
+        RowBox[{
+         RowBox[{"n", "-", "1"}], ",", 
+         RowBox[{"depth", "+", "1"}], ",", "mindepth", ",", 
+         RowBox[{"distance", "/", "2"}], ",", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{"xcoords", ",", "ycoords", ",", "zcoords"}], "}"}], "+", 
+          RowBox[{
+           RowBox[{"i1", "[", 
+            RowBox[{"[", "1", "]"}], "]"}], "*", 
+           RowBox[{"distance", "/", "2"}]}]}]}], "]"}], "||", 
+       RowBox[{"IcosahedronComplimentDrilling", "[", 
+        RowBox[{
+         RowBox[{"n", "-", "1"}], ",", 
+         RowBox[{"depth", "+", "1"}], ",", "mindepth", ",", 
+         RowBox[{"distance", "/", "2"}], ",", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{"xcoords", ",", "ycoords", ",", "zcoords"}], "}"}], "+", 
+          RowBox[{
+           RowBox[{"i1", "[", 
+            RowBox[{"[", "2", "]"}], "]"}], "*", 
+           RowBox[{"distance", "/", "2"}]}]}]}], "]"}], "||", 
+       RowBox[{"IcosahedronComplimentDrilling", "[", 
+        RowBox[{
+         RowBox[{"n", "-", "1"}], ",", 
+         RowBox[{"depth", "+", "1"}], ",", "mindepth", ",", 
+         RowBox[{"distance", "/", "2"}], ",", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{"xcoords", ",", "ycoords", ",", "zcoords"}], "}"}], "+", 
+          RowBox[{
+           RowBox[{"i1", "[", 
+            RowBox[{"[", "3", "]"}], "]"}], "*", 
+           RowBox[{"distance", "/", "2"}]}]}]}], "]"}], "||", 
+       RowBox[{"IcosahedronComplimentDrilling", "[", 
+        RowBox[{
+         RowBox[{"n", "-", "1"}], ",", 
+         RowBox[{"depth", "+", "1"}], ",", "mindepth", ",", 
+         RowBox[{"distance", "/", "2"}], ",", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{"xcoords", ",", "ycoords", ",", "zcoords"}], "}"}], "+", 
+          RowBox[{
+           RowBox[{"i1", "[", 
+            RowBox[{"[", "4", "]"}], "]"}], "*", 
+           RowBox[{"distance", "/", "2"}]}]}]}], "]"}], "||", 
+       "\[IndentingNewLine]", 
+       RowBox[{"IcosahedronComplimentDrilling", "[", 
+        RowBox[{
+         RowBox[{"n", "-", "1"}], ",", 
+         RowBox[{"depth", "+", "1"}], ",", "mindepth", ",", 
+         RowBox[{"distance", "/", "2"}], ",", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{"xcoords", ",", "ycoords", ",", "zcoords"}], "}"}], "+", 
+          RowBox[{
+           RowBox[{"i1", "[", 
+            RowBox[{"[", "5", "]"}], "]"}], "*", 
+           RowBox[{"distance", "/", "2"}]}]}]}], "]"}], "||", 
+       RowBox[{"IcosahedronComplimentDrilling", "[", 
+        RowBox[{
+         RowBox[{"n", "-", "1"}], ",", 
+         RowBox[{"depth", "+", "1"}], ",", "mindepth", ",", 
+         RowBox[{"distance", "/", "2"}], ",", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{"xcoords", ",", "ycoords", ",", "zcoords"}], "}"}], "+", 
+          RowBox[{
+           RowBox[{"i1", "[", 
+            RowBox[{"[", "6", "]"}], "]"}], "*", 
+           RowBox[{"distance", "/", "2"}]}]}]}], "]"}], "||", 
+       RowBox[{"IcosahedronComplimentDrilling", "[", 
+        RowBox[{
+         RowBox[{"n", "-", "1"}], ",", 
+         RowBox[{"depth", "+", "1"}], ",", "mindepth", ",", 
+         RowBox[{"distance", "/", "2"}], ",", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{"xcoords", ",", "ycoords", ",", "zcoords"}], "}"}], "+", 
+          RowBox[{
+           RowBox[{"i1", "[", 
+            RowBox[{"[", "7", "]"}], "]"}], "*", 
+           RowBox[{"distance", "/", "2"}]}]}]}], "]"}], "||", 
+       "\[IndentingNewLine]", 
+       RowBox[{"IcosahedronComplimentDrilling", "[", 
+        RowBox[{
+         RowBox[{"n", "-", "1"}], ",", 
+         RowBox[{"depth", "+", "1"}], ",", "mindepth", ",", 
+         RowBox[{"distance", "/", "2"}], ",", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{"xcoords", ",", "ycoords", ",", "zcoords"}], "}"}], "+", 
+          RowBox[{
+           RowBox[{"i1", "[", 
+            RowBox[{"[", "8", "]"}], "]"}], "*", 
+           RowBox[{"distance", "/", "2"}]}]}]}], "]"}], "||", 
+       RowBox[{"IcosahedronComplimentDrilling", "[", 
+        RowBox[{
+         RowBox[{"n", "-", "1"}], ",", 
+         RowBox[{"depth", "+", "1"}], ",", "mindepth", ",", 
+         RowBox[{"distance", "/", "2"}], ",", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{"xcoords", ",", "ycoords", ",", "zcoords"}], "}"}], "+", 
+          RowBox[{
+           RowBox[{"i1", "[", 
+            RowBox[{"[", "9", "]"}], "]"}], "*", 
+           RowBox[{"distance", "/", "2"}]}]}]}], "]"}], "||", 
+       RowBox[{"IcosahedronComplimentDrilling", "[", 
+        RowBox[{
+         RowBox[{"n", "-", "1"}], ",", 
+         RowBox[{"depth", "+", "1"}], ",", "mindepth", ",", 
+         RowBox[{"distance", "/", "2"}], ",", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{"xcoords", ",", "ycoords", ",", "zcoords"}], "}"}], "+", 
+          RowBox[{
+           RowBox[{"i1", "[", 
+            RowBox[{"[", "10", "]"}], "]"}], "*", 
+           RowBox[{"distance", "/", "2"}]}]}]}], "]"}], "||", 
+       RowBox[{"IcosahedronComplimentDrilling", "[", 
+        RowBox[{
+         RowBox[{"n", "-", "1"}], ",", 
+         RowBox[{"depth", "+", "1"}], ",", "mindepth", ",", 
+         RowBox[{"distance", "/", "2"}], ",", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{"xcoords", ",", "ycoords", ",", "zcoords"}], "}"}], "+", 
+          RowBox[{
+           RowBox[{"i1", "[", 
+            RowBox[{"[", "11", "]"}], "]"}], "*", 
+           RowBox[{"distance", "/", "2"}]}]}]}], "]"}], "||", 
+       "\[IndentingNewLine]", 
+       RowBox[{"IcosahedronComplimentDrilling", "[", 
+        RowBox[{
+         RowBox[{"n", "-", "1"}], ",", 
+         RowBox[{"depth", "+", "1"}], ",", "mindepth", ",", 
+         RowBox[{"distance", "/", "2"}], ",", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{"xcoords", ",", "ycoords", ",", "zcoords"}], "}"}], "+", 
+          RowBox[{
+           RowBox[{"i1", "[", 
+            RowBox[{"[", "12", "]"}], "]"}], "*", 
+           RowBox[{"distance", "/", "2"}]}]}]}], "]"}]}]}]}], 
+    ";"}]}]}]], "Code",
+ CellChangeTimes->{{3.5524292243107*^9, 3.552429580155436*^9}, 
+   3.552429622097569*^9, {3.5524296567114487`*^9, 3.552429681592835*^9}, {
+   3.5524469166628323`*^9, 3.5524471737470284`*^9}, {3.552447770997064*^9, 
+   3.552447772293908*^9}, {3.552447802728531*^9, 3.552447822840316*^9}, 
+   3.5524479277635527`*^9, {3.5524844396519213`*^9, 3.552484454560721*^9}, {
+   3.552491135640921*^9, 3.552491543260664*^9}, {3.552491615812839*^9, 
+   3.5524916169712067`*^9}, {3.552491895455043*^9, 3.55249190290375*^9}, {
+   3.552491976991412*^9, 3.552491984356188*^9}, {3.552492177733988*^9, 
+   3.552492185230043*^9}, {3.5528712683184357`*^9, 3.5528712759856253`*^9}, {
+   3.553043211012185*^9, 3.553043236790416*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "SlideShowNavigationBar",
+ CellTags->"SlideShowHeader"],
+
+Cell[TextData[{
+ StyleBox["Dodecahedron",
+  FontColor->RGBColor[0.8118867780575265, 0., 0.]],
+ " Gasket Code"
+}], "Item",
+ CellDingbat->"\[RightGuillemet] ",
+ CellChangeTimes->{{3.51987719454279*^9, 3.519877302667454*^9}, {
+   3.5198777102433977`*^9, 3.5198777526706963`*^9}, {3.519878617304996*^9, 
+   3.519878623567318*^9}, 3.52399668355009*^9, {3.5239967592767467`*^9, 
+   3.523996759285749*^9}, {3.523997020161542*^9, 3.523997022805822*^9}, {
+   3.5239971687972918`*^9, 3.5239972024108*^9}, 3.523998116683179*^9, 
+   3.523999032312121*^9, 3.52399986284588*^9, 3.524000229982913*^9, {
+   3.567435115836684*^9, 3.56743512657791*^9}, 3.567750840860441*^9, {
+   3.5682580198160677`*^9, 3.568258030451024*^9}, {3.569109201407279*^9, 
+   3.569109209814609*^9}, {3.571268968376562*^9, 3.5712689983672667`*^9}, 
+   3.571269095726047*^9, 3.57126912595522*^9}],
+
+Cell[BoxData[
+ RowBox[{"\[IndentingNewLine]", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+  
+  RowBox[{"(*", 
+   RowBox[{
+    RowBox[{
+     RowBox[{
+      RowBox[{
+       RowBox[{
+        RowBox[{
+         RowBox[{
+          RowBox[{
+           RowBox[{
+            RowBox[{
+             RowBox[{
+              RowBox[{
+               RowBox[{
+                RowBox[{
+                 RowBox[{
+                  RowBox[{
+                   RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"**", "**"}], "**"}], "**"}], "**"}], "**"}], 
+                    "**"}], "**"}], "**"}], "**"}], "**"}], "**"}], "**"}], 
+                    "**"}], "**"}], "**"}], "**"}], "**"}], "**"}], "**"}], 
+                    "**"}], "**"}], "**"}], "**"}], "**"}], "**"}], "**"}], 
+                    "**"}], "**"}], "**"}], "**"}], "**"}], "**"}], "**"}], 
+               "**"}], "**"}], "**"}], "**"}], "**"}], "**"}], "**"}], "**"}],
+        "**"}], "**"}], "**"}], "**"}], "********)"}], "\[IndentingNewLine]", 
+  
+  RowBox[{"(*", " ", 
+   RowBox[{"General", " ", "Variables"}], " ", "*)"}], "\[IndentingNewLine]", 
+  
+  RowBox[{"(*", 
+   RowBox[{
+   "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**",
+     "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**",
+     "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**",
+     "**", "**", "**", "**", "**", "**", "**"}], "********)"}], 
+  "\[IndentingNewLine]", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+  RowBox[{"(*", 
+   RowBox[{
+   "Intializes", " ", "the", " ", "Vertices", " ", "of", " ", "the", " ", 
+    "Polyhedra", " ", "to", " ", "Used", " ", "for", " ", "the", " ", 
+    "Fractal"}], "*)"}], "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"d1", "=", 
+     RowBox[{"PolyhedronData", "[", 
+      RowBox[{"\"\<Dodecahedron\>\"", ",", "\"\<VertexCoordinates\>\""}], 
+      "]"}]}], ";"}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{
+    "Defines", " ", "a", " ", "function", " ", "which", " ", "takes", " ", 
+     "the", " ", "VertexCoordiantes", " ", "of", " ", "the", " ", "Polyhedra",
+      " ", "and", " ", "reduces", " ", "them", " ", 
+     RowBox[{"1", "/", "2"}]}], "*)"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"dodecavec", "[", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"x_", ",", "y_", ",", "z_"}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"coordsx_", ",", "coordsy_", ",", "coordsz_"}], "}"}]}], 
+      "]"}], ":=", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"(", 
+        RowBox[{"2.", "+", "GoldenRatio"}], ")"}], "*", 
+       RowBox[{"{", 
+        RowBox[{"x", ",", "y", ",", "z"}], "}"}]}], "-", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"coordsx", ",", "coordsy", ",", "coordsz"}], "}"}], "*", 
+       FractionBox[
+        RowBox[{"(", 
+         RowBox[{"2.", "+", "GoldenRatio"}], ")"}], "1.4"]}]}]}], ";"}], 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{
+    "Threads", " ", "the", " ", "Vector", " ", "to", " ", "the", " ", "to", 
+     " ", "the", " ", 
+     RowBox[{"Polyhedra", "'"}], "s", " ", "VertexCoordiantes"}], "*)"}], 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"Thread", "[", 
+     RowBox[{
+      RowBox[{"dodecavec", "[", 
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{"x", ",", "y", ",", "z"}], "}"}], ",", "d1"}], "]"}], ",", 
+      "List", ",", 
+      RowBox[{"-", "1"}]}], "]"}], ";"}], "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{
+     RowBox[{
+     "Uses", " ", "a", " ", "Regional", " ", "Plot", " ", "of", " ", "the", 
+      " ", "Poyhedra", " ", "to", " ", "define", " ", "the", " ", 
+      "Polyhedra"}], ",", " ", 
+     RowBox[{"then", " ", "takes", " ", "the", " ", 
+      RowBox[{"1", "/", "2"}], " ", "reduced", " ", "sized", " ", 
+      "polyhedra"}], ",", " ", 
+     RowBox[{
+     "places", " ", "them", " ", "at", " ", "the", " ", "vertext", " ", 
+      "coordiantes"}], ",", " ", 
+     RowBox[{
+     "and", " ", "removes", " ", "them", " ", "so", " ", "that", " ", "the", 
+      " ", "remaining", " ", "logic", " ", "statment", " ", "if", " ", "the", 
+      " ", "polyhedra", " ", 
+      RowBox[{"fractal", "'"}], "s", " ", "compliment"}]}], "*)"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"grosslogicalexpressiondodeca", "=", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"PolyhedronData", "[", 
+        RowBox[{"\"\<Dodecahedron\>\"", ",", "\"\<RegionFunction\>\""}], 
+        "]"}], "[", 
+       RowBox[{"x", ",", "y", ",", "z"}], "]"}], " ", "&&", 
+      RowBox[{"Not", "[", 
+       RowBox[{"Apply", "[", 
+        RowBox[{"Or", ",", 
+         RowBox[{"Map", "[", 
+          RowBox[{
+           RowBox[{
+            RowBox[{"Apply", "[", 
+             RowBox[{
+              RowBox[{"PolyhedronData", "[", 
+               RowBox[{
+               "\"\<Dodecahedron\>\"", ",", "\"\<RegionFunction\>\""}], "]"}],
+               ",", "#"}], "]"}], "&"}], ",", 
+           RowBox[{"Thread", "[", 
+            RowBox[{
+             RowBox[{"dodecavec", "[", 
+              RowBox[{
+               RowBox[{"{", 
+                RowBox[{"x", ",", "y", ",", "z"}], "}"}], ",", "d1"}], "]"}], 
+             ",", "List", ",", 
+             RowBox[{"-", "1"}]}], "]"}]}], "]"}]}], "]"}], "]"}]}]}], ";"}], 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{"(*", " ", 
+    RowBox[{
+    "Reduces", " ", "the", " ", "number", " ", "of", " ", "logical", " ", 
+     "statments", " ", "required", " ", "to", " ", "define", " ", "the", " ", 
+     "previous", " ", "logic", " ", "statment", " ", "used", " ", "to", " ", 
+     "define", " ", "the", " ", "polyhedra", " ", 
+     RowBox[{"fractal", "'"}], "s", " ", 
+     RowBox[{"compliment", "."}]}], " ", "*)"}], "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", 
+   RowBox[{"(*", " ", 
+    RowBox[{"Quick", " ", "Fix"}], "*)"}], "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"lessgrosslogicalexpressiondodeca", "[", 
+       RowBox[{"x_", ",", "y_", ",", "z_"}], "]"}], "=", 
+      RowBox[{"FullSimplify", "[", "grosslogicalexpressiondodeca", "]"}]}], 
+     ";"}], "*)"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"lessgrosslogicalexpressiondodeca", "[", 
+      RowBox[{"x_", ",", "y_", ",", "z_"}], "]"}], "=", 
+     "grosslogicalexpressiondodeca"}], ";"}], "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{
+     RowBox[{
+      RowBox[{
+       RowBox[{
+        RowBox[{
+         RowBox[{
+          RowBox[{
+           RowBox[{
+            RowBox[{
+             RowBox[{
+              RowBox[{
+               RowBox[{
+                RowBox[{
+                 RowBox[{
+                  RowBox[{
+                   RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"**", "**"}], "**"}], "**"}], "**"}], "**"}], 
+                    "**"}], "**"}], "**"}], "**"}], "**"}], "**"}], "**"}], 
+                    "**"}], "**"}], "**"}], "**"}], "**"}], "**"}], "**"}], 
+                    "**"}], "**"}], "**"}], "**"}], "**"}], "**"}], "**"}], 
+                    "**"}], "**"}], "**"}], "**"}], "**"}], "**"}], "**"}], 
+                "**"}], "**"}], "**"}], "**"}], "**"}], "**"}], "**"}], 
+         "**"}], "**"}], "**"}], "**"}], "**"}], "********)"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{"(*", " ", 
+    RowBox[{"Fractal", " ", "Variables"}], " ", "*)"}], "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{
+    "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**",
+      "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", 
+     "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**",
+      "**", "**", "**", "**", "**", "**", "**", "**"}], "********)"}], 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{"Clears", " ", "DodecahedronFractalDrilling"}], "*)"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"Clear", "[", "DodecahedronFractalDrilling", "]"}], ";"}], 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{"(*", " ", 
+    RowBox[{"Defines", " ", "the", " ", 
+     SuperscriptBox["0", "th"], " ", "Fractal"}], "*)"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"DodecahedronFractalDrilling", "[", 
+      RowBox[{"0", ",", "distance_", ",", 
+       RowBox[{"{", 
+        RowBox[{"xcoords_", ",", "ycoords_", ",", "zcoords_"}], "}"}]}], 
+      "]"}], "=", "False"}], ";"}], "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", 
+   RowBox[{"(*", " ", 
+    RowBox[{"Defines", " ", "the", " ", 
+     SuperscriptBox["0", "th"], " ", "Fractal"}], "*)"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"DodecahedronFractalDrilling", "[", 
+      RowBox[{"1", ",", "distance_", ",", 
+       RowBox[{"{", 
+        RowBox[{"xcoords_", ",", "ycoords_", ",", "zcoords_"}], "}"}]}], 
+      "]"}], "=", 
+     RowBox[{"lessgrosslogicalexpressiondodeca", "[", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"(", 
+         RowBox[{"x", "-", "xcoords"}], ")"}], "/", "distance"}], ",", 
+       RowBox[{
+        RowBox[{"(", 
+         RowBox[{"y", "-", "ycoords"}], ")"}], "/", "distance"}], ",", 
+       RowBox[{
+        RowBox[{"(", 
+         RowBox[{"z", "-", "zcoords"}], ")"}], "/", "distance"}]}], "]"}]}], 
+    ";"}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{"(*", " ", 
+    RowBox[{"Defines", " ", "the", " ", 
+     SuperscriptBox["0", "th"], " ", "Fractal"}], "*)"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"DodecahedronFractalDrilling", "[", 
+      RowBox[{"n_", ",", "distance_", ",", 
+       RowBox[{"{", 
+        RowBox[{"xcoords_", ",", "ycoords_", ",", "zcoords_"}], "}"}]}], 
+      "]"}], ":=", 
+     RowBox[{
+      RowBox[{"DodecahedronFractalDrilling", "[", 
+       RowBox[{"n", ",", "distance", ",", 
+        RowBox[{"{", 
+         RowBox[{"xcoords", ",", "ycoords", ",", "zcoords"}], "}"}]}], "]"}], 
+      "=", 
+      RowBox[{
+       RowBox[{"DodecahedronFractalDrilling", "[", 
+        RowBox[{
+         RowBox[{"n", "-", "1"}], ",", "distance", ",", 
+         RowBox[{"{", 
+          RowBox[{"xcoords", ",", "ycoords", ",", "zcoords"}], "}"}]}], "]"}],
+        "||", 
+       RowBox[{"DodecahedronFractalDrilling", "[", 
+        RowBox[{
+         RowBox[{"n", "-", "1"}], ",", 
+         RowBox[{"distance", "/", "2"}], ",", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{"xcoords", ",", "ycoords", ",", "zcoords"}], "}"}], "+", 
+          RowBox[{
+           RowBox[{"d1", "[", 
+            RowBox[{"[", "1", "]"}], "]"}], "*", 
+           RowBox[{"distance", "/", "2"}]}]}]}], "]"}], "||", 
+       RowBox[{"DodecahedronFractalDrilling", "[", 
+        RowBox[{
+         RowBox[{"n", "-", "1"}], ",", 
+         RowBox[{"distance", "/", "2"}], ",", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{"xcoords", ",", "ycoords", ",", "zcoords"}], "}"}], "+", 
+          RowBox[{
+           RowBox[{"d1", "[", 
+            RowBox[{"[", "2", "]"}], "]"}], "*", 
+           RowBox[{"distance", "/", "2"}]}]}]}], "]"}], "||", 
+       RowBox[{"DodecahedronFractalDrilling", "[", 
+        RowBox[{
+         RowBox[{"n", "-", "1"}], ",", 
+         RowBox[{"distance", "/", "2"}], ",", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{"xcoords", ",", "ycoords", ",", "zcoords"}], "}"}], "+", 
+          RowBox[{
+           RowBox[{"d1", "[", 
+            RowBox[{"[", "3", "]"}], "]"}], "*", 
+           RowBox[{"distance", "/", "2"}]}]}]}], "]"}], "||", 
+       RowBox[{"DodecahedronFractalDrilling", "[", 
+        RowBox[{
+         RowBox[{"n", "-", "1"}], ",", 
+         RowBox[{"distance", "/", "2"}], ",", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{"xcoords", ",", "ycoords", ",", "zcoords"}], "}"}], "+", 
+          RowBox[{
+           RowBox[{"d1", "[", 
+            RowBox[{"[", "4", "]"}], "]"}], "*", 
+           RowBox[{"distance", "/", "2"}]}]}]}], "]"}], "||", 
+       "\[IndentingNewLine]", 
+       RowBox[{"DodecahedronFractalDrilling", "[", 
+        RowBox[{
+         RowBox[{"n", "-", "1"}], ",", 
+         RowBox[{"distance", "/", "2"}], ",", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{"xcoords", ",", "ycoords", ",", "zcoords"}], "}"}], "+", 
+          RowBox[{
+           RowBox[{"d1", "[", 
+            RowBox[{"[", "5", "]"}], "]"}], "*", 
+           RowBox[{"distance", "/", "2"}]}]}]}], "]"}], "||", 
+       RowBox[{"DodecahedronFractalDrilling", "[", 
+        RowBox[{
+         RowBox[{"n", "-", "1"}], ",", 
+         RowBox[{"distance", "/", "2"}], ",", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{"xcoords", ",", "ycoords", ",", "zcoords"}], "}"}], "+", 
+          RowBox[{
+           RowBox[{"d1", "[", 
+            RowBox[{"[", "6", "]"}], "]"}], "*", 
+           RowBox[{"distance", "/", "2"}]}]}]}], "]"}], "||", 
+       RowBox[{"DodecahedronFractalDrilling", "[", 
+        RowBox[{
+         RowBox[{"n", "-", "1"}], ",", 
+         RowBox[{"distance", "/", "2"}], ",", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{"xcoords", ",", "ycoords", ",", "zcoords"}], "}"}], "+", 
+          RowBox[{
+           RowBox[{"d1", "[", 
+            RowBox[{"[", "7", "]"}], "]"}], "*", 
+           RowBox[{"distance", "/", "2"}]}]}]}], "]"}], "||", 
+       RowBox[{"DodecahedronFractalDrilling", "[", 
+        RowBox[{
+         RowBox[{"n", "-", "1"}], ",", 
+         RowBox[{"distance", "/", "2"}], ",", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{"xcoords", ",", "ycoords", ",", "zcoords"}], "}"}], "+", 
+          RowBox[{
+           RowBox[{"d1", "[", 
+            RowBox[{"[", "8", "]"}], "]"}], "*", 
+           RowBox[{"distance", "/", "2"}]}]}]}], "]"}], "||", 
+       RowBox[{"DodecahedronFractalDrilling", "[", 
+        RowBox[{
+         RowBox[{"n", "-", "1"}], ",", 
+         RowBox[{"distance", "/", "2"}], ",", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{"xcoords", ",", "ycoords", ",", "zcoords"}], "}"}], "+", 
+          RowBox[{
+           RowBox[{"d1", "[", 
+            RowBox[{"[", "9", "]"}], "]"}], "*", 
+           RowBox[{"distance", "/", "2"}]}]}]}], "]"}], "||", 
+       RowBox[{"DodecahedronFractalDrilling", "[", 
+        RowBox[{
+         RowBox[{"n", "-", "1"}], ",", 
+         RowBox[{"distance", "/", "2"}], ",", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{"xcoords", ",", "ycoords", ",", "zcoords"}], "}"}], "+", 
+          RowBox[{
+           RowBox[{"d1", "[", 
+            RowBox[{"[", "10", "]"}], "]"}], "*", 
+           RowBox[{"distance", "/", "2"}]}]}]}], "]"}], "||", 
+       RowBox[{"DodecahedronFractalDrilling", "[", 
+        RowBox[{
+         RowBox[{"n", "-", "1"}], ",", 
+         RowBox[{"distance", "/", "2"}], ",", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{"xcoords", ",", "ycoords", ",", "zcoords"}], "}"}], "+", 
+          RowBox[{
+           RowBox[{"d1", "[", 
+            RowBox[{"[", "11", "]"}], "]"}], "*", 
+           RowBox[{"distance", "/", "2"}]}]}]}], "]"}], "||", 
+       RowBox[{"DodecahedronFractalDrilling", "[", 
+        RowBox[{
+         RowBox[{"n", "-", "1"}], ",", 
+         RowBox[{"distance", "/", "2"}], ",", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{"xcoords", ",", "ycoords", ",", "zcoords"}], "}"}], "+", 
+          RowBox[{
+           RowBox[{"d1", "[", 
+            RowBox[{"[", "12", "]"}], "]"}], "*", 
+           RowBox[{"distance", "/", "2"}]}]}]}], "]"}], "||", 
+       "\[IndentingNewLine]", 
+       RowBox[{"DodecahedronFractalDrilling", "[", 
+        RowBox[{
+         RowBox[{"n", "-", "1"}], ",", 
+         RowBox[{"distance", "/", "2"}], ",", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{"xcoords", ",", "ycoords", ",", "zcoords"}], "}"}], "+", 
+          RowBox[{
+           RowBox[{"d1", "[", 
+            RowBox[{"[", "13", "]"}], "]"}], "*", 
+           RowBox[{"distance", "/", "2"}]}]}]}], "]"}], "||", 
+       RowBox[{"DodecahedronFractalDrilling", "[", 
+        RowBox[{
+         RowBox[{"n", "-", "1"}], ",", 
+         RowBox[{"distance", "/", "2"}], ",", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{"xcoords", ",", "ycoords", ",", "zcoords"}], "}"}], "+", 
+          RowBox[{
+           RowBox[{"d1", "[", 
+            RowBox[{"[", "14", "]"}], "]"}], "*", 
+           RowBox[{"distance", "/", "2"}]}]}]}], "]"}], "||", 
+       RowBox[{"DodecahedronFractalDrilling", "[", 
+        RowBox[{
+         RowBox[{"n", "-", "1"}], ",", 
+         RowBox[{"distance", "/", "2"}], ",", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{"xcoords", ",", "ycoords", ",", "zcoords"}], "}"}], "+", 
+          RowBox[{
+           RowBox[{"d1", "[", 
+            RowBox[{"[", "15", "]"}], "]"}], "*", 
+           RowBox[{"distance", "/", "2"}]}]}]}], "]"}], "||", 
+       RowBox[{"DodecahedronFractalDrilling", "[", 
+        RowBox[{
+         RowBox[{"n", "-", "1"}], ",", 
+         RowBox[{"distance", "/", "2"}], ",", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{"xcoords", ",", "ycoords", ",", "zcoords"}], "}"}], "+", 
+          RowBox[{
+           RowBox[{"d1", "[", 
+            RowBox[{"[", "16", "]"}], "]"}], "*", 
+           RowBox[{"distance", "/", "2"}]}]}]}], "]"}], "||", 
+       RowBox[{"DodecahedronFractalDrilling", "[", 
+        RowBox[{
+         RowBox[{"n", "-", "1"}], ",", 
+         RowBox[{"distance", "/", "2"}], ",", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{"xcoords", ",", "ycoords", ",", "zcoords"}], "}"}], "+", 
+          RowBox[{
+           RowBox[{"d1", "[", 
+            RowBox[{"[", "17", "]"}], "]"}], "*", 
+           RowBox[{"distance", "/", "2"}]}]}]}], "]"}], "||", 
+       RowBox[{"DodecahedronFractalDrilling", "[", 
+        RowBox[{
+         RowBox[{"n", "-", "1"}], ",", 
+         RowBox[{"distance", "/", "2"}], ",", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{"xcoords", ",", "ycoords", ",", "zcoords"}], "}"}], "+", 
+          RowBox[{
+           RowBox[{"d1", "[", 
+            RowBox[{"[", "18", "]"}], "]"}], "*", 
+           RowBox[{"distance", "/", "2"}]}]}]}], "]"}], "||", 
+       RowBox[{"DodecahedronFractalDrilling", "[", 
+        RowBox[{
+         RowBox[{"n", "-", "1"}], ",", 
+         RowBox[{"distance", "/", "2"}], ",", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{"xcoords", ",", "ycoords", ",", "zcoords"}], "}"}], "+", 
+          RowBox[{
+           RowBox[{"d1", "[", 
+            RowBox[{"[", "19", "]"}], "]"}], "*", 
+           RowBox[{"distance", "/", "2"}]}]}]}], "]"}], "||", 
+       RowBox[{"DodecahedronFractalDrilling", "[", 
+        RowBox[{
+         RowBox[{"n", "-", "1"}], ",", 
+         RowBox[{"distance", "/", "2"}], ",", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{"xcoords", ",", "ycoords", ",", "zcoords"}], "}"}], "+", 
+          RowBox[{
+           RowBox[{"d1", "[", 
+            RowBox[{"[", "20", "]"}], "]"}], "*", 
+           RowBox[{"distance", "/", "2"}]}]}]}], "]"}]}]}]}], ";"}], 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{"Clear", "[", "DodecahedronFractalReduce", "]"}], 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"DodecahedronFractalReduce", "[", "0", "]"}], "=", 
+     RowBox[{
+      RowBox[{"PolyhedronData", "[", 
+       RowBox[{"\"\<Dodecahedron\>\"", ",", "\"\<RegionFunction\>\""}], "]"}],
+       "[", 
+      RowBox[{"x", ",", "y", ",", "z"}], "]"}]}], " ", ";"}], 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"DodecahedronFractalReduce", "[", "n_", "]"}], ":=", 
+     RowBox[{
+      RowBox[{"DodecahedronFractalReduce", "[", "n", "]"}], "=", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"PolyhedronData", "[", 
+         RowBox[{"\"\<Dodecahedron\>\"", ",", "\"\<RegionFunction\>\""}], 
+         "]"}], "[", 
+        RowBox[{"x", ",", "y", ",", "z"}], "]"}], " ", "&&", 
+       RowBox[{"Not", "[", 
+        RowBox[{"DodecahedronFractalDrilling", "[", 
+         RowBox[{"n", ",", "1", ",", 
+          RowBox[{"{", 
+           RowBox[{"0", ",", "0", ",", "0"}], "}"}]}], "]"}], "]"}]}]}]}], 
+    ";"}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{
+     RowBox[{
+      RowBox[{
+       RowBox[{
+        RowBox[{
+         RowBox[{
+          RowBox[{
+           RowBox[{
+            RowBox[{
+             RowBox[{
+              RowBox[{
+               RowBox[{
+                RowBox[{
+                 RowBox[{
+                  RowBox[{
+                   RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"**", "**"}], "**"}], "**"}], "**"}], "**"}], 
+                    "**"}], "**"}], "**"}], "**"}], "**"}], "**"}], "**"}], 
+                    "**"}], "**"}], "**"}], "**"}], "**"}], "**"}], "**"}], 
+                    "**"}], "**"}], "**"}], "**"}], "**"}], "**"}], "**"}], 
+                    "**"}], "**"}], "**"}], "**"}], "**"}], "**"}], "**"}], 
+                "**"}], "**"}], "**"}], "**"}], "**"}], "**"}], "**"}], 
+         "**"}], "**"}], "**"}], "**"}], "**"}], "********)"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{"(*", " ", 
+    RowBox[{"Compliment", " ", "Variables"}], " ", "*)"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{
+    "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**",
+      "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", 
+     "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**",
+      "**", "**", "**", "**", "**", "**", "**", "**"}], "********)"}], 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{"Clears", " ", "DodecahedronComplimentDrilling"}], "*)"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"Clear", "[", "DodecahedronComplimentDrilling", "]"}], ";"}], 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{"(*", " ", 
+    RowBox[{"Defines", " ", "the", " ", 
+     SuperscriptBox["0", "th"], " ", "Fractal"}], "*)"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"DodecahedronComplimentDrilling", "[", 
+      RowBox[{"0", ",", "depth_", ",", "mindepth_", ",", "distance_", ",", 
+       RowBox[{"{", 
+        RowBox[{"xcoords_", ",", "ycoords_", ",", "zcoords_"}], "}"}]}], 
+      "]"}], "=", "False"}], ";"}], "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", 
+   RowBox[{"(*", " ", 
+    RowBox[{"Defines", " ", "the", " ", 
+     SuperscriptBox["0", "th"], " ", "Fractal"}], "*)"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"DodecahedronComplimentDrilling", "[", 
+      RowBox[{"1", ",", "depth_", ",", "mindepth_", ",", "distance_", ",", 
+       RowBox[{"{", 
+        RowBox[{"xcoords_", ",", "ycoords_", ",", "zcoords_"}], "}"}]}], 
+      "]"}], "=", 
+     RowBox[{"If", "[", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"depth", "+", "1"}], " ", "\[GreaterEqual]", " ", 
+        "mindepth"}], ",", 
+       RowBox[{"lessgrosslogicalexpressiondodeca", "[", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"(", 
+           RowBox[{"x", "-", "xcoords"}], ")"}], "/", "distance"}], ",", 
+         RowBox[{
+          RowBox[{"(", 
+           RowBox[{"y", "-", "ycoords"}], ")"}], "/", "distance"}], ",", 
+         RowBox[{
+          RowBox[{"(", 
+           RowBox[{"z", "-", "zcoords"}], ")"}], "/", "distance"}]}], "]"}], 
+       ",", "False"}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", 
+   RowBox[{"(*", " ", 
+    RowBox[{"Defines", " ", "the", " ", 
+     SuperscriptBox["0", "th"], " ", "Fractal"}], "*)"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"DodecahedronComplimentDrilling", "[", 
+      RowBox[{"n_", ",", "depth_", ",", "mindepth_", ",", "distance_", ",", 
+       RowBox[{"{", 
+        RowBox[{"xcoords_", ",", "ycoords_", ",", "zcoords_"}], "}"}]}], 
+      "]"}], ":=", 
+     RowBox[{
+      RowBox[{"DodecahedronComplimentDrilling", "[", 
+       RowBox[{"n", ",", "depth", ",", "mindepth", ",", "distance", ",", 
+        RowBox[{"{", 
+         RowBox[{"xcoords", ",", "ycoords", ",", "zcoords"}], "}"}]}], "]"}], 
+      "=", 
+      RowBox[{
+       RowBox[{"DodecahedronComplimentDrilling", "[", 
+        RowBox[{
+         RowBox[{"n", "-", "1"}], ",", "depth", ",", "mindepth", ",", 
+         "distance", ",", 
+         RowBox[{"{", 
+          RowBox[{"xcoords", ",", "ycoords", ",", "zcoords"}], "}"}]}], "]"}],
+        "||", 
+       RowBox[{"DodecahedronComplimentDrilling", "[", 
+        RowBox[{
+         RowBox[{"n", "-", "1"}], ",", 
+         RowBox[{"depth", "+", "1"}], ",", "mindepth", ",", 
+         RowBox[{"distance", "/", "2"}], ",", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{"xcoords", ",", "ycoords", ",", "zcoords"}], "}"}], "+", 
+          RowBox[{
+           RowBox[{"d1", "[", 
+            RowBox[{"[", "1", "]"}], "]"}], "*", 
+           RowBox[{"distance", "/", "2"}]}]}]}], "]"}], "||", 
+       RowBox[{"DodecahedronComplimentDrilling", "[", 
+        RowBox[{
+         RowBox[{"n", "-", "1"}], ",", 
+         RowBox[{"depth", "+", "1"}], ",", "mindepth", ",", 
+         RowBox[{"distance", "/", "2"}], ",", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{"xcoords", ",", "ycoords", ",", "zcoords"}], "}"}], "+", 
+          RowBox[{
+           RowBox[{"d1", "[", 
+            RowBox[{"[", "2", "]"}], "]"}], "*", 
+           RowBox[{"distance", "/", "2"}]}]}]}], "]"}], "||", 
+       RowBox[{"DodecahedronComplimentDrilling", "[", 
+        RowBox[{
+         RowBox[{"n", "-", "1"}], ",", 
+         RowBox[{"depth", "+", "1"}], ",", "mindepth", ",", 
+         RowBox[{"distance", "/", "2"}], ",", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{"xcoords", ",", "ycoords", ",", "zcoords"}], "}"}], "+", 
+          RowBox[{
+           RowBox[{"d1", "[", 
+            RowBox[{"[", "3", "]"}], "]"}], "*", 
+           RowBox[{"distance", "/", "2"}]}]}]}], "]"}], "||", 
+       RowBox[{"DodecahedronComplimentDrilling", "[", 
+        RowBox[{
+         RowBox[{"n", "-", "1"}], ",", 
+         RowBox[{"depth", "+", "1"}], ",", "mindepth", ",", 
+         RowBox[{"distance", "/", "2"}], ",", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{"xcoords", ",", "ycoords", ",", "zcoords"}], "}"}], "+", 
+          RowBox[{
+           RowBox[{"d1", "[", 
+            RowBox[{"[", "4", "]"}], "]"}], "*", 
+           RowBox[{"distance", "/", "2"}]}]}]}], "]"}], "||", 
+       "\[IndentingNewLine]", 
+       RowBox[{"DodecahedronComplimentDrilling", "[", 
+        RowBox[{
+         RowBox[{"n", "-", "1"}], ",", 
+         RowBox[{"depth", "+", "1"}], ",", "mindepth", ",", 
+         RowBox[{"distance", "/", "2"}], ",", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{"xcoords", ",", "ycoords", ",", "zcoords"}], "}"}], "+", 
+          RowBox[{
+           RowBox[{"d1", "[", 
+            RowBox[{"[", "5", "]"}], "]"}], "*", 
+           RowBox[{"distance", "/", "2"}]}]}]}], "]"}], "||", 
+       RowBox[{"DodecahedronComplimentDrilling", "[", 
+        RowBox[{
+         RowBox[{"n", "-", "1"}], ",", 
+         RowBox[{"depth", "+", "1"}], ",", "mindepth", ",", 
+         RowBox[{"distance", "/", "2"}], ",", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{"xcoords", ",", "ycoords", ",", "zcoords"}], "}"}], "+", 
+          RowBox[{
+           RowBox[{"d1", "[", 
+            RowBox[{"[", "6", "]"}], "]"}], "*", 
+           RowBox[{"distance", "/", "2"}]}]}]}], "]"}], "||", 
+       RowBox[{"DodecahedronComplimentDrilling", "[", 
+        RowBox[{
+         RowBox[{"n", "-", "1"}], ",", 
+         RowBox[{"depth", "+", "1"}], ",", "mindepth", ",", 
+         RowBox[{"distance", "/", "2"}], ",", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{"xcoords", ",", "ycoords", ",", "zcoords"}], "}"}], "+", 
+          RowBox[{
+           RowBox[{"d1", "[", 
+            RowBox[{"[", "7", "]"}], "]"}], "*", 
+           RowBox[{"distance", "/", "2"}]}]}]}], "]"}], "||", 
+       "\[IndentingNewLine]", 
+       RowBox[{"DodecahedronComplimentDrilling", "[", 
+        RowBox[{
+         RowBox[{"n", "-", "1"}], ",", 
+         RowBox[{"depth", "+", "1"}], ",", "mindepth", ",", 
+         RowBox[{"distance", "/", "2"}], ",", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{"xcoords", ",", "ycoords", ",", "zcoords"}], "}"}], "+", 
+          RowBox[{
+           RowBox[{"d1", "[", 
+            RowBox[{"[", "8", "]"}], "]"}], "*", 
+           RowBox[{"distance", "/", "2"}]}]}]}], "]"}], "||", 
+       RowBox[{"DodecahedronComplimentDrilling", "[", 
+        RowBox[{
+         RowBox[{"n", "-", "1"}], ",", 
+         RowBox[{"depth", "+", "1"}], ",", "mindepth", ",", 
+         RowBox[{"distance", "/", "2"}], ",", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{"xcoords", ",", "ycoords", ",", "zcoords"}], "}"}], "+", 
+          RowBox[{
+           RowBox[{"d1", "[", 
+            RowBox[{"[", "9", "]"}], "]"}], "*", 
+           RowBox[{"distance", "/", "2"}]}]}]}], "]"}], "||", 
+       RowBox[{"DodecahedronComplimentDrilling", "[", 
+        RowBox[{
+         RowBox[{"n", "-", "1"}], ",", 
+         RowBox[{"depth", "+", "1"}], ",", "mindepth", ",", 
+         RowBox[{"distance", "/", "2"}], ",", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{"xcoords", ",", "ycoords", ",", "zcoords"}], "}"}], "+", 
+          RowBox[{
+           RowBox[{"d1", "[", 
+            RowBox[{"[", "10", "]"}], "]"}], "*", 
+           RowBox[{"distance", "/", "2"}]}]}]}], "]"}], "||", 
+       RowBox[{"DodecahedronComplimentDrilling", "[", 
+        RowBox[{
+         RowBox[{"n", "-", "1"}], ",", 
+         RowBox[{"depth", "+", "1"}], ",", "mindepth", ",", 
+         RowBox[{"distance", "/", "2"}], ",", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{"xcoords", ",", "ycoords", ",", "zcoords"}], "}"}], "+", 
+          RowBox[{
+           RowBox[{"d1", "[", 
+            RowBox[{"[", "11", "]"}], "]"}], "*", 
+           RowBox[{"distance", "/", "2"}]}]}]}], "]"}], "||", 
+       "\[IndentingNewLine]", 
+       RowBox[{"DodecahedronComplimentDrilling", "[", 
+        RowBox[{
+         RowBox[{"n", "-", "1"}], ",", 
+         RowBox[{"depth", "+", "1"}], ",", "mindepth", ",", 
+         RowBox[{"distance", "/", "2"}], ",", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{"xcoords", ",", "ycoords", ",", "zcoords"}], "}"}], "+", 
+          RowBox[{
+           RowBox[{"d1", "[", 
+            RowBox[{"[", "12", "]"}], "]"}], "*", 
+           RowBox[{"distance", "/", "2"}]}]}]}], "]"}], "||", 
+       "\[IndentingNewLine]", 
+       RowBox[{"DodecahedronComplimentDrilling", "[", 
+        RowBox[{
+         RowBox[{"n", "-", "1"}], ",", 
+         RowBox[{"depth", "+", "1"}], ",", "mindepth", ",", 
+         RowBox[{"distance", "/", "2"}], ",", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{"xcoords", ",", "ycoords", ",", "zcoords"}], "}"}], "+", 
+          RowBox[{
+           RowBox[{"d1", "[", 
+            RowBox[{"[", "13", "]"}], "]"}], "*", 
+           RowBox[{"distance", "/", "2"}]}]}]}], "]"}], "||", 
+       RowBox[{"DodecahedronComplimentDrilling", "[", 
+        RowBox[{
+         RowBox[{"n", "-", "1"}], ",", 
+         RowBox[{"depth", "+", "1"}], ",", "mindepth", ",", 
+         RowBox[{"distance", "/", "2"}], ",", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{"xcoords", ",", "ycoords", ",", "zcoords"}], "}"}], "+", 
+          RowBox[{
+           RowBox[{"d1", "[", 
+            RowBox[{"[", "14", "]"}], "]"}], "*", 
+           RowBox[{"distance", "/", "2"}]}]}]}], "]"}], "||", 
+       RowBox[{"DodecahedronComplimentDrilling", "[", 
+        RowBox[{
+         RowBox[{"n", "-", "1"}], ",", 
+         RowBox[{"depth", "+", "1"}], ",", "mindepth", ",", 
+         RowBox[{"distance", "/", "2"}], ",", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{"xcoords", ",", "ycoords", ",", "zcoords"}], "}"}], "+", 
+          RowBox[{
+           RowBox[{"d1", "[", 
+            RowBox[{"[", "15", "]"}], "]"}], "*", 
+           RowBox[{"distance", "/", "2"}]}]}]}], "]"}], "||", 
+       "\[IndentingNewLine]", 
+       RowBox[{"DodecahedronComplimentDrilling", "[", 
+        RowBox[{
+         RowBox[{"n", "-", "1"}], ",", 
+         RowBox[{"depth", "+", "1"}], ",", "mindepth", ",", 
+         RowBox[{"distance", "/", "2"}], ",", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{"xcoords", ",", "ycoords", ",", "zcoords"}], "}"}], "+", 
+          RowBox[{
+           RowBox[{"d1", "[", 
+            RowBox[{"[", "16", "]"}], "]"}], "*", 
+           RowBox[{"distance", "/", "2"}]}]}]}], "]"}], "||", 
+       RowBox[{"DodecahedronComplimentDrilling", "[", 
+        RowBox[{
+         RowBox[{"n", "-", "1"}], ",", 
+         RowBox[{"depth", "+", "1"}], ",", "mindepth", ",", 
+         RowBox[{"distance", "/", "2"}], ",", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{"xcoords", ",", "ycoords", ",", "zcoords"}], "}"}], "+", 
+          RowBox[{
+           RowBox[{"d1", "[", 
+            RowBox[{"[", "17", "]"}], "]"}], "*", 
+           RowBox[{"distance", "/", "2"}]}]}]}], "]"}], "||", 
+       RowBox[{"DodecahedronComplimentDrilling", "[", 
+        RowBox[{
+         RowBox[{"n", "-", "1"}], ",", 
+         RowBox[{"depth", "+", "1"}], ",", "mindepth", ",", 
+         RowBox[{"distance", "/", "2"}], ",", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{"xcoords", ",", "ycoords", ",", "zcoords"}], "}"}], "+", 
+          RowBox[{
+           RowBox[{"d1", "[", 
+            RowBox[{"[", "18", "]"}], "]"}], "*", 
+           RowBox[{"distance", "/", "2"}]}]}]}], "]"}], "||", 
+       RowBox[{"DodecahedronComplimentDrilling", "[", 
+        RowBox[{
+         RowBox[{"n", "-", "1"}], ",", 
+         RowBox[{"depth", "+", "1"}], ",", "mindepth", ",", 
+         RowBox[{"distance", "/", "2"}], ",", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{"xcoords", ",", "ycoords", ",", "zcoords"}], "}"}], "+", 
+          RowBox[{
+           RowBox[{"d1", "[", 
+            RowBox[{"[", "19", "]"}], "]"}], "*", 
+           RowBox[{"distance", "/", "2"}]}]}]}], "]"}], "||", 
+       "\[IndentingNewLine]", 
+       RowBox[{"DodecahedronComplimentDrilling", "[", 
+        RowBox[{
+         RowBox[{"n", "-", "1"}], ",", 
+         RowBox[{"depth", "+", "1"}], ",", "mindepth", ",", 
+         RowBox[{"distance", "/", "2"}], ",", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{"xcoords", ",", "ycoords", ",", "zcoords"}], "}"}], "+", 
+          RowBox[{
+           RowBox[{"d1", "[", 
+            RowBox[{"[", "20", "]"}], "]"}], "*", 
+           RowBox[{"distance", "/", "2"}]}]}]}], "]"}]}]}]}], 
+    ";"}]}]}]], "Code",
+ CellChangeTimes->{{3.5524292243107*^9, 3.552429580155436*^9}, 
+   3.552429622097569*^9, {3.5524296567114487`*^9, 3.552429681592835*^9}, {
+   3.5524469166628323`*^9, 3.5524471737470284`*^9}, {3.552447770997064*^9, 
+   3.552447772293908*^9}, {3.552447802728531*^9, 3.552447822840316*^9}, 
+   3.5524479277635527`*^9, {3.5524844396519213`*^9, 3.552484454560721*^9}, {
+   3.552491135640921*^9, 3.552491543260664*^9}, {3.552491615812839*^9, 
+   3.5524916169712067`*^9}, {3.552491895455043*^9, 3.55249190290375*^9}, {
+   3.552491976991412*^9, 3.552491984356188*^9}, {3.552492177733988*^9, 
+   3.552492185230043*^9}, {3.552498461842442*^9, 3.5524985699970093`*^9}, {
+   3.552498608915427*^9, 3.552498828948249*^9}, 3.5524988624668083`*^9, {
+   3.5528713005380373`*^9, 3.552871307129033*^9}, {3.553047462775128*^9, 
+   3.5530474756604147`*^9}}]
+}, Open  ]]
+},
+WindowSize->{1496, 930},
+WindowMargins->{{171, Automatic}, {Automatic, 0}},
+FrontEndVersion->"10.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (June 27, \
+2014)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{
+ "SlideShowHeader"->{
+  Cell[1698, 54, 64, 1, 74, "SlideShowNavigationBar",
+   CellTags->"SlideShowHeader"],
+  Cell[3864, 108, 64, 1, 74, "SlideShowNavigationBar",
+   CellTags->"SlideShowHeader"],
+  Cell[29493, 781, 64, 1, 74, "SlideShowNavigationBar",
+   CellTags->"SlideShowHeader"],
+  Cell[53968, 1418, 64, 1, 74, "SlideShowNavigationBar",
+   CellTags->"SlideShowHeader"],
+  Cell[75408, 1984, 64, 1, 74, "SlideShowNavigationBar",
+   CellTags->"SlideShowHeader"],
+  Cell[106750, 2783, 64, 1, 74, "SlideShowNavigationBar",
+   CellTags->"SlideShowHeader"]}
+ }
+*)
+(*CellTagsIndex
+CellTagsIndex->{
+ {"SlideShowHeader", 146236, 3782}
+ }
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[557, 20, 369, 7, 44, "Text"],
+Cell[929, 29, 475, 10, 36, "Text"],
+Cell[1407, 41, 266, 9, 59, "Subsubtitle"],
+Cell[CellGroupData[{
+Cell[1698, 54, 64, 1, 74, "SlideShowNavigationBar",
+ CellTags->"SlideShowHeader"],
+Cell[1765, 57, 758, 15, 92, "Title"],
+Cell[2526, 74, 1301, 29, 49, "Text"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[3864, 108, 64, 1, 74, "SlideShowNavigationBar",
+ CellTags->"SlideShowHeader"],
+Cell[3931, 111, 832, 15, 28, "Item"],
+Cell[4766, 128, 21898, 568, 1107, "Code"],
+Cell[26667, 698, 119, 2, 28, "Input"],
+Cell[26789, 702, 359, 9, 63, "Input"],
+Cell[27151, 713, 1142, 29, 46, "Input"],
+Cell[28296, 744, 1160, 32, 63, "Input"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[29493, 781, 64, 1, 74, "SlideShowNavigationBar",
+ CellTags->"SlideShowHeader"],
+Cell[29560, 784, 850, 15, 28, "Item"],
+Cell[30413, 801, 23518, 612, 1154, "Code"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[53968, 1418, 64, 1, 74, "SlideShowNavigationBar",
+ CellTags->"SlideShowHeader"],
+Cell[54035, 1421, 857, 15, 28, "Item"],
+Cell[54895, 1438, 20476, 541, 1009, "Code"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[75408, 1984, 64, 1, 74, "SlideShowNavigationBar",
+ CellTags->"SlideShowHeader"],
+Cell[75475, 1987, 877, 15, 28, "Item"],
+Cell[76355, 2004, 30358, 774, 1254, "Code"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[106750, 2783, 64, 1, 74, "SlideShowNavigationBar",
+ CellTags->"SlideShowHeader"],
+Cell[106817, 2786, 854, 15, 28, "Item"],
+Cell[107674, 2803, 38234, 965, 1332, "Code"]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)

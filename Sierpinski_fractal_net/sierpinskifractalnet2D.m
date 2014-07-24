@@ -78,7 +78,7 @@ generateSierpinskiNet[iteration_,net_]:=If[iteration==0,If[net,showFolded2D[{F0T
 (*******************************************************************)(*******************************************************************)
 (*Documentation: fractalNetModule2D*)
 (*Function: generateSierpinskiNet*)
-fractalNetModule2D=Dynamic[Column[{Panel[Grid[{{"n",SetterBar[Dynamic[n],{0,1,2,3}]},{"net",Checkbox[Dynamic[net]]},{" "},{" "}},Frame->All,Spacings->{0,1},Alignment->Left],ImageSize-> {600,125},Background->White],
+fractalNetModule2D=Dynamic[Column[{Panel[Grid[{{"n",SetterBar[Dynamic[n],{0,1,2,3}]},{"net",Checkbox[Dynamic[net]]}},Alignment->Left,ItemSize->{{10,40}}],ImageSize-> {600,125},Background->White],
 Dynamic[generateSierpinskiNet[n,net]]}]];
 (*;*)
 
