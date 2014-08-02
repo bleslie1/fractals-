@@ -1,0 +1,383 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 10.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     12839,        374]
+NotebookOptionsPosition[     11591,        328]
+NotebookOutlinePosition[     11975,        345]
+CellTagsIndexPosition[     11932,        342]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["Intialization cell", "Section"],
+
+Cell[CellGroupData[{
+
+Cell["\<\
+For the code to work the following files need to be the same directory: \
+\>", "Item"],
+
+Cell[CellGroupData[{
+
+Cell["sierpinskifractalnet2D.m package", "SubitemNumbered"],
+
+Cell["fillHoles.m package", "SubitemNumbered"],
+
+Cell["sierpinskifractalnet2D.m", "SubitemNumbered"],
+
+Cell["test.nb", "SubitemNumbered"]
+}, Open  ]],
+
+Cell["The cell below does the following:", "Item"],
+
+Cell[CellGroupData[{
+
+Cell["runs the sierpinskifractalnet2D.m package", "SubitemNumbered"],
+
+Cell["runs the sierpinskifractalnet3D.m package", "SubitemNumbered"],
+
+Cell["\<\
+Combines all three packages and places each packages module in one combine \
+module for viewing the various rule of the Sirepinski fractal net method. \
+\>", "SubitemNumbered"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"<<", 
+   RowBox[{"(", 
+    RowBox[{
+     RowBox[{"NotebookDirectory", "[", "]"}], "<>", "\"\<fillHoles.m\>\""}], 
+    ")"}]}], " "}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"<<", 
+   RowBox[{"(", 
+    RowBox[{
+     RowBox[{"NotebookDirectory", "[", "]"}], "<>", 
+     "\"\<sierpinskifractalnet3D.m\>\""}], ")"}]}], 
+  " "}], "\[IndentingNewLine]", 
+ RowBox[{"Panel", "[", 
+  RowBox[{
+   RowBox[{"TabView", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"\"\<'Fill Holes' Rule\>\"", "\[Rule]", "fillHolesMethod"}], 
+       " ", ",", 
+       RowBox[{"\"\<Cut-fold Rule\>\"", "\[Rule]", "fractalNetModule2D"}], 
+       ",", 
+       RowBox[{"\"\<Folding Rule\>\"", "\[Rule]", "fractalNetModule3D"}]}], 
+      "}"}], ",", 
+     RowBox[{"ControlPlacement", "\[Rule]", 
+      RowBox[{"{", 
+       RowBox[{"Top", ",", "Left"}], "}"}]}], ",", 
+     RowBox[{"Background", "\[Rule]", "Black"}]}], "]"}], ",", 
+   RowBox[{"Background", "\[Rule]", "White"}]}], "]"}]}], "Code"],
+
+Cell[BoxData[
+ PanelBox[
+  TabViewBox[{{1,"\<\"'Fill Holes' Rule\"\>"->
+   DynamicModuleBox[{fillHoles`Private`theta$$ = 0, fillHoles`Private`t$$ = 0,
+     fillHoles`Private`contraction$$ = 1}, 
+    TagBox[GridBox[{
+       {
+        PanelBox[
+         TagBox[GridBox[{
+            {"\<\"n\"\>", 
+             InterpretationBox[
+              StyleBox[GridBox[{
+                 {
+                  SetterBox[Dynamic[sierpinskifractalnet2D`n], {0}, "0"], 
+                  SetterBox[Dynamic[sierpinskifractalnet2D`n], {1}, "1"], 
+                  SetterBox[Dynamic[sierpinskifractalnet2D`n], {2}, "2"], 
+                  SetterBox[Dynamic[sierpinskifractalnet2D`n], {3}, "3"]}
+                },
+                BaselinePosition->{1, 1},
+                GridBoxSpacings->{"Columns" -> {
+                    Offset[0.27999999999999997`], {
+                    Offset[0.]}, 
+                    Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, 
+                  "Rows" -> {
+                    Offset[0.2], {
+                    Offset[0.4]}, 
+                    Offset[0.2]}, "RowsIndexed" -> {}}],
+               Deployed->True],
+              SetterBar[
+               Dynamic[sierpinskifractalnet2D`n], {0, 1, 2, 3}]]},
+            {"\<\"angle\"\>", 
+             SliderBox[Dynamic[
+               BoxForm`RemapVariable[fillHoles`Private`theta$$, {0, Pi}], 
+               BoxForm`RemapValue[#, fillHoles`Private`theta$$, {0, Pi}]& ], {
+              0, 1}]},
+            {"\<\"translate\"\>", 
+             SliderBox[Dynamic[fillHoles`Private`t$$], {0, 1}]},
+            {"\<\"contract\"\>", 
+             SliderBox[Dynamic[
+               BoxForm`RemapVariable[fillHoles`Private`contraction$$, {1, 
+                 Rational[1, 2]}], 
+               BoxForm`RemapValue[#, fillHoles`Private`contraction$$, {1, 
+                 Rational[1, 2]}]& ], {0, 1}]}
+           },
+           AutoDelete->False,
+           GridBoxAlignment->{"Columns" -> {{Left}}},
+           GridBoxItemSize->{"Columns" -> {10, 40}}],
+          "Grid"],
+         Background->GrayLevel[1],
+         ImageSize->{600, 125}]},
+       {
+        DynamicBox[ToBoxes[
+          fillHoles`Private`makeFrame[
+          fillHoles`Private`theta$$, fillHoles`Private`t$$, 
+           fillHoles`Private`contraction$$, sierpinskifractalnet2D`n], 
+          StandardForm],
+         ImageSizeCache->{600., {298., 302.}}]}
+      },
+      DefaultBaseStyle->"Column",
+      GridBoxAlignment->{"Columns" -> {{Left}}},
+      GridBoxItemSize->{"Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}],
+     
+     "Column"],
+    DynamicModuleValues:>{}]}, {2,"\<\"Cut-fold Rule\"\>"->
+   DynamicBox[ToBoxes[
+     Column[{
+       Panel[
+        Grid[{{"n", 
+           SetterBar[
+            Dynamic[sierpinskifractalnet2D`n], {0, 1, 2, 3}]}, {"net", 
+           Checkbox[
+            Dynamic[sierpinskifractalnet2D`net]]}}, Alignment -> Left, 
+         ItemSize -> {{10, 40}}], ImageSize -> {600, 125}, Background -> 
+        White], 
+       Dynamic[
+        sierpinskifractalnet2D`generateSierpinskiNet[
+        sierpinskifractalnet2D`n, sierpinskifractalnet2D`net]]}], 
+     StandardForm],
+    ImageSizeCache->{600., {361.9169921875, 367.0830078125}}]}, {
+   3,"\<\"Folding Rule\"\>"->
+   DynamicModuleBox[{sierpinskifractalnet3D`Private`alphatheta$$ = 
+    1.9106332362490184`}, 
+    TagBox[GridBox[{
+       {
+        PanelBox[
+         TagBox[GridBox[{
+            {"\<\"n\"\>", 
+             InterpretationBox[
+              StyleBox[GridBox[{
+                 {
+                  SetterBox[Dynamic[sierpinskifractalnet2D`n], {0}, "0"], 
+                  SetterBox[Dynamic[sierpinskifractalnet2D`n], {1}, "1"], 
+                  SetterBox[Dynamic[sierpinskifractalnet2D`n], {2}, "2"], 
+                  SetterBox[Dynamic[sierpinskifractalnet2D`n], {3}, "3"]}
+                },
+                BaselinePosition->{1, 1},
+                GridBoxSpacings->{"Columns" -> {
+                    Offset[0.27999999999999997`], {
+                    Offset[0.]}, 
+                    Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, 
+                  "Rows" -> {
+                    Offset[0.2], {
+                    Offset[0.4]}, 
+                    Offset[0.2]}, "RowsIndexed" -> {}}],
+               Deployed->True],
+              SetterBar[
+               Dynamic[sierpinskifractalnet2D`n], {0, 1, 2, 3}]]},
+            {"\<\"net\"\>", 
+             CheckboxBox[Dynamic[sierpinskifractalnet2D`net]]},
+            {"\<\"Fold\"\>", 
+             
+             SliderBox[Dynamic[sierpinskifractalnet3D`Private`alphatheta$$], {
+              0, 1.9106332362490184`}]}
+           },
+           AutoDelete->False,
+           GridBoxAlignment->{"Columns" -> {{Left}}},
+           GridBoxItemSize->{"Columns" -> {10, 40}}],
+          "Grid"],
+         Background->GrayLevel[1],
+         ImageSize->{600, 125}]},
+       {
+        DynamicBox[ToBoxes[
+          Show[
+           If[
+           sierpinskifractalnet3D`Private`alphatheta$$ > 
+            sierpinskifractalnet3D`Private`foldedAngle - 10^(-6), 
+            sierpinskifractalnet3D`Private`labeled3DPts, 
+            If[
+            sierpinskifractalnet2D`net, 
+             sierpinskifractalnet3D`Private`labeledNet2pts, 
+             sierpinskifractalnet3D`Private`labeledNet1PtsS1]], 
+           sierpinskifractalnet3D`Private`showFolded3D[
+            sierpinskifractalnet3D`Private`foldedSierpinski[
+            sierpinskifractalnet2D`n, 
+             Table[
+             sierpinskifractalnet3D`Private`foldedAngle - 
+              sierpinskifractalnet3D`Private`alphatheta$$, {
+              sierpinskifractalnet3D`Private`i, 5}], 
+             sierpinskifractalnet2D`net]], 
+           sierpinskifractalnet2D`generateSierpinskiNet[
+           sierpinskifractalnet2D`n + 1, sierpinskifractalnet2D`net], Boxed -> 
+           False, ImageSize -> {600, 600}, ViewPoint -> {0.18, -1, 0.542}, 
+           ViewAngle -> 0.69115, PlotRange -> 1.5, Background -> White, 
+           Lighting -> "Neutral", Axes -> True, AxesOrigin -> {0, 0, 0}, 
+           AxesStyle -> Directive[Dotted, Italic, Black, Thin]], StandardForm],
+         ImageSizeCache->{600., {298., 302.}}]}
+      },
+      DefaultBaseStyle->"Column",
+      GridBoxAlignment->{"Columns" -> {{Left}}},
+      GridBoxItemSize->{"Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}],
+     
+     "Column"],
+    DynamicModuleValues:>{}]}}, 3,
+   Background->GrayLevel[0],
+   ControlPlacement->{Top, Left}],
+  Background->GrayLevel[1]]], "Output"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Debugging Code", "Section"],
+
+Cell["Basic tools to help debug.", "Item"],
+
+Cell["The cell below creates a palette for all open .nb files. ", "Text"],
+
+Cell[BoxData[
+ RowBox[{"With", "[", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{"title", "=", "\"\<Notebook selector\>\""}], "}"}], ",", 
+   RowBox[{"CreatePalette", "[", 
+    RowBox[{
+     RowBox[{"Dynamic", "@", 
+      RowBox[{"Column", "[", 
+       RowBox[{"DeleteCases", "[", 
+        RowBox[{
+         RowBox[{
+          RowBox[{
+           RowBox[{"Button", "[", 
+            RowBox[{
+             RowBox[{"\"\<WindowTitle\>\"", "/.", 
+              RowBox[{"NotebookInformation", "@", "#"}]}], ",", 
+             RowBox[{"SetSelectedNotebook", "@", "#"}]}], "]"}], "&"}], "/@", 
+          
+          RowBox[{"Notebooks", "[", "]"}]}], ",", 
+         RowBox[{"Button", "[", 
+          RowBox[{"title", ",", "_"}], "]"}]}], "]"}], "]"}]}], ",", 
+     RowBox[{"WindowTitle", "\[Rule]", "title"}]}], "]"}]}], "]"}]], "Code"],
+
+Cell[TextData[{
+ "The cell below creates a short cut for quitting the ",
+ StyleBox["Mathematica",
+  FontSlant->"Italic"],
+ " kernel."
+}], "Text"],
+
+Cell[BoxData[
+ RowBox[{"FrontEndExecute", "[", 
+  RowBox[{"FrontEnd`AddMenuCommands", "[", 
+   RowBox[{"\"\<MenuListQuitEvaluators\>\"", ",", 
+    RowBox[{"{", 
+     RowBox[{"MenuItem", "[", 
+      RowBox[{"\"\<AddMenu &Quit\>\"", ",", 
+       RowBox[{"FrontEnd`KernelExecute", "[", 
+        RowBox[{"ToExpression", "[", "\"\<Quit[]\>\"", "]"}], "]"}], ",", 
+       RowBox[{"MenuKey", "[", 
+        RowBox[{"\"\<q\>\"", ",", 
+         RowBox[{"Modifiers", "\[Rule]", 
+          RowBox[{"{", "\"\<Control\>\"", "}"}]}]}], "]"}], ",", 
+       RowBox[{"System`MenuEvaluator", "\[Rule]", "Automatic"}]}], "]"}], 
+     "}"}]}], "]"}], "]"}]], "Code"],
+
+Cell[TextData[{
+ "The cell below can be added to the ",
+ StyleBox["Mathematica",
+  FontSlant->"Italic"],
+ " root directory files to Creates a permanent short cut for quitting the \
+mathematica kernel."
+}], "Text"],
+
+Cell[BoxData[
+ RowBox[{"Menu", "[", 
+  RowBox[{"\"\<Quit Local\>\"", ",", 
+   RowBox[{"{", 
+    RowBox[{"MenuItem", "[", 
+     RowBox[{"\"\<Quit Kernel\>\"", ",", 
+      RowBox[{"FrontEnd`KernelExecute", "[", 
+       RowBox[{"ToExpression", "[", "\"\<Quit[]\>\"", "]"}], "]"}], ",", 
+      RowBox[{"MenuKey", "[", 
+       RowBox[{"\"\<q\>\"", ",", 
+        RowBox[{"Modifiers", "\[Rule]", 
+         RowBox[{"{", "\"\<Control\>\"", "}"}]}]}], "]"}], ",", 
+      RowBox[{"MenuEvaluator", "\[Rule]", "Automatic"}]}], "]"}], "}"}]}], 
+  "]"}]], "Code"]
+}, Open  ]]
+},
+WindowSize->{922, 1069},
+WindowMargins->{{Automatic, 274}, {Automatic, 0}},
+TrackCellChangeTimes->False,
+FrontEndVersion->"10.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (June 27, \
+2014)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[580, 22, 37, 0, 64, "Section"],
+Cell[CellGroupData[{
+Cell[642, 26, 96, 2, 28, "Item"],
+Cell[CellGroupData[{
+Cell[763, 32, 59, 0, 24, "SubitemNumbered"],
+Cell[825, 34, 46, 0, 24, "SubitemNumbered"],
+Cell[874, 36, 51, 0, 24, "SubitemNumbered"],
+Cell[928, 38, 34, 0, 24, "SubitemNumbered"]
+}, Open  ]],
+Cell[977, 41, 50, 0, 28, "Item"],
+Cell[CellGroupData[{
+Cell[1052, 45, 68, 0, 24, "SubitemNumbered"],
+Cell[1123, 47, 68, 0, 24, "SubitemNumbered"],
+Cell[1194, 49, 186, 3, 41, "SubitemNumbered"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[1429, 58, 1026, 30, 82, "Code"],
+Cell[2458, 90, 6524, 155, 805, "Output"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[9031, 251, 33, 0, 64, "Section"],
+Cell[9067, 253, 42, 0, 28, "Item"],
+Cell[9112, 255, 73, 0, 30, "Text"],
+Cell[9188, 257, 824, 22, 50, "Code"],
+Cell[10015, 281, 145, 5, 30, "Text"],
+Cell[10163, 288, 645, 14, 50, "Code"],
+Cell[10811, 304, 213, 6, 49, "Text"],
+Cell[11027, 312, 548, 13, 50, "Code"]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)
